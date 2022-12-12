@@ -3,6 +3,7 @@ package com.example.planter.UserAuth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
+import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
 
@@ -29,6 +31,17 @@ class JoinActivity : AppCompatActivity() {
         val etJoinCk = findViewById<EditText>(R.id.etJoinCk)
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoinJoin = findViewById<Button>(R.id.btnJoinJoin)
+
+
+        etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+            val pwRegex = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+            val pwPattern = Pattern.compile(pwRegex)
+            if (source.isNullOrBlank() || pwPattern.matcher(source).matches()) {
+                return@InputFilter source
+            }
+            Toast.makeText(this,"입력할 수 없는 문자입니다: $source",Toast.LENGTH_SHORT).show()
+            ""
+        })
 
 
         btnJoinJoin.setOnClickListener {
@@ -68,6 +81,7 @@ class JoinActivity : AppCompatActivity() {
                 isJoin = false
                 Toast.makeText(this,"비밀번호는 8자리 이상 입력해주세요",Toast.LENGTH_SHORT).show()
             }
+
 
             if(isJoin){
                 auth.createUserWithEmailAndPassword(email,pw)
