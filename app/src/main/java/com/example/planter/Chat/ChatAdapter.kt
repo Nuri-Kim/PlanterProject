@@ -15,23 +15,23 @@ class ChatAdapter (val context: Context,
                    val loginId : String) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val imgChat : ImageView
-        val tvChatListName : TextView
-        val tvChatListContent : TextView
-        val tvChatListMyContent : TextView
+        val imgChatList : ImageView
+        val tvChatTemplateName : TextView
+        val tvChatTemplateContent : TextView
+        val tvChatTemplateMyContent : TextView
 
         init {
-            imgChat=itemView.findViewById(R.id.imgChatList)
-            tvChatListName=itemView.findViewById(R.id.tvChatListName)
-            tvChatListContent=itemView.findViewById(R.id.tvChatListContent)
-            tvChatListMyContent=itemView.findViewById(R.id.tvChatListMyContent)
+            imgChatList=itemView.findViewById(R.id.imgChatList)
+            tvChatTemplateName=itemView.findViewById(R.id.tvChatTemplateName)
+            tvChatTemplateContent=itemView.findViewById(R.id.tvChatTemplateContent)
+            tvChatTemplateMyContent=itemView.findViewById(R.id.tvChatTemplateMyContent)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val view = layoutInflater.inflate(R.layout.chat_list,null)
+        val view = layoutInflater.inflate(R.layout.chat_list_template,null)
 
         return ViewHolder(view)
     }
