@@ -7,10 +7,11 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.planter.MainActivity
 import com.example.planter.R
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
-    //lateinit var auth: FirebaseAuth
+    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

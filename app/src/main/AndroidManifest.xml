@@ -40,7 +40,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Chat.ChatActivity"
+            android:name=".Chat.ChatFragment"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
