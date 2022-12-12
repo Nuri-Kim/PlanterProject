@@ -23,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
         val etLoginPw = findViewById<TextView>(R.id.etLoginPw)
         val btnLoginLogin = findViewById<Button>(R.id.btnLoginLogin)
 
+        val sp = getSharedPreferences()
+
         btnLoginLogin.setOnClickListener {
             val email = etLoginEmail.text.toString()
             val pw = etLoginPw.text.toString()
