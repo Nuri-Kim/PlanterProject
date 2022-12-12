@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         editorSp.putString("loginId",email)
                         editorSp.commit()
 
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
 
@@ -60,17 +60,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this,"아이디 또는 비밀번호를 다시 확인해주세요",Toast.LENGTH_SHORT).show()
 
                     }
-
-            }
-
-
-
-
-
-
-
+                }
         }
-
-
     }
 }
