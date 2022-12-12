@@ -14,7 +14,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etJoinEmail"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginStart="16dp"
@@ -29,87 +29,87 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="비밀번호를 재입력 해주세요"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이메일"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 확인"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:text="회원가입"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName4"
-        android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="닉네임을 지어주세요"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="닉네임"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName4"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/etJoinPw"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="비밀번호를 입력해주세요"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinEmail"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/etJoinEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinEmail" />
+
+    <EditText
+        android:id="@+id/etJoinCk"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="비밀번호를 재입력 해주세요"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinPw"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etJoinPw"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinPw" />
+
+    <EditText
+        android:id="@+id/etJoinNick"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="닉네임을 지어주세요"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinCk"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etJoinCk"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinCk" />
+
+    <Button
+        android:id="@+id/btnJoinJoin"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:text="회원가입"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/etJoinNick"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/etJoinNick"
+        app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닉네임"
+        app:layout_constraintBottom_toTopOf="@+id/etJoinNick"
+        app:layout_constraintStart_toStartOf="@+id/etJoinNick" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이메일"
+        app:layout_constraintBottom_toTopOf="@+id/etJoinEmail"
+        app:layout_constraintStart_toStartOf="@+id/etJoinEmail" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 확인"
+        app:layout_constraintBottom_toTopOf="@+id/etJoinCk"
+        app:layout_constraintStart_toStartOf="@+id/etJoinCk" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"
+        app:layout_constraintBottom_toTopOf="@+id/etJoinPw"
+        app:layout_constraintStart_toStartOf="@+id/etJoinPw" />
 
     <ImageView
         android:id="@+id/imageView"
