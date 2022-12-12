@@ -24,7 +24,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvChatListName"
+        android:id="@+id/tvChatTemplateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/tvChatListContent"
+        android:id="@+id/tvChatTemplateContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -48,11 +48,11 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvChatListName"
-        app:layout_constraintTop_toBottomOf="@+id/tvChatListName" />
+        app:layout_constraintStart_toStartOf="@+id/tvChatTemplateName"
+        app:layout_constraintTop_toBottomOf="@+id/tvChatTemplateName" />
 
     <TextView
-        android:id="@+id/tvChatListMyContent"
+        android:id="@+id/tvChatTemplateMyContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

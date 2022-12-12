@@ -22,5 +22,9 @@ class FBdataBase {
         fun getContentRef():DatabaseReference{
             return dataBase.getReference("content")
         }
+
+        fun getChatListRef():DatabaseReference{
+            return dataBase.getReference("ChatList")
+        }
     }
 }
