@@ -36,7 +36,7 @@
         android:id="@+id/btnLoginLogin"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:text="로그인"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/etLoginPw"
@@ -71,24 +71,36 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.10015175" />
 
-    <Button
-        android:id="@+id/btnLoginJoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="아직 가입 안한거야?"
+        android:layout_marginTop="40dp"
+        android:text="날 죽이지마.."
+        app:layout_constraintEnd_toEndOf="@+id/tvLoginJoin"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/tvLoginJoin"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginJoin" />
+
+    <TextView
+        android:id="@+id/tvLoginJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="회원가입"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLoginLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLoginLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin" />
+
+    <ImageView
+        android:id="@+id/manman"
+        android:layout_width="142dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="4dp"
+        android:src="@raw/testgif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

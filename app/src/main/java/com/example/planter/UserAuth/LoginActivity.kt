@@ -5,11 +5,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //auth = Firebase.auth
+        auth = Firebase.auth
+
         val sharedPreferences = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
         val loginId = sharedPreferences.getString("loginId","")
         val loginPw = sharedPreferences.getString("loginPw","")
@@ -27,11 +32,15 @@ class LoginActivity : AppCompatActivity() {
         val etLoginEmail = findViewById<TextView>(R.id.etLoginEmail)
         val etLoginPw = findViewById<TextView>(R.id.etLoginPw)
         val btnLoginLogin = findViewById<Button>(R.id.btnLoginLogin)
-        val btnLoginJoin = findViewById<Button>(R.id.btnLoginJoin)
-        etLoginEmail.setText(loginId)
-        etLoginPw.setText(loginPw)
+        val tvLoginJoin = findViewById<TextView>(R.id.tvLoginJoin)
+        etLoginEmail.text = loginId
+        etLoginPw.text = loginPw
 
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+
+
+        val manman = findViewById<ImageView>(R.id.manman)
+        Glide.with(this).load(R.raw.testgif).into(manman)
 
 
         btnLoginLogin.setOnClickListener {
@@ -64,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        btnLoginJoin.setOnClickListener{
+        tvLoginJoin.setOnClickListener{
             val intent = Intent(this@LoginActivity,JoinActivity::class.java)
             startActivity(intent)
         }
