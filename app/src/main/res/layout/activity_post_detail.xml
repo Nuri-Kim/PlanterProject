@@ -7,25 +7,25 @@
     tools:context=".Post.PostDetailActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgPostListPicture"
         android:layout_width="53dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/tvPostListCategory"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListCategory"
         app:srcCompat="@drawable/icon_mypage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvPostListContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="작성일시간"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostListPicture"
+        app:layout_constraintStart_toEndOf="@+id/imgPostListPicture" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvPostListCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -35,13 +35,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvPostListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="작성자이름"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/imgPostListPicture"
+        app:layout_constraintTop_toTopOf="@+id/imgPostListPicture" />
 
     <TextView
         android:id="@+id/textView5"
@@ -60,7 +60,7 @@
         android:layout_marginEnd="8dp"
         android:text="수정"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/tvPostListContent" />
 
     <TextView
         android:id="@+id/textView7"
@@ -69,7 +69,7 @@
         android:layout_marginEnd="8dp"
         android:text="삭제"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/tvPostListContent" />
 
     <TextView
         android:id="@+id/textView8"
@@ -81,7 +81,7 @@
         android:text="글 내용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostListPicture" />
 
     <ImageView
         android:id="@+id/imageView4"

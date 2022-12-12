@@ -78,12 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="이미지 추가"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintEnd_toEndOf="@+id/imgPostWritePicture"
+        app:layout_constraintStart_toStartOf="@+id/imgPostWritePicture"
+        app:layout_constraintTop_toBottomOf="@+id/imgPostWritePicture" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imgPostWritePicture"
         android:layout_width="196dp"
         android:layout_height="138dp"
         android:layout_marginTop="84dp"
@@ -98,15 +98,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:srcCompat="@drawable/imgpostwrite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
