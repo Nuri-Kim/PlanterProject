@@ -60,7 +60,6 @@
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.10015175" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

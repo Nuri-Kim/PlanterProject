@@ -1,4 +1,4 @@
-package com.example.planter.Join
+package com.example.planter.UserAuth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

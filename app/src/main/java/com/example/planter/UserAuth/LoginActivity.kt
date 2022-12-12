@@ -1,4 +1,4 @@
-package com.example.planter.Login
+package com.example.planter.UserAuth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +26,13 @@ class LoginActivity : AppCompatActivity() {
             val email = etLoginEmail.text.toString()
             val pw = etLoginPw.text.toString()
 
+            if(email){
+
+            }
+
             val intent = Intent(this, MainActivity::class.java)
+
+
 
 
 
