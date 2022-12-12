@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Planter Color -->
-    <color name="mainColor">#4CAF50</color>
+    <color name="mainColor">#0D6B3E</color>
+    <color name="lightColor">#EBFFEA</color>
     <color name="pointColor">#8BC34A</color>
-    <color name="test">#000000</color>
 </resources>
