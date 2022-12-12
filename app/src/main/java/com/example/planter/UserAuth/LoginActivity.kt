@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //auth = Firebase.auth
+        auth = Firebase.auth
+
         val sharedPreferences = getSharedPreferences("autoLogin", Context.MODE_PRIVATE)
         val loginId = sharedPreferences.getString("loginId","")
         val loginPw = sharedPreferences.getString("loginPw","")
@@ -48,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this){task ->
 
                     if(task.isSuccessful){
-                        Toast.makeText(this," 님 반가워요",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this," ${email}님 반가워요",Toast.LENGTH_SHORT).show()
 
                         val editor = sharedPreferences.edit()
                         editor.putString("loginId",email)
