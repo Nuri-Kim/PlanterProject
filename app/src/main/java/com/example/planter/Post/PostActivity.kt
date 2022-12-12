@@ -1,4 +1,4 @@
-package com.example.planter.post
+package com.example.planter.Post
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
