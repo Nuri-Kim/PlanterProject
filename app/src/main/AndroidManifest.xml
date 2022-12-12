@@ -27,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".post.PostActivity"
+            android:name=".Post.PostActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
