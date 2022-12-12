@@ -1,8 +1,9 @@
 package com.example.fullstackapplication
 
-data class ChatVO(val name : String, val msg : String, val img : String) {
+data class ChatVO(val sendUser : String,val recUser:String, val msg : String, val img : String, val time : String) {
 
 
-    constructor() : this("","","")
+
+    constructor() : this("","","","", "")
 
 }
