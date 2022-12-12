@@ -1,12 +1,12 @@
-package com.example.planter.Chat
+package com.example.planter.Post
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.planter.R
 
-class ChatActivity : AppCompatActivity() {
+class PostDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat)
+        setContentView(R.layout.activity_post_detail)
     }
 }
