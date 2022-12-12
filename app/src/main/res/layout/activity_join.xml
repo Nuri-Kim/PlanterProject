@@ -29,17 +29,17 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/etPostWriteContent"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="비밀번호를 재입력 해주세요"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/etPostWriteTitle"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/etPostWriteTitle"
+        app:layout_constraintTop_toBottomOf="@+id/etPostWriteTitle" />
 
     <TextView
         android:id="@+id/textView2"
@@ -54,16 +54,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 확인"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintBottom_toTopOf="@+id/etPostWriteContent"
+        app:layout_constraintStart_toStartOf="@+id/etPostWriteContent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintBottom_toTopOf="@+id/etPostWriteTitle"
+        app:layout_constraintStart_toStartOf="@+id/etPostWriteTitle" />
 
     <Button
         android:id="@+id/button"
@@ -85,10 +85,10 @@
         android:ems="10"
         android:hint="닉네임을 지어주세요"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
+        app:layout_constraintEnd_toEndOf="@+id/etPostWriteContent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintStart_toStartOf="@+id/etPostWriteContent"
+        app:layout_constraintTop_toBottomOf="@+id/etPostWriteContent" />
 
     <TextView
         android:id="@+id/textView5"
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/etPostWriteTitle"
         android:layout_width="0dp"
         android:layout_height="65dp"
         android:layout_marginTop="20dp"
