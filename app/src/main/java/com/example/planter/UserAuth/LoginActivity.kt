@@ -27,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
         val etLoginEmail = findViewById<TextView>(R.id.etLoginEmail)
         val etLoginPw = findViewById<TextView>(R.id.etLoginPw)
         val btnLoginLogin = findViewById<Button>(R.id.btnLoginLogin)
+        etLoginEmail.setText(loginId)
+        etLoginPw.setText(loginPw)
 
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
@@ -53,6 +55,9 @@ class LoginActivity : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+
+                    }else{
+                        Toast.makeText(this,"아이디 또는 비밀번호를 다시 확인해주세요",Toast.LENGTH_SHORT).show()
 
                     }
 
