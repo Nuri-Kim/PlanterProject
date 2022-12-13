@@ -27,6 +27,12 @@ class FBdataBase {
             return dataBase.getReference("ChatList")
         }
 
-        // 이메일, 닉네임 리얼데이터?에 보내주기
+        // 이메일, 닉네임 모아서 보내주기
+        fun getJoinEmailNickListRef():DatabaseReference{
+            return dataBase.getReference("EmailNickList")
+        }
+
+
+
     }
 }

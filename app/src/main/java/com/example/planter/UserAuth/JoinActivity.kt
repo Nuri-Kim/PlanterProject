@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +33,11 @@ class JoinActivity : AppCompatActivity() {
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoinJoin = findViewById<Button>(R.id.btnJoinJoin)
 
+        val emailList = FBdataBase.getJoinEmailNickListRef()
+        val nickList = FBdataBase.getJoinEmailNickListRef()
+        val messageAlram = FBdataBase.getJoinEmailNickListRef()
+        val waterAlram = FBdataBase.getJoinEmailNickListRef()
+
 
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val pwRegex = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
@@ -51,6 +57,20 @@ class JoinActivity : AppCompatActivity() {
             val pw = etJoinPw.text.toString()
             val checkPw = etJoinCk.text.toString()
             val nick = etJoinNick.text.toString()
+
+            val messageAlramButton =
+            val waterAlramButton =
+
+
+            // 닉네임 따로 보내주는거
+
+            // 아이디 따로 보내주는거
+
+            // 이거를 모아서 Push로 FBdataBase 에 보내주기
+
+
+                // 알람받기 회원가입 정보 두 개 넣기
+
 
 
             if(email.isEmpty()){
@@ -89,6 +109,10 @@ class JoinActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
 
                             Toast.makeText(this, "플랜터에 온 걸 환영합니다", Toast.LENGTH_SHORT).show()
+
+                            emailList.push().setValue(JoinVO("email","nick","n","n"))
+                            nickList.push().setValue(JoinVO())
+
 
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
                             startActivity(intent)
