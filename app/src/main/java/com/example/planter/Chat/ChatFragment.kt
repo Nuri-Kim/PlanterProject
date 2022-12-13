@@ -98,8 +98,8 @@ class ChatFragment : Fragment() {
         }
 
 
-        FBdataBase.getChatListMyFilterRef("receiver").addValueEventListener(postListener)
-        Log.d("myChat",FBdataBase.getChatListMyFilterRef("receiver").toString())
+        //FBdataBase.getChatListMyFilterRef("receiver").addValueEventListener(postListener)
+        //Log.d("myChat",FBdataBase.getChatListMyFilterRef("receiver").toString())
 
     }
 

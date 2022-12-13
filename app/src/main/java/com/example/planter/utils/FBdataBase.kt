@@ -28,8 +28,8 @@ class FBdataBase {
         }
 
         // 이메일, 닉네임 모아서 보내주기
-        fun getJoinEmailNickListRef():DatabaseReference{
-            return dataBase.getReference("EmailNickList")
+        fun getJoinRef():DatabaseReference{
+            return dataBase.getReference("JoinList")
         }
 
 

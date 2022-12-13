@@ -1,7 +1,9 @@
 package com.example.planter.UserAuth
 
-data class JoinVO(val Email : String, val Nick : String, val waterAlram : String, val messageAlram : String) {
+data class JoinVO(val Email : String, val Nick : String, val waterAlram : Boolean, val messageAlram : Boolean) {
 
-    constructor() : this("","","","")
+
+    // 물주기알림 메시지 알람 허용
+    constructor() : this("","",true,true)
 }
 
