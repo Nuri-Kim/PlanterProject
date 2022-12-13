@@ -25,8 +25,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 
-
-
 class PostWriteActivity : AppCompatActivity() {
 
     lateinit var imgPostWritePicture : ImageView
@@ -95,6 +93,7 @@ class PostWriteActivity : AppCompatActivity() {
                 manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 10_000L,10f,locationListener)
 //                manager.removeUpdates(locationListener)
+
 
 
             }
