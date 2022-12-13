@@ -16,6 +16,21 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
 
     val database = Firebase.database
 
+    // 리스너 커스텀
+    interface  OnItemClickListener{
+        fun  onItemClick(view : View, position: Int)
+    }
+
+    // 객체 저장 변수 선언
+    lateinit var mOnItemClickListener : OnItemClickListener
+
+    //객체 전달 메서드
+    fun setOnItemClickListener(OnItemClickListener : OnItemClickListener){
+
+        mOnItemClickListener = OnItemClickListener
+    }
+
+
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -28,12 +43,17 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
                 tvPostListCategory = itemView.findViewById(R.id.tvPostListCategory)
 
+                itemView.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION){
+                        // 버그로 인해 -1이 아닐경우에
+                        mOnItemClickListener.onItemClick(itemView,position)
+                    }
+                }
 
             }
 
     }
-
-
 
 
     //xml파일을 view로, imflat작업 필요
