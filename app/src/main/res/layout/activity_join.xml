@@ -23,10 +23,10 @@
         android:ems="10"
         android:hint="이메일을 입력해주세요"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imgPostDetailUserPic"
         app:layout_constraintHorizontal_bias="0.547"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/imgPostDetailUserPic"
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailUserPic" />
 
     <EditText
         android:id="@+id/etJoinPw"
@@ -80,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvPostDetailCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="닉네임"
@@ -88,7 +88,7 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinNick" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvPostDetailUserNick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이메일"
@@ -96,7 +96,7 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinEmail" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvPostDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 확인"
@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinCk" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvPostDetailTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호"
@@ -112,7 +112,7 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinPw" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgPostDetailUserPic"
         android:layout_width="0dp"
         android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
