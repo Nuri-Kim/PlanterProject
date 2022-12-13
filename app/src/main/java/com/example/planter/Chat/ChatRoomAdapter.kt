@@ -67,7 +67,7 @@ class ChatRoomAdapter(val context: Context,
             holder.tvChatTemplateMyContent.visibility=View.GONE
             holder.tvChatTemplateMyTime.visibility=View.GONE
 
-            holder.imgChatList.setImageResource(R.drawable.icon_home)
+            holder.imgChatList.setImageResource(R.drawable.de_profile)
             holder.tvChatTemplateName.text=chatList[position].sendUser
             holder.tvChatTemplateContent.text=chatList[position].msg
             holder.tvChatTemplateTime.text = chatList[position].time
