@@ -26,7 +26,5 @@ class FBdataBase {
         fun getChatListRef():DatabaseReference{
             return dataBase.getReference("ChatList")
         }
-
-        
     }
 }
