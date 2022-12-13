@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fullstackapplication.ChatVO
+import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.R
 import com.google.firebase.database.ChildEventListener
@@ -25,8 +26,9 @@ class ChatFragment : Fragment() {
     // 로그인 user 전체 채팅 목록 보여주는 창
 
     val chatList = ArrayList<ChatVO>()
-    lateinit var adapter : ChatListAdapter
+    lateinit var adapter : ChatFragmentAdapter
     var keyData = ArrayList<String>()
+    val user = FBAuth.getUid()
 
 
 
@@ -49,8 +51,10 @@ class ChatFragment : Fragment() {
 
 
 
+
+
         // 어댑터 생성
-        adapter = ChatListAdapter(requireContext(),chatList,"user")
+        adapter = ChatFragmentAdapter(requireContext(),chatList)
         rvChat.adapter = adapter
         rvChat.layoutManager = LinearLayoutManager(requireContext())
 
@@ -60,7 +64,7 @@ class ChatFragment : Fragment() {
 
 
         // 객체 클릭 이벤트
-        adapter.setOnItemClickListener(object : ChatListAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : ChatFragmentAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 val intent = Intent(requireContext(),ChatActivity::class.java)
                 intent.putExtra("sendUser",chatList[position].sendUser)
@@ -98,8 +102,7 @@ class ChatFragment : Fragment() {
         }
 
 
-        FBdataBase.getChatListMyFilterRef("receiver").addValueEventListener(postListener)
-        Log.d("myChat",FBdataBase.getChatListMyFilterRef("receiver").toString())
+        FBdataBase.getChatListMyFilterRef(user).addValueEventListener(postListener)
 
     }
 
