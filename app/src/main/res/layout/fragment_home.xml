@@ -27,31 +27,21 @@
         app:layout_constraintStart_toEndOf="@+id/tvHome1"
         app:layout_constraintTop_toBottomOf="@+id/tvHome1" />
 
-    <ListView
-        android:id="@+id/lvHome"
-        android:layout_width="0dp"
-        android:layout_height="333dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="224dp" />
-
     <TextView
         android:id="@+id/tvHome1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="70dp"
         android:text="알람 설정"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvHome" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="250dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/lvHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -72,5 +62,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgHomeReset"
         app:layout_constraintStart_toEndOf="@+id/imgHomeReset"
         app:layout_constraintTop_toTopOf="@+id/imgHomeReset" />
+
+    <ListView
+        android:id="@+id/lvHome"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvHome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

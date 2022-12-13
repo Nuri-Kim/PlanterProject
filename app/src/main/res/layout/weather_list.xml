@@ -50,10 +50,10 @@
         app:layout_constraintTop_toBottomOf="@+id/tvHomeTemp" />
 
     <TextView
-        android:id="@+id/tvHomeHour"
+        android:id="@+id/tvHomeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="65dp"
+        android:layout_marginEnd="30dp"
         android:text="시간기준"
         app:layout_constraintBottom_toBottomOf="@+id/tvHomeLoc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="비내림"
-        app:layout_constraintStart_toStartOf="@+id/tvHomeHour"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeHour" />
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

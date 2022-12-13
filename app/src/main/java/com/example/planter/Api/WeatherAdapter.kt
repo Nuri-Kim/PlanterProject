@@ -13,7 +13,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<WeatherVO>
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val tvHomeWind: TextView
-        val tvHomeHour: TextView
+        val tvHomeTime: TextView
         val tvHomeTemp: TextView
         val tvHomeHum: TextView
         val tvHomeSun: TextView
@@ -22,7 +22,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<WeatherVO>
 
         init {
             tvHomeWind = itemView.findViewById<TextView>(R.id.tvHomeWind)
-            tvHomeHour = itemView.findViewById<TextView>(R.id.tvHomeHour)
+            tvHomeTime = itemView.findViewById<TextView>(R.id.tvHomeTime)
             tvHomeTemp = itemView.findViewById<TextView>(R.id.tvHomeTemp)
             tvHomeHum = itemView.findViewById<TextView>(R.id.tvHomeHum)
             tvHomeSun = itemView.findViewById<TextView>(R.id.tvHomeSun)
@@ -36,6 +36,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<WeatherVO>
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.tvHomeTime.setText("${weatherList.get(position).time} 기준")
         holder.tvHomeLoc.setText(weatherList.get(position).city)
         holder.tvHomeState.setText(weatherList.get(position).state)
         holder.tvHomeTemp.setText(weatherList.get(position).temp)

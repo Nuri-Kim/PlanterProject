@@ -17,20 +17,9 @@ class MainActivity : AppCompatActivity() {
         val bnvMain = findViewById<BottomNavigationView>(R.id.bnvMain)
         val flMain = findViewById<FrameLayout>(R.id.flMain)
 
-            supportFragmentManager.beginTransaction().replace(
-                R.id.flMain,
-                PostFragment()
-            ).commit()
-
         bnvMain.setOnItemSelectedListener{
             item ->
             when(item.itemId){
-                R.id.tab1 ->{
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.flMain,
-                        PostFragment()
-                    ).commit()
-                }
 
                 R.id.tab2 ->{
                     supportFragmentManager.beginTransaction().replace(
