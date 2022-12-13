@@ -109,4 +109,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
+    <ImageView
+        android:id="@+id/imgPostWriteLocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/etPostWriteTitle"
+        app:layout_constraintTop_toBottomOf="@+id/etPostWriteContent"
+        app:srcCompat="@drawable/icon_location" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

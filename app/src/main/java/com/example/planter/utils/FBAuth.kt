@@ -1,5 +1,6 @@
 package com.example.fullstackapplication.utils
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,6 +15,7 @@ class FBAuth {
             auth = FirebaseAuth.getInstance()
             return auth.currentUser!!.uid
         }
+
 
         // 현재 시간 가져오는 함수
         fun getTime():String{

@@ -23,10 +23,11 @@
         android:id="@+id/btnIntroLogin"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:text="로그인"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
@@ -40,4 +41,25 @@
         app:layout_constraintEnd_toEndOf="@+id/btnIntroLogin"
         app:layout_constraintStart_toStartOf="@+id/btnIntroLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnIntroLogin" />
+
+    <Button
+        android:id="@+id/btnIntroLogOut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="로그아웃"
+        app:layout_constraintEnd_toEndOf="@+id/btnIntroJoin"
+        app:layout_constraintStart_toStartOf="@+id/btnIntroJoin"
+        app:layout_constraintTop_toBottomOf="@+id/btnIntroJoin" />
+
+    <Button
+        android:id="@+id/btnIntroDel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="회원탈퇴"
+        app:layout_constraintEnd_toEndOf="@+id/btnIntroLogOut"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnIntroLogOut"
+        app:layout_constraintTop_toBottomOf="@+id/btnIntroLogOut" />
 </androidx.constraintlayout.widget.ConstraintLayout>
