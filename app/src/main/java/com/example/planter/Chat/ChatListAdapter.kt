@@ -74,7 +74,7 @@ class ChatListAdapter (val context: Context,
         // 다음 position 발신자가 이미 리스트에 있다면 데이터 대체하기
 
         if( "receiver" == recUser){
-            holder.imgChatList.setImageResource(R.drawable.icon_home)
+            holder.imgChatList.setImageResource(R.drawable.de_profile)
             holder.tvChatListOther.text = chatList[position].sendUser
             holder.tvChatListContent.text = chatList[position].msg
             holder.tvChatTime.text = chatList[position].time
