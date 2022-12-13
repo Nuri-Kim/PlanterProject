@@ -7,17 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fullstackapplication.ChatVO
+import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.R
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 
 class ChatFragment : Fragment() {
@@ -25,8 +23,10 @@ class ChatFragment : Fragment() {
     // 로그인 user 전체 채팅 목록 보여주는 창
 
     val chatList = ArrayList<ChatVO>()
-    lateinit var adapter : ChatListAdapter
+    lateinit var adapter : ChatFragmentAdapter
     var keyData = ArrayList<String>()
+
+    val user = FBAuth.getUid()
 
 
 
@@ -42,7 +42,12 @@ class ChatFragment : Fragment() {
         // Views 초기화
         val rvChat = view.findViewById<RecyclerView>(R.id.rvChat)
 
+
         getChatList()
+
+        val chatListRef = FBdataBase.getChatListRef()
+
+        //chatListRef.push().setValue(ChatVO("GiWnK6dWC3Q9YdE67fXM6vBvLnA2",user,"안녕!","",FBAuth.getTime()))
 
 
 
@@ -50,7 +55,7 @@ class ChatFragment : Fragment() {
 
 
         // 어댑터 생성
-        adapter = ChatListAdapter(requireContext(),chatList,"user")
+        adapter = ChatFragmentAdapter(requireContext(),chatList)
         rvChat.adapter = adapter
         rvChat.layoutManager = LinearLayoutManager(requireContext())
 
@@ -60,7 +65,7 @@ class ChatFragment : Fragment() {
 
 
         // 객체 클릭 이벤트
-        adapter.setOnItemClickListener(object : ChatListAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : ChatFragmentAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 val intent = Intent(requireContext(),ChatActivity::class.java)
                 intent.putExtra("sendUser",chatList[position].sendUser)
@@ -83,6 +88,7 @@ class ChatFragment : Fragment() {
                 chatList.clear()
                 for(model in snapshot.children){
                     val item = model.getValue(ChatVO::class.java)
+
                     if(item != null){
                         chatList.add(item)
                     }
@@ -97,9 +103,8 @@ class ChatFragment : Fragment() {
 
         }
 
-
-        FBdataBase.getChatListMyFilterRef("receiver").addValueEventListener(postListener)
-        Log.d("myChat",FBdataBase.getChatListMyFilterRef("receiver").toString())
+        // 현재 로그인한 사용자가 받은 메세지 목록만 불러오기
+        FBdataBase.getChatListMyFilterRef(user).addValueEventListener(postListener)
 
     }
 

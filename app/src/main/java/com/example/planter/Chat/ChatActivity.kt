@@ -20,34 +20,38 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+
+
         // 실질적 채팅하는 창
+
+        val user = FBAuth.getUid()
 
         val etChatInput = findViewById<EditText>(R.id.etChatInput)
         val imgChatSend = findViewById<ImageView>(R.id.imgChatSend)
         val rvChat = findViewById<RecyclerView>(R.id.rvChat)
-        
+
         val chatList = ArrayList<ChatVO>()
 
         val chatListRef = FBdataBase.getChatListRef()
         val nowTime = FBAuth.getTime()
 
-        val adapter = ChatRoomAdapter(this,chatList,"receiver")
+        val adapter = ChatActivityAdapter(this,chatList,user)
         rvChat.adapter=adapter
         rvChat.layoutManager=LinearLayoutManager(this)
 
         imgChatSend.setOnClickListener{
             val msg = etChatInput.text.toString()
+            chatListRef.push().setValue(ChatVO(user,"sender",msg,"",nowTime))
 
-            chatListRef.push().setValue(ChatVO("receiver","sender",msg,"",nowTime))
             etChatInput.text = null
         }
-        
+
         chatListRef.addChildEventListener(object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatItem = snapshot.getValue<ChatVO> () as ChatVO
-                
+
                 chatList.add(chatItem)
-                
+
                 adapter.notifyDataSetChanged()
             }
 

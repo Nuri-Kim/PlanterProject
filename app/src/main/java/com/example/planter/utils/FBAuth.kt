@@ -20,7 +20,7 @@ class FBAuth {
             // Calendar 객체는 getInstance() 매소드로 생성
             val currentTime = Calendar.getInstance().time
             val time = SimpleDateFormat(
-                "yyyy.MM.dd HH:mm:ss", Locale.KOREA).format(currentTime)
+                "yyyy.MM.dd HH:mm", Locale.KOREA).format(currentTime)
 
             return time
         }

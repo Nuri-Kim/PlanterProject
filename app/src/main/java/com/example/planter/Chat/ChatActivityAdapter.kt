@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fullstackapplication.ChatVO
 import com.example.planter.R
 
-class ChatRoomAdapter(val context: Context,
-                      val chatList : ArrayList<ChatVO>,
-                      val loginId : String):RecyclerView.Adapter<ChatRoomAdapter.ViewHolder>(){
+class ChatActivityAdapter(val context: Context,
+                          val chatList : ArrayList<ChatVO>,
+                          val loginId : String):RecyclerView.Adapter<ChatActivityAdapter.ViewHolder>(){
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
 
         val imgChatList : ImageView
@@ -45,7 +45,7 @@ class ChatRoomAdapter(val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val name = chatList[position].sendUser
 
-        if("receiver" == name){
+        if( loginId == name){
             holder.imgChatList.visibility=View.GONE
             holder.tvChatTemplateName.visibility=View.GONE
             holder.tvChatTemplateContent.visibility=View.GONE
