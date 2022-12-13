@@ -32,6 +32,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
+            android:name=".EditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Chat.ChatActivity"
             android:exported="false">
             <meta-data
