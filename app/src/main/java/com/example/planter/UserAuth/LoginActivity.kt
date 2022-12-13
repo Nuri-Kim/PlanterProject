@@ -4,13 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -35,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
         val etLoginPw = findViewById<TextView>(R.id.etLoginPw)
         val btnLoginLogin = findViewById<Button>(R.id.btnLoginLogin)
         val tvLoginJoin = findViewById<TextView>(R.id.tvLoginJoin)
-
-
         etLoginEmail.text = loginId
         etLoginPw.text = loginPw
 
@@ -68,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
 
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
-                        Log.d("현재 유저","업데이트테스트:${FBAuth.getUid()}")
                         finish()
 
                     }else{
@@ -82,5 +77,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this@LoginActivity,JoinActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

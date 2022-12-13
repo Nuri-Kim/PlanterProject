@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvHomeTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="온도"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHomeHum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:text="습도"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeWind"
+        app:layout_constraintEnd_toStartOf="@+id/tvHomeWind"
+        app:layout_constraintTop_toTopOf="@+id/tvHomeWind" />
+
+    <TextView
+        android:id="@+id/tvHomeSun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:text="해돋이"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeWind"
+        app:layout_constraintStart_toEndOf="@+id/tvHomeWind"
+        app:layout_constraintTop_toTopOf="@+id/tvHomeWind" />
+
+    <TextView
+        android:id="@+id/tvHomeWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="바람"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvHomeTemp"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTemp"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTemp" />
+
+    <TextView
+        android:id="@+id/tvHomeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="시간기준"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeLoc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHomeLoc" />
+
+    <TextView
+        android:id="@+id/tvHomeLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="30dp"
+        android:text="위치"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHomeState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="비내림"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
+</androidx.constraintlayout.widget.ConstraintLayout>
