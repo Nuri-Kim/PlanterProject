@@ -2,6 +2,7 @@ package com.example.planter.Chat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -95,7 +96,10 @@ class ChatFragment : Fragment() {
             }
 
         }
-        FBdataBase.getChatListRef().addValueEventListener(postListener)
+
+
+        FBdataBase.getChatListMyFilterRef("receiver").addValueEventListener(postListener)
+        Log.d("myChat",FBdataBase.getChatListMyFilterRef("receiver").toString())
 
     }
 

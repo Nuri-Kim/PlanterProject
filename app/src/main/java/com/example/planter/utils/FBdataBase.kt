@@ -1,6 +1,9 @@
 package com.example.fullstackapplication.utils
 
+import android.provider.ContactsContract.Data
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -25,6 +28,14 @@ class FBdataBase {
 
         fun getChatListRef():DatabaseReference{
             return dataBase.getReference("ChatList")
+        }
+
+        fun getChatListMyFilterRef(user : String): Query {
+
+            val data = FirebaseDatabase.getInstance().getReference("ChatList")
+            val myChatList = data.orderByChild("recUser").equalTo(user)
+
+            return myChatList
         }
     }
 }
