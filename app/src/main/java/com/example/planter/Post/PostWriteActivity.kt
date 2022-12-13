@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.Map.MapsActivity
 import com.example.planter.R
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
@@ -94,9 +95,14 @@ class PostWriteActivity : AppCompatActivity() {
                 10_000L,10f,locationListener)
 //                manager.removeUpdates(locationListener)
 
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+                finish()
 
 
             }
+
+
 
 
         }
