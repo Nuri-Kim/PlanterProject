@@ -99,7 +99,6 @@ class JoinActivity : AppCompatActivity() {
                 Toast.makeText(this,"비밀번호는 8자리 이상 입력해주세요",Toast.LENGTH_SHORT).show()
             }
 
-
             if(isJoin){
                 auth.createUserWithEmailAndPassword(email,pw)
                     .addOnCompleteListener(this) { task ->

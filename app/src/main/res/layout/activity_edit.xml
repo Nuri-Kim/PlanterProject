@@ -53,7 +53,7 @@
         android:id="@+id/btnEditEdit"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:text="회원정보수정"
         app:layout_constraintEnd_toEndOf="@+id/etEditNick"
         app:layout_constraintHorizontal_bias="0.549"
@@ -71,8 +71,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="214dp"
-        android:layout_height="208dp"
+        android:layout_width="229dp"
+        android:layout_height="219dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@+id/btnEditImg"
         app:layout_constraintHorizontal_bias="0.0"
