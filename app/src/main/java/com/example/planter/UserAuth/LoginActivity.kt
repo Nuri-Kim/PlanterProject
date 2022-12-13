@@ -37,8 +37,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
-
         }
 
 
