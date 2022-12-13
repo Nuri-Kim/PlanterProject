@@ -26,5 +26,7 @@ class FBdataBase {
         fun getChatListRef():DatabaseReference{
             return dataBase.getReference("ChatList")
         }
+
+        // 이메일, 닉네임 리얼데이터?에 보내주기
     }
 }
