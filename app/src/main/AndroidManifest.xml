@@ -111,6 +111,20 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".Post.PostDetailJsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Post.PostWriteJsActivity"
+            android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+        </activity>
     </application>
 
 </manifest>
