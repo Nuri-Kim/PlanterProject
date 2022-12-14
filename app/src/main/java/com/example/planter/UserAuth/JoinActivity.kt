@@ -4,22 +4,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import org.w3c.dom.Text
 import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
+
+    lateinit var joinImg : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +33,13 @@ class JoinActivity : AppCompatActivity() {
         val etJoinCk = findViewById<EditText>(R.id.etJoinCk)
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoinJoin = findViewById<Button>(R.id.btnJoinJoin)
+        val imgJoinUser = findViewById<ImageView>(R.id.imgJoinUser)
+        val imgJoinEditIcon = findViewById<ImageView>(R.id.imgJoinEditIcon)
 
         val userList = FBdataBase.getJoinRef()
+        val key = intent.getStringExtra("key")
 
-
+        getImageData(key.toString())
 
 
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
@@ -56,7 +60,7 @@ class JoinActivity : AppCompatActivity() {
             val pw = etJoinPw.text.toString()
             val checkPw = etJoinCk.text.toString()
             val nick = etJoinNick.text.toString()
-
+            // val img = imgJoinUser.toString()
 
 
             // 닉네임 따로 보내주는거
@@ -115,6 +119,19 @@ class JoinActivity : AppCompatActivity() {
                             Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
                         }
                     }
+            }
+        }
+    }
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(this)
+                    .load(task.result)
+                    .into(imgPostDetailPicture) //지역변수
+
             }
         }
     }
