@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.widget.*
 import com.bumptech.glide.Glide
+import com.example.fullstackapplication.utils.FBAuth.Companion.auth
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
@@ -18,9 +19,8 @@ import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
 
-    lateinit var auth: FirebaseAuth
-
-    lateinit var joinImg : ImageView
+    lateinit var auth : FirebaseAuth
+    lateinit var imgJoinUser : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +33,13 @@ class JoinActivity : AppCompatActivity() {
         val etJoinCk = findViewById<EditText>(R.id.etJoinCk)
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoinJoin = findViewById<Button>(R.id.btnJoinJoin)
-        val imgJoinUser = findViewById<ImageView>(R.id.imgJoinUser)
+        imgJoinUser = findViewById(R.id.imgJoinUser)
         val imgJoinEditIcon = findViewById<ImageView>(R.id.imgJoinEditIcon)
 
         val userList = FBdataBase.getJoinRef()
-        val key = intent.getStringExtra("key")
+        val img = intent.getStringExtra("key")
 
-        getImageData(key.toString())
+        getJoinImageData(img.toString())
 
 
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
@@ -60,7 +60,8 @@ class JoinActivity : AppCompatActivity() {
             val pw = etJoinPw.text.toString()
             val checkPw = etJoinCk.text.toString()
             val nick = etJoinNick.text.toString()
-            // val img = imgJoinUser.toString()
+
+
 
 
             // 닉네임 따로 보내주는거
@@ -70,13 +71,14 @@ class JoinActivity : AppCompatActivity() {
             // 이거를 모아서 Push로 FBdataBase 에 보내주기
 
 
-                // 알람받기 회원가입 정보 두 개 넣기
+            // 알람받기 회원가입 정보 두 개 넣기
 
 
 
             if(email.isEmpty()){
                 isJoin = false
                 Toast.makeText(this,"이메일을 입력해주세요",Toast.LENGTH_SHORT).show()
+
             }
             if(pw.isEmpty()){
                 isJoin = false
@@ -122,7 +124,7 @@ class JoinActivity : AppCompatActivity() {
             }
         }
     }
-    fun getImageData(key: String) {
+    fun getJoinImageData(key: String) {
         val storageReference = Firebase.storage.reference.child("$key.png")
 
         storageReference.downloadUrl.addOnCompleteListener { task ->
@@ -130,7 +132,7 @@ class JoinActivity : AppCompatActivity() {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
-                    .into(imgPostDetailPicture) //지역변수
+                    .into(imgJoinUser) //지역변수
 
             }
         }

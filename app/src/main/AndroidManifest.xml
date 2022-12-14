@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Planter"
         tools:targetApi="31">
         <activity
-            android:name=".EditActivity"
+            android:name=".UserAuth.EditActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

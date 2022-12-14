@@ -23,16 +23,10 @@ class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
 
         val btnIntroLogin = findViewById<Button>(R.id.btnIntroLogin)
-
         val btnIntroJoin = findViewById<Button>(R.id.btnIntroJoin)
-
         val btnIntroLogOut = findViewById<Button>(R.id.btnIntroLogOut)
-
         val btnIntroDel = findViewById<Button>(R.id.btnIntroDel)
-
         val btnIntroEdit = findViewById<Button>(R.id.btnIntroEdit)
-
-
 
 
 
