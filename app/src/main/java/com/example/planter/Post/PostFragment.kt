@@ -36,7 +36,7 @@ class PostFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_post, container, false)
 
         val rvPostView = view.findViewById<RecyclerView>(R.id.rvPostView)
-        val btnPostSend = view.findViewById<Button>(R.id.btnPostSend)
+        val btnPostSend = view.findViewById<ImageView>(R.id.btnPostSend)
 
         //2. Template결정 : post_list.xml
 
