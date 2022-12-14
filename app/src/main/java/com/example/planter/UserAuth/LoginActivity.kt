@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -53,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if(task.isSuccessful){
                         Toast.makeText(this," ${email}님 반가워요",Toast.LENGTH_SHORT).show()
-
+                        
                         val editor = sharedPreferences.edit()
                         editor.putString("loginId",email)
                         editor.putString("loginPw",pw)

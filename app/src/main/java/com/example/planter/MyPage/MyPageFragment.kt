@@ -40,6 +40,7 @@ class MyPageFragment : Fragment() {
         btnMyPageEdit.setOnClickListener {
 
             val intent = Intent(context,EditActivity::class.java)
+            startActivity(intent)
         }
 
 

@@ -16,52 +16,59 @@
     <EditText
         android:id="@+id/etEditEmail"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="#ECECEC"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/etEditPw"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#ECECEC"
         android:ems="10"
         android:hint="비밀번호를 입력해주세요"
         android:inputType="textPassword"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/etEditEmail"
-        app:layout_constraintStart_toStartOf="@+id/etEditEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEditEmail" />
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
         android:id="@+id/etEditNick"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#ECECEC"
         android:ems="10"
         android:inputType="textPersonName"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/etEditPw"
-        app:layout_constraintStart_toStartOf="@+id/etEditPw"
-        app:layout_constraintTop_toBottomOf="@+id/etEditPw" />
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
         android:id="@+id/btnEditEdit"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:layout_marginTop="245dp"
         android:text="회원정보수정"
         app:layout_constraintEnd_toEndOf="@+id/etEditNick"
-        tools:layout_editor_absoluteY="581dp" />
+        app:layout_constraintStart_toStartOf="@+id/etEditNick"
+        app:layout_constraintTop_toBottomOf="@+id/etEditNick" />
 
     <Button
         android:id="@+id/btnEditImg"
         android:layout_width="104dp"
         android:layout_height="70dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="24dp"
         android:text="첨부하기"
         app:layout_constraintEnd_toEndOf="@+id/etEditNick"
         app:layout_constraintTop_toBottomOf="@+id/etEditNick" />
@@ -77,5 +84,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="183dp"
+        android:layout_height="197dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditEdit"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditImg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/etEditNick"
+        app:layout_constraintTop_toBottomOf="@+id/etEditNick"
+        tools:srcCompat="@drawable/de_profile" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="이메일"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="비밀번호"
+        app:layout_constraintStart_toStartOf="@+id/etEditEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEditEmail" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="닉네임"
+        app:layout_constraintStart_toStartOf="@+id/etEditPw"
+        app:layout_constraintTop_toBottomOf="@+id/etEditPw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
