@@ -56,10 +56,11 @@ class IntroActivity : AppCompatActivity() {
         // 로그아웃 버튼
         btnIntroLogOut.setOnClickListener {
 
-            FirebaseAuth.getInstance().signOut()
+            auth.signOut()
             Toast.makeText(this, "로그아웃하셨습니다", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
@@ -72,8 +73,10 @@ class IntroActivity : AppCompatActivity() {
             // AlertDialog.Builder(this).setTitle("asd").setMessage("asdf")
             // 이런 식으로 한 줄에 쓸 수도 있음
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("회원 탈퇴")
-            builder.setMessage("정말 탈퇴하시겠습니까?")
+
+            builder.setIcon(R.drawable.dotol)
+            builder.setTitle("도토리")
+            builder.setMessage("정말 탈퇴할거야?")
 
 //            builder.setPositiveButton("탈퇴", DialogInterface.OnClickListener() {
 //                @Override
