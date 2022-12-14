@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -34,7 +33,7 @@ class PostDetailActivity : AppCompatActivity() {
 
             imgPostDetailPicture = findViewById(R.id.imgPostDetailPicture)
 
-            val imgPostDetailUserPic = findViewById<ImageView>(R.id.imgPostDetailUserPic)
+            val imgPostDetailUserPic = findViewById<ImageView>(R.id.imgJoinLogo)
             val tvPostDetailTime = findViewById<TextView>(R.id.tvPostDetailTime)
             val tvPostDetailTitle = findViewById<TextView>(R.id.tvPostDetailTitle)
             tvPostDetailUserNick = findViewById(R.id.tvPostDetailUserNick)
