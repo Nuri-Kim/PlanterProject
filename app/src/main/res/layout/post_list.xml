@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imgPostListPicture"
-        android:layout_width="69dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -22,12 +22,13 @@
         android:id="@+id/tvPostListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="타이틀타이틀"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tvPostListCategory"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostListCategory" />
+        app:layout_constraintStart_toStartOf="@+id/tvPostListWriter"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListWriter" />
 
     <TextView
         android:id="@+id/tvPostListContent"
@@ -42,11 +43,19 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPostListTitle" />
 
     <TextView
-        android:id="@+id/tvPostListCategory"
+        android:id="@+id/tvPostListWriter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="카테고리카테"
+        android:background="@drawable/btn_style"
+        android:paddingLeft="8dp"
+        android:paddingTop="2dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="2dp"
+        android:text="작성자"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgPostListPicture"
         app:layout_constraintTop_toTopOf="@+id/imgPostListPicture" />
 
@@ -68,6 +77,6 @@
         android:background="#bdbdbd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostListContent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostListPicture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
