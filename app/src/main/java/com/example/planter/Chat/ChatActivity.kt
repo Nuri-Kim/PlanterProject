@@ -42,7 +42,7 @@ class ChatActivity : AppCompatActivity() {
 
         imgChatSend.setOnClickListener{
             val msg = etChatInput.text.toString()
-            chatListRef.push().setValue(ChatVO(user,"edxi2TvzmvWhaL0VZb1kCcpmNGj2",msg,"",nowTime))
+            chatListRef.push().setValue(ChatVO(user,"누리","edxi2TvzmvWhaL0VZb1kCcpmNGj2",msg,"",nowTime))
 
             etChatInput.text = null
         }

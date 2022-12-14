@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.R
@@ -59,7 +60,7 @@ class PostFragment : Fragment() {
                 val intent = Intent(requireActivity(), PostDetailActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
-                intent.putExtra("nick", PostList[position].nick)
+
                 intent.putExtra("content", PostList[position].content)
                 intent.putExtra("category", PostList[position].category)
                 intent.putExtra("time", PostList[position].time)
@@ -76,7 +77,7 @@ class PostFragment : Fragment() {
         //5.Adapter 부착
 
         rvPostView.adapter = adapter
-        rvPostView.layoutManager = GridLayoutManager(requireContext(), 2)
+        rvPostView.layoutManager = LinearLayoutManager(requireContext())
 
 
         // 게시글작성 액티비티로 이동

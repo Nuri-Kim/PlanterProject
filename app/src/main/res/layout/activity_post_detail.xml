@@ -7,7 +7,7 @@
     tools:context=".Post.PostDetailActivity">
 
     <ImageView
-        android:id="@+id/imgJoinLogo"
+        android:id="@+id/imgPostDetailUserPic"
         android:layout_width="53dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="작성일시간"
-        app:layout_constraintBottom_toBottomOf="@+id/imgJoinLogo"
-        app:layout_constraintStart_toEndOf="@+id/imgJoinLogo" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostDetailUserPic"
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailUserPic" />
 
     <TextView
         android:id="@+id/tvPostDetailTitle"
@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="작성자이름"
-        app:layout_constraintStart_toEndOf="@+id/imgJoinLogo"
-        app:layout_constraintTop_toTopOf="@+id/imgJoinLogo" />
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailUserPic"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailUserPic" />
 
     <TextView
         android:id="@+id/tvPostDetailCategory"
@@ -81,7 +81,7 @@
         android:text="글 내용"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgJoinLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailUserPic" />
 
     <ImageView
         android:id="@+id/imgPostDetailPicture"
