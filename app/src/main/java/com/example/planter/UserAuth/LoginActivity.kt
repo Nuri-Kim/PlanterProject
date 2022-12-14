@@ -39,8 +39,8 @@ class LoginActivity : AppCompatActivity() {
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
 
-        val manman = findViewById<ImageView>(R.id.manman)
-        Glide.with(this).load(R.raw.testgif).into(manman)
+
+
 
 
         btnLoginLogin.setOnClickListener {

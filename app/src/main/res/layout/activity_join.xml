@@ -31,7 +31,7 @@
         android:layout_width="32dp"
         android:layout_height="28dp"
         android:layout_marginEnd="16dp"
-        android:background="#FFFFFF"
+        android:background="@color/mainColor"
         android:src="@drawable/icon_edit"
         app:layout_constraintBottom_toBottomOf="@+id/imgJoinUser"
         app:layout_constraintEnd_toEndOf="@+id/imgJoinUser" />
@@ -150,7 +150,9 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/btn_style"
         android:text="회원가입"
+        android:textColor="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/etJoinNick"
         app:layout_constraintStart_toStartOf="@+id/etJoinNick"

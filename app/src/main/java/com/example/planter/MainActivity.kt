@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.planter.Api.HomeFragment
 import com.example.planter.Chat.ChatFragment
+import com.example.planter.MyPage.MyPageFragment
 import com.example.planter.Post.PostFragment
 import com.example.planter.UserAuth.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -51,10 +52,20 @@ class MainActivity : AppCompatActivity() {
                     ).commit()
                 }
 
+                R.id.tab4 ->{
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.flMain,
+                        MyPageFragment()
+                    ).commit()
+                }
+
             }
 
         true
 
+
         }
     }
+
+
 }
