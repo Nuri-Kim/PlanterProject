@@ -158,4 +158,8 @@
         app:layout_constraintStart_toStartOf="@+id/etJoinNick"
         app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
 
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

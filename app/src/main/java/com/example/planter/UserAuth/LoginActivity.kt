@@ -42,6 +42,10 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
+
+
+
         btnLoginLogin.setOnClickListener {
             val email = etLoginEmail.text.toString()
             val pw = etLoginPw.text.toString()
@@ -52,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
                     if(task.isSuccessful){
                         Toast.makeText(this," ${email}님 반가워요",Toast.LENGTH_SHORT).show()
-                        
+
                         val editor = sharedPreferences.edit()
                         editor.putString("loginId",email)
                         editor.putString("loginPw",pw)

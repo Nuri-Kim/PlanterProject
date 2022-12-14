@@ -42,6 +42,10 @@ class JoinActivity : AppCompatActivity() {
         getJoinImageData(img.toString())
 
 
+
+
+
+
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val pwRegex = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
             val pwPattern = Pattern.compile(pwRegex)
