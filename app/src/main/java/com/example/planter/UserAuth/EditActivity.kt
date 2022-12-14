@@ -26,15 +26,13 @@ class EditActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        val etEditEmail = findViewById<EditText>(R.id.etEditEmail)
         val etEditPw = findViewById<EditText>(R.id.etEditPw)
         val etEditNick = findViewById<EditText>(R.id.etEditNick)
-        val btnEditImg = findViewById<Button>(R.id.btnEditImg)
+        val btnEditImg = findViewById<ImageView>(R.id.btnEditImg)
         val btnEditEdit = findViewById<Button>(R.id.btnEditEdit)
 
 
 
-        val email = etEditEmail.text.toString()
         val pw = etEditPw.text.toString()
         val nick = etEditNick.text.toString()
 
