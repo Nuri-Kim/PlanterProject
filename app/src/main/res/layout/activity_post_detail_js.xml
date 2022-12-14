@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Post.PostDetailActivity">
+    tools:context=".Post.PostDetailJsActivity">
 
     <ImageView
         android:id="@+id/imgPostDetailUserPic"
@@ -86,30 +86,94 @@
     <ImageView
         android:id="@+id/imgCommentPicture"
         android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/tvPostDetailContent"
         app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailContent"
-        app:srcCompat="@drawable/planter_logo" />
+        app:srcCompat="@drawable/icon_home" />
 
     <TextView
         android:id="@+id/tvPostDetailCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:text="댓글 개수"
-        app:layout_constraintStart_toStartOf="@+id/imgCommentPicture"
-        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture" />
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailComment"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailComment" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
+        app:srcCompat="@drawable/icon_like_white" />
+
+    <ImageView
+        android:id="@+id/imgPostDetailBookmark"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:srcCompat="@drawable/bookmark_empty" />
+
+    <ImageView
+        android:id="@+id/imgPostDetailComment"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:srcCompat="@drawable/icon_comment" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
         android:id="@+id/tvPostDetailCmtAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginEnd="8dp"
+        android:text="댓글 등록"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etPostDetailComment" />
+
+    <EditText
+        android:id="@+id/etPostDetailComment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="댓글 작성"
-        app:layout_constraintStart_toStartOf="@+id/imgCommentPicture"
-        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture" />
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:hint="댓글을 남겨보세요"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvPostDetailCmtAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvComment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

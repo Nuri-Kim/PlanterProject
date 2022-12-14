@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imgPostDetailPicture"
+        android:id="@+id/imgCommentPicture"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
@@ -16,45 +16,36 @@
         app:srcCompat="@drawable/icon_mypage" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tvCommentNick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="닉네임"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgPostDetailPicture"
-        app:layout_constraintTop_toTopOf="@+id/imgPostDetailPicture" />
+        app:layout_constraintStart_toEndOf="@+id/imgCommentPicture"
+        app:layout_constraintTop_toTopOf="@+id/imgCommentPicture" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tvCommentContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="댓글 내용"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintStart_toStartOf="@+id/tvCommentNick"
+        app:layout_constraintTop_toBottomOf="@+id/tvCommentNick" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvCommentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="댓글작성시간"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="수정"
-        app:layout_constraintEnd_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintStart_toStartOf="@+id/tvCommentContent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCommentContent" />
 
     <TextView
         android:id="@+id/textView15"
@@ -63,6 +54,6 @@
         android:layout_marginEnd="8dp"
         android:text="삭제"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/tvCommentNick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

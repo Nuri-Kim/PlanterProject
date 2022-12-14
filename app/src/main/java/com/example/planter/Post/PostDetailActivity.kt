@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -41,7 +40,7 @@ class PostDetailActivity : AppCompatActivity() {
             Log.d("나와", email)
         }
 
-        imgPostDetailPicture = findViewById(R.id.imgPostDetailPicture)
+        imgPostDetailPicture = findViewById(R.id.imgCommentPicture)
 
         val imgPostDetailUserPic = findViewById<ImageView>(R.id.imgPostDetailUserPic)
         val tvPostDetailTime = findViewById<TextView>(R.id.tvPostDetailTime)
@@ -52,7 +51,7 @@ class PostDetailActivity : AppCompatActivity() {
         val tvPostDetailDelete = findViewById<TextView>(R.id.tvPostDetailDelete)
         val tvPostDetailContent = findViewById<TextView>(R.id.tvPostDetailContent)
         val tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
-        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailWrite)
+        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
 
 
 
