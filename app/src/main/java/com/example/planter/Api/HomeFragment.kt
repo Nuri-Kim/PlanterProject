@@ -43,7 +43,6 @@ import java.util.*
     val sdf = SimpleDateFormat("HH시 mm분")
 
     lateinit var tvHomeSet : TextView
-    val mNotificationHelper = NotificationHelper(context)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -183,12 +182,6 @@ import java.util.*
 
         updateTimeText(c)
         startAlarm(c)
-    }
-
-    fun sendOnChannel2(title: String?, message: String?) {
-        val nb: NotificationCompat.Builder =
-            mNotificationHelper.getChannel2Notification(title, message)!!
-        mNotificationHelper.getManager()?.notify(2, nb.build())
     }
 
     fun startAlarm(c: Calendar) {

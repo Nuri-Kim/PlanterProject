@@ -43,10 +43,10 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         channel2.enableVibration(true)
         channel2.lightColor = "#0D6B3E".toColorInt()
         channel2.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
-        getManager()?.createNotificationChannel(channel2)
+        getManager().createNotificationChannel(channel2)
     }
 
-    fun getManager(): NotificationManager? {
+    fun getManager(): NotificationManager {
         return getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     }
 
