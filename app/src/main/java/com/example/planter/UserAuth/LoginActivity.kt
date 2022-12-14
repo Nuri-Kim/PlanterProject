@@ -47,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
             val email = etLoginEmail.text.toString()
             val pw = etLoginPw.text.toString()
 
+
             auth.signInWithEmailAndPassword(email,pw)
                 .addOnCompleteListener(this){task ->
 

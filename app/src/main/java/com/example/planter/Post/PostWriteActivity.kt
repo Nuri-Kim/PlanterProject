@@ -17,15 +17,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.Map.MapsActivity
 import com.example.planter.R
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
+
 class PostWriteActivity : AppCompatActivity() {
 
     lateinit var imgPostWritePicture : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_write)
@@ -91,8 +95,14 @@ class PostWriteActivity : AppCompatActivity() {
                 10_000L,10f,locationListener)
 //                manager.removeUpdates(locationListener)
 
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+                finish()
+
 
             }
+
+
 
 
         }
@@ -103,9 +113,11 @@ class PostWriteActivity : AppCompatActivity() {
                 //Firebase에 업로드하기
                 val title = etPostWriteTitle.text.toString()
                 val content = etPostWriteContent.text.toString()
+                val time = FBAuth.getTime()
+                val uid = FBAuth.getUid()
 
                 var key =  FBdataBase.getBoardRef().push().key.toString()
-                FBdataBase.getBoardRef().child(key).setValue(PostVO("지연",title, content,"일반"))
+                FBdataBase.getBoardRef().child(key).setValue(PostVO("지연",title, content,"일반", uid, time ))
                 imgUpload(key)
                 finish()
 
