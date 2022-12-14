@@ -42,16 +42,14 @@ class PostFragment : Fragment() {
 
         //3. Item결정 : PostVO
 
-//        PostList.add(PostVO("지연지연","a","a","a"))
-//        PostList.add(PostVO("정선정선","a","a","a"))
 
-
+        //모든 정보 불러옴.
         getPostData()
         //4. Adapter 결정
 
         adapter = PostAdapter(requireContext(), PostList)
 
-        // 각 게시글 클릭 이벤트 - 게시글 내부로 이동
+        // 각 게시글 클릭 이벤트 - 게시글 내부로 동
         adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
 
@@ -65,8 +63,11 @@ class PostFragment : Fragment() {
                 intent.putExtra("category", PostList[position].category)
                 intent.putExtra("time", PostList[position].time)
                 intent.putExtra("uid", PostList[position].uid)
-
+                
+                //PostDetail로 게시글의 키 값 전달
                 intent.putExtra("key", keyData[position])
+                
+                //PostDetail 액티비티 구동
                 startActivity(intent)
 
             }
@@ -95,18 +96,26 @@ class PostFragment : Fragment() {
 
     // post에 있는 데이터 다~ 가져오는 함수
     fun getPostData() {
+        
+        //데이터베이스에서 컨텐츠 세부정보 검색
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // Firebase에서 snapshot으로 데이터를 받아온 경우
                 // 게시물의 uid
                 //        -BoardVO
+                
+                //저장/삭제마다 데이터 누적으로 인한 게시글 중복 저장 방지
                 PostList.clear()
-                for (model in snapshot.children) {
+
+                //snapshot 내부 데이터 모델 형식으로 지정정
+               for (model in snapshot.children) {
                     val item = model.getValue(PostVO::class.java)
 
                     if (item != null) {
+                        //게시글 목록에 item(게시글)삽입
                         PostList.add(item)
                     }
+                   //게시글 키 목록으로 String변환 넣음
                     keyData.add(model.key.toString())
 
                 }

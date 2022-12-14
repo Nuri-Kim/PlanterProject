@@ -31,6 +31,8 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
     }
 
 
+
+
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -51,6 +53,8 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
                     }
                 }
 
+
+
             }
 
     }
@@ -69,9 +73,12 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
         holder.tvPostListCategory.text = PostList[position].category
 
 
+
     }
 
     override fun getItemCount(): Int {
         return PostList.size //항목의 갯수
     }
+
+
 }

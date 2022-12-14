@@ -1,6 +1,8 @@
 package com.example.planter.Post
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -12,58 +14,105 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
 import com.example.fullstackapplication.utils.FBAuth
 import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.Map.MapsActivity
 import com.example.planter.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 
 class PostWriteActivity : AppCompatActivity() {
 
+    lateinit var auth: FirebaseAuth
     lateinit var imgPostWritePicture : ImageView
+    lateinit var etPostWriteTitle : EditText
+    lateinit var etPostWriteContent : EditText
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_write)
+        auth = Firebase.auth
+
+        //user?.email.toString()
 
         imgPostWritePicture = findViewById(R.id.imgPostWritePicture)
+        etPostWriteTitle = findViewById<EditText>(R.id.etPostWriteTitle)
+        etPostWriteContent = findViewById<EditText>(R.id.etPostWriteContent)
+
         val imgPostWriteUserNick = findViewById<TextView>(R.id.tvPostWriteUserNick)
-        val etPostWriteTitle = findViewById<EditText>(R.id.etPostWriteTitle)
-        val etPostWriteContent = findViewById<EditText>(R.id.etPostWriteContent)
         val btnPostWriteSend = findViewById<Button>(R.id.btnPostWriteSend)
         val imgPostWriteLocation = findViewById<ImageView>(R.id.imgPostWriteLocation)
+
+        val key = intent.getStringExtra("key")
+        val title = intent.getStringExtra("title")
+        val content = intent.getStringExtra("content")
+        val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
+
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
         val uid = FBAuth.getUid()
+        val uidsended = intent.getStringExtra(uid)
+
+        getImageData(key.toString())
 
 
 
-        if (email != null) {
-            Log.d("나와", email)
-        }
-        Log.d("나와id", id)
+//        if (email != null) {
+//            Log.d("나와", email)
+//        }
 
-        if (uid != null) {
-            Log.d("나와uid", uid)
-        }
-
-
-
+        Log.d("나와uidsended_WriteActivity", id)
+         Log.d("나와uid_WriteActivity", uid)
 
         imgPostWriteUserNick.setText(email)
+
+
+
+
+
+
+
+//        // 수정 버튼 클릭 시 View 값 이전 게시물에서 가져오기
+        etPostWriteTitle.setText(title)
+        etPostWriteContent.setText(content)
+        imgPostWriteUserNick.setText(sp.getString("loginId",""))
+
+        fun getImageData(key: String) {
+            val storageReference = Firebase.storage.reference.child("$key.png")
+
+            storageReference.downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                    Glide.with(this)
+                        .load(task.result)
+                        .into(imgPostWritePicture) //지역변수
+
+                }
+            }
+
+
+        }
+
+
+
+
+
 
 
 
@@ -134,22 +183,37 @@ class PostWriteActivity : AppCompatActivity() {
         }
 
 
-            btnPostWriteSend.setOnClickListener {
+                btnPostWriteSend.setOnClickListener {
 
-                //Firebase에 업로드하기
+                    //Firebase에 업로드하기
 
-                val title = etPostWriteTitle.text.toString()
-                val content = etPostWriteContent.text.toString()
-                val time = FBAuth.getTime()
-                val uid = FBAuth.getUid()
+                    val title = etPostWriteTitle.text.toString()
+                    val content = etPostWriteContent.text.toString()
+                    val time = FBAuth.getTime()
+                    val uid = FBAuth.getUid()
 
 
-                var key =  FBdataBase.getBoardRef().push().key.toString()
-                FBdataBase.getBoardRef().child(key).setValue(PostVO(title, content,"일반", uid, time ))
-                imgUpload(key)
-                finish()
+                    var key2 = FBdataBase.getBoardRef().child(uid).key.toString()
 
+
+                    Log.d("작성 글 key 찍기", key2)
+//                    var etPost = FBdataBase.getBoardRef().child(key2)
+//                        .setValue(PostVO(title, content, "일반", uid, time))
+
+                    if(key==null) {
+                    FBdataBase.getBoardRef().child(key2!!)
+                        .setValue(PostVO(title, content, "일반", uid, time))
+//                    Log.d("etPost", etPost.toString())
+                    imgUpload(key2!!)
+
+                    finish()
+
+
+            }else{
+                editPostData(key.toString())
+                imgUpload(key!!)
             }
+        }
 
 
 ////        uid = intent.getStringExtra("uid")
@@ -194,6 +258,36 @@ class PostWriteActivity : AppCompatActivity() {
             // ...
         }
     }
+
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(this)
+                    .load(task.result)
+                    .into(imgPostWritePicture) //지역변수
+
+            }
+        }
+
+
+    }
+
+    fun editPostData(key: String){
+        FBdataBase.getBoardRef().child(key).setValue(PostVO(
+            etPostWriteTitle.text.toString(),
+            etPostWriteContent.text.toString(),
+            "일반",
+            FBAuth.getUid(),
+            FBAuth.getTime()
+        ))
+        // 수정 확인 메시지
+        Toast.makeText(this, "게시글이 수정되었습니다", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
 
 
 }
