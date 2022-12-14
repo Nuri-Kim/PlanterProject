@@ -59,9 +59,12 @@ class PostFragment : Fragment() {
                 val intent = Intent(requireActivity(), PostDetailActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
-                intent.putExtra("userNick", PostList[position].userNick)
+                intent.putExtra("nick", PostList[position].nick)
                 intent.putExtra("content", PostList[position].content)
                 intent.putExtra("category", PostList[position].category)
+                intent.putExtra("time", PostList[position].time)
+                intent.putExtra("uid", PostList[position].uid)
+
                 intent.putExtra("key", keyData[position])
                 startActivity(intent)
 
@@ -77,6 +80,7 @@ class PostFragment : Fragment() {
 
 
         // 게시글작성 액티비티로 이동
+
         btnPostSend.setOnClickListener {
             val intent = Intent(requireContext(), PostWriteActivity::class.java)
             startActivity(intent)
