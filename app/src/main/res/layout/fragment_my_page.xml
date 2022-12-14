@@ -34,9 +34,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/de_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +45,13 @@
     <Button
         android:id="@+id/btnMyPageLogOut"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
+        android:background="@drawable/btn_style"
         android:text="로그아웃"
+        android:textColor="#FFFFFF"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/btnMyPageEdit"
         app:layout_constraintTop_toTopOf="@+id/btnMyPageEdit" />
 
@@ -67,11 +70,14 @@
     <Button
         android:id="@+id/btnMyPageEdit"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginStart="115dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_style"
         android:text="정보수정"
+        android:textColor="#FFFFFF"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 

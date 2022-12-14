@@ -61,9 +61,6 @@ class MyPageFragment : Fragment() {
             // 이런 식으로 한 줄에 쓸 수도 있음
             val builder = AlertDialog.Builder(requireContext())
 
-            builder.setIcon(R.drawable.dotol)
-            builder.setTitle("도토리")
-            builder.setMessage("정말 탈퇴할거야?")
 
 //            builder.setPositiveButton("탈퇴", DialogInterface.OnClickListener() {
 //                @Override
