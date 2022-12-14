@@ -17,6 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnMyPageLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:text="로그아웃"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btnMyPageEdit"
+        app:layout_constraintTop_toTopOf="@+id/btnMyPageEdit" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -30,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnMyPageEdit"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="115dp"
@@ -40,16 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <Button
-        android:id="@+id/btnMyPageLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:text="로그아웃"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
-
     <TextView
         android:id="@+id/tvHome"
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         android:layout_marginTop="50dp"
         android:text="알람 설정"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMyPageEdit" />
 
     <Switch
         android:id="@+id/swHomeMsg2"
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvHome" />
 
     <TextView
-        android:id="@+id/btnMyPageDel"
+        android:id="@+id/tvMyPageDel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
