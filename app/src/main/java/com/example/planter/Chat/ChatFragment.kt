@@ -47,6 +47,12 @@ class ChatFragment : Fragment() {
         getChatList()
 
 
+        //더미데이터 생성
+        val chatListRef = FBdataBase.getChatListRef()
+        val nowTime = FBAuth.getTime()
+        //chatListRef.push().setValue(ChatVO("edxi2TvzmvWhaL0VZb1kCcpmNGj2",user,"test msg","",nowTime))
+
+
 
 
 
@@ -68,6 +74,7 @@ class ChatFragment : Fragment() {
             override fun onItemClick(view: View, position: Int) {
                 val intent = Intent(requireContext(),ChatActivity::class.java)
                 intent.putExtra("sendUser",chatList[position].sendUser)
+                intent.putExtra("senderName",chatList[position].senderName)
                 intent.putExtra("msg",chatList[position].msg)
                 intent.putExtra("img",chatList[position].img)
                 intent.putExtra("time",chatList[position].time)

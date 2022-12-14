@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planter.R
@@ -31,6 +30,8 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
     }
 
 
+
+
     inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -41,7 +42,7 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
             init {
                 tvPostListTitle = itemView.findViewById(R.id.tvPostListTitle)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
-                tvPostListCategory = itemView.findViewById(R.id.tvPostListCategory)
+                tvPostListCategory = itemView.findViewById(R.id.tvPostListWriter)
 
                 itemView.setOnClickListener {
                     val position = adapterPosition
@@ -50,6 +51,8 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
                         mOnItemClickListener.onItemClick(itemView,position)
                     }
                 }
+
+
 
             }
 
@@ -69,9 +72,12 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
         holder.tvPostListCategory.text = PostList[position].category
 
 
+
     }
 
     override fun getItemCount(): Int {
         return PostList.size //항목의 갯수
     }
+
+
 }

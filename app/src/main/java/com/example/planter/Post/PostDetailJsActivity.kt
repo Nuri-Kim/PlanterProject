@@ -1,7 +1,6 @@
 package com.example.planter.Post
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -28,28 +27,31 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class PostDetailActivity : AppCompatActivity() {
+class PostDetailJsActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     lateinit var tvPostDetailUserNick: TextView
+
     lateinit var imgPostDetailPicture: ImageView
+
+    //~정선추가
     lateinit var adapter: CommentAdapter
     var commentList = ArrayList<CommentVO>()
     var keyData = ArrayList<String>()
-
+    //~
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post_detail)
-
-
+        setContentView(R.layout.activity_post_detail_js)
 
         auth = Firebase.auth
 
+        //~정선추가
         val database = Firebase.database
         val bookMarkRef = database.getReference("BookMarkList")
         val commentRef = database.getReference("CommentList")
         val likeRef = database.getReference("LikeList")
+        //~
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
         val email = sharedPreferences.getString("loginId", "")
@@ -70,8 +72,9 @@ class PostDetailActivity : AppCompatActivity() {
         val tvPostDetailDelete = findViewById<TextView>(R.id.tvPostDetailDelete)
         val tvPostDetailContent = findViewById<TextView>(R.id.tvPostDetailContent)
         val tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
-        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
+//        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailWrite)
 
+        // ~정선 추가
         val imgPostDetailLike = findViewById<ImageView>(R.id.imageView4)
         val imgPostDetailComment = findViewById<ImageView>(R.id.imgPostDetailComment)
         val imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
@@ -80,6 +83,13 @@ class PostDetailActivity : AppCompatActivity() {
         val rvComment = findViewById<RecyclerView>(R.id.rvComment)
 
 
+//        if(bookmarkList.contains(keyData[position])){
+//            imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+//        }else{
+//            imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
+//        }
+
+        // ~
 
 
 
@@ -88,9 +98,6 @@ class PostDetailActivity : AppCompatActivity() {
         val nick = intent.getStringExtra("nick")
         val time = intent.getStringExtra("time")
         var uid = intent.getStringExtra("uid")
-
-        val prePost = PostVO(title!!, content!!, "일반", uid!!, time!!)
-        Log.d("뭐야", prePost.toString())
 
 
 
@@ -115,51 +122,30 @@ class PostDetailActivity : AppCompatActivity() {
 
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
-        if(uid != id) {
+        if(uid == id) {
             tvPostDetailModify.visibility = View.INVISIBLE
             tvPostDetailDelete.visibility = View.INVISIBLE
 
-        }else{
-            tvPostDetailModify.visibility = View.VISIBLE
-            tvPostDetailDelete.visibility = View.VISIBLE
         }
 
-
-            tvPostDetailModify.setOnClickListener {
-
-                val db = Firebase.database
-
-                val Content = db.getReference("board").child(key.toString())
+//        if () {
+//
+//
+//
+//
+//            tvPostDetailModify.setOnClickListener {
+//
+//                val db = Firebase.database
+//
+//                val Content = db.getReference("board").child(key.toString())
 //                Content.setValue(null)
-
-                val intent = Intent(this, PostWriteActivity::class.java)
-                intent.putExtra("title", title)
-                intent.putExtra("content", content)
-                intent.putExtra("key", key)
-
-                if (uid != null) {
-                    Log.d("나와보내는uid", uid)
-                    startActivity(intent)
-                }
-
-                finish()
-
-            }
-
-        tvPostDetailDelete.setOnClickListener {
-            val db = Firebase.database
-
-            val Content = db.getReference("board").child(key.toString())
-            Content.setValue(null)
-            finish()
-        }
-
-
-        val cmtData = ArrayList<CommentVO>()
-        getCommentData(key)
-        adapter = CommentAdapter(this, commentList)
-        rvComment.adapter = adapter
-        rvComment.layoutManager = LinearLayoutManager(this)
+//
+//                val intent = Intent(this, PostWriteActivity::class.java)
+//                intent.putExtra("uid", uid)
+//                Log.d("나와", uid)
+//                startActivity(intent)
+//
+//            }
 //
 //            tvPostDetailDelete.setOnClickListener {
 //
@@ -172,14 +158,25 @@ class PostDetailActivity : AppCompatActivity() {
 //
 //        }
 
-        imgPostDetailLike.setOnClickListener{
 
-            imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+        // ~정선 추가 - 소셜 기능
+        val cmtData = ArrayList<CommentVO>()
+        getCommentData(key)
+        adapter = CommentAdapter(this, commentList)
+        rvComment.adapter = adapter
+        rvComment.layoutManager = LinearLayoutManager(this)
 
-            likeRef.child(key!!).child("count").setValue("good")
+        // ~
+
+
+       imgPostDetailLike.setOnClickListener{
+
+           imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+
+           likeRef.child(key!!).child("count").setValue("good")
 //           likeRef.child(key!!).child("count").setValue("good")
 
-            likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
+           likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
 
         }
 
@@ -203,6 +200,8 @@ class PostDetailActivity : AppCompatActivity() {
             etPostDetailComment.setText("")
 
         }
+
+
     }
 
     fun getImageData(key: String) {
@@ -222,7 +221,8 @@ class PostDetailActivity : AppCompatActivity() {
     }
 
 
-    // 댓글 데이터 받아오기
+    // 정선 추가
+    // post에 있는 데이터 다~ 가져오는 함수
     fun getCommentData(key: String?) {
         val commentListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -245,6 +245,7 @@ class PostDetailActivity : AppCompatActivity() {
                 keyData.reverse()
                 adapter.notifyDataSetChanged()
 
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -255,6 +256,7 @@ class PostDetailActivity : AppCompatActivity() {
 
         FBdataBase.getCommentRef().child(key!!).addValueEventListener(commentListener)
     }
+
 
 
 }

@@ -4,26 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Post.PostDetailActivity">
-
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@color/mainColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".Post.PostDetailJsActivity">
 
     <ImageView
         android:id="@+id/imgPostDetailUserPic"
         android:layout_width="53dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostDetailTitle"
         app:srcCompat="@drawable/icon_mypage" />
 
     <TextView
@@ -39,14 +28,11 @@
         android:id="@+id/tvPostDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="제목"
-        android:textColor="#FFFFFF"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailCategory"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostDetailCategory" />
 
     <TextView
         android:id="@+id/tvPostDetailUserNick"
@@ -58,42 +44,52 @@
         app:layout_constraintTop_toTopOf="@+id/imgPostDetailUserPic" />
 
     <TextView
+        android:id="@+id/tvPostDetailCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="카테고리"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvPostDetailModify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="수정"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPostDetailTime"
-        app:layout_constraintEnd_toStartOf="@+id/tvPostDetailDelete" />
+        app:layout_constraintEnd_toStartOf="@+id/tvPostDetailDelete"
+        app:layout_constraintTop_toTopOf="@+id/tvPostDetailTime" />
 
     <TextView
         android:id="@+id/tvPostDetailDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="삭제"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPostDetailModify"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPostDetailTime" />
 
     <TextView
         android:id="@+id/tvPostDetailContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:text="글 내용"
-        app:layout_constraintEnd_toEndOf="@+id/tvPostDetailDelete"
-        app:layout_constraintStart_toStartOf="@+id/imgPostDetailUserPic"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostDetailDelete" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailUserPic" />
 
     <ImageView
         android:id="@+id/imgCommentPicture"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvPostDetailContent"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailContent"
         app:srcCompat="@drawable/icon_home" />
 
@@ -109,8 +105,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
         app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
@@ -127,10 +123,9 @@
 
     <ImageView
         android:id="@+id/imgPostDetailComment"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:srcCompat="@drawable/icon_comment" />
@@ -148,42 +143,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComment"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/etPostDetailComment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <EditText
-        android:id="@+id/etPostDetailComment"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint="댓글을 남겨보세요"
-        android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPostDetailCmtAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/btn_style"
-        android:padding="5dp"
+        android:layout_marginEnd="8dp"
         android:text="댓글 등록"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/etPostDetailComment"
-        app:layout_constraintEnd_toEndOf="@+id/etPostDetailComment"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etPostDetailComment" />
+
+    <EditText
+        android:id="@+id/etPostDetailComment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:hint="댓글을 남겨보세요"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvPostDetailCmtAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvComment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

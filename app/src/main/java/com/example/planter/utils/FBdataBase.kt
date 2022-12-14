@@ -19,7 +19,7 @@ class FBdataBase {
         }
 
         fun getBookMarkRef():DatabaseReference{
-            return dataBase.getReference("bookMarkList")
+            return dataBase.getReference("BookMarkList")
         }
 
         fun getContentRef():DatabaseReference{
@@ -41,5 +41,14 @@ class FBdataBase {
         fun getJoinRef():DatabaseReference{
             return dataBase.getReference("JoinList")
         }
+
+        fun getCommentRef():DatabaseReference{
+            return dataBase.getReference("CommentList")
+        }
+
+        fun getLikeRef():DatabaseReference{
+            return dataBase.getReference("LikeList")
+        }
+
     }
 }

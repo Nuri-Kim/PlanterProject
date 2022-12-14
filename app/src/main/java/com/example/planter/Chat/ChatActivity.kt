@@ -39,9 +39,10 @@ class ChatActivity : AppCompatActivity() {
         rvChat.adapter=adapter
         rvChat.layoutManager=LinearLayoutManager(this)
 
+
         imgChatSend.setOnClickListener{
             val msg = etChatInput.text.toString()
-            chatListRef.push().setValue(ChatVO(user,"GiWnK6dWC3Q9YdE67fXM6vBvLnA2",msg,"",nowTime))
+            chatListRef.push().setValue(ChatVO(user,"누리","edxi2TvzmvWhaL0VZb1kCcpmNGj2",msg,"",nowTime))
 
             etChatInput.text = null
         }
