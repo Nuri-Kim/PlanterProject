@@ -36,7 +36,7 @@ class JoinActivity : AppCompatActivity() {
         imgJoinUser = findViewById(R.id.imgJoinUser)
         val imgJoinEditIcon = findViewById<ImageView>(R.id.imgJoinEditIcon)
 
-        val userList = FBdataBase.getJoinRef()
+
         val img = intent.getStringExtra("key")
 
         getJoinImageData(img.toString())
@@ -78,7 +78,6 @@ class JoinActivity : AppCompatActivity() {
             // 알람받기 회원가입 정보 두 개 넣기
 
 
-
             if(email.isEmpty()){
                 isJoin = false
                 Toast.makeText(this,"이메일을 입력해주세요",Toast.LENGTH_SHORT).show()
@@ -116,9 +115,9 @@ class JoinActivity : AppCompatActivity() {
 
                             Toast.makeText(this, "플랜터에 온 걸 환영합니다", Toast.LENGTH_SHORT).show()
 
-                            userList.push().setValue(JoinVO(email,nick,true,true))
-
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
+                            intent.putExtra("email",email)
+                            intent.putExtra("nick",nick)
                             startActivity(intent)
                             finish()
                         } else {

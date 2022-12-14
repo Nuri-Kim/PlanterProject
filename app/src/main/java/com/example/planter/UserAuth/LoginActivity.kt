@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -39,9 +41,14 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+        Log.d("TEST_LOG_가입 후 로그인 UID ","${FBAuth.getUid()}")
 
+        val uid = FBAuth.getUid()
+        val getEmail = intent.getStringExtra("email").toString()
+        val getNick = intent.getStringExtra("nick").toString()
 
-
+        val userList = FBdataBase.getJoinRef()
+        userList.child(uid).setValue(JoinVO(getEmail,getNick,true,true))
 
 
 
