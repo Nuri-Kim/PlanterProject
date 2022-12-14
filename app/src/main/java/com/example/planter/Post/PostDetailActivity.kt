@@ -87,30 +87,31 @@ class PostDetailActivity : AppCompatActivity() {
 
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
-        if(uid == id) {
+        if(uid != id) {
             tvPostDetailModify.visibility = View.INVISIBLE
             tvPostDetailDelete.visibility = View.INVISIBLE
 
+        }else{
+            tvPostDetailModify.visibility = View.VISIBLE
+            tvPostDetailDelete.visibility = View.VISIBLE
         }
 
-//        if () {
-//
-//
-//
-//
-//            tvPostDetailModify.setOnClickListener {
-//
-//                val db = Firebase.database
-//
-//                val Content = db.getReference("board").child(key.toString())
-//                Content.setValue(null)
-//
-//                val intent = Intent(this, PostWriteActivity::class.java)
-//                intent.putExtra("uid", uid)
-//                Log.d("나와", uid)
-//                startActivity(intent)
-//
-//            }
+
+            tvPostDetailModify.setOnClickListener {
+
+                val db = Firebase.database
+
+                val Content = db.getReference("board").child(key.toString())
+                Content.setValue(null)
+
+                val intent = Intent(this, PostWriteActivity::class.java)
+                intent.putExtra("uid", uid)
+                if (uid != null) {
+                    Log.d("나와보내는uid", uid)
+                    startActivity(intent)
+                }
+
+            }
 //
 //            tvPostDetailDelete.setOnClickListener {
 //

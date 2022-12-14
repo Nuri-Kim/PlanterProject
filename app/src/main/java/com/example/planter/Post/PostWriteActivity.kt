@@ -47,9 +47,19 @@ class PostWriteActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
+        val uid = FBAuth.getUid()
 
-        Log.d("나와", email!!)
-        Log.d("나와2", id)
+
+
+        if (email != null) {
+            Log.d("나와", email)
+        }
+        Log.d("나와id", id)
+
+        if (uid != null) {
+            Log.d("나와uid", uid)
+        }
+
 
 
 
