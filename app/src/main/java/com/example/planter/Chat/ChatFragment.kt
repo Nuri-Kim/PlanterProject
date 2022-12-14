@@ -46,6 +46,10 @@ class ChatFragment : Fragment() {
 
         getChatList()
 
+        val chatListRef = FBdataBase.getChatListRef()
+        val nowTime = FBAuth.getTime()
+        //chatListRef.push().setValue(ChatVO("edxi2TvzmvWhaL0VZb1kCcpmNGj2",user,"test msg","",nowTime))
+
 
 
 
