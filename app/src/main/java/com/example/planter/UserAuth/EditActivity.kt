@@ -39,35 +39,6 @@ class EditActivity : AppCompatActivity() {
         val nick = etEditNick.text.toString()
 
 
-        val user = Firebase.auth.currentUser
-        user?.let {
-            for (profile in it.providerData) {
-                // Id of the provider (ex: google.com)
-                val providerId = profile.providerId
-
-                // UID specific to the provider
-                val uid = profile.uid
-
-                // Name, email address, and profile photo Url
-                val name = profile.displayName
-                val email = profile.email
-                val photoUrl = profile.photoUrl
-            }
-        }
-
-
-
-        val profileUpdates = userProfileChangeRequest {
-            displayName = "Jane Q. User"
-            photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
-        }
-
-        user!!.updateProfile(profileUpdates)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "User profile updated.")
-                }
-            }
 
 
 
@@ -78,8 +49,6 @@ class EditActivity : AppCompatActivity() {
         btnEditImg.setOnClickListener {
 
 
-
-
         }
 
 
@@ -88,6 +57,11 @@ class EditActivity : AppCompatActivity() {
 
         // 회원정보수정 완료 버튼
         btnEditEdit.setOnClickListener {
+            val profileUpdates = userProfileChangeRequest {
+                displayName = "Jane Q. User"
+                photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
+            }
+
 
             finish()
         }
