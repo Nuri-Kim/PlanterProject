@@ -80,6 +80,7 @@ class PostFragment : Fragment() {
 
 
         // 게시글작성 액티비티로 이동
+
         btnPostSend.setOnClickListener {
             val intent = Intent(requireContext(), PostWriteActivity::class.java)
             startActivity(intent)
