@@ -9,6 +9,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
@@ -18,6 +19,7 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.example.fullstackapplication.utils.FBAuth
+import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
 import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.Map.MapsActivity
 import com.example.planter.R
@@ -30,16 +32,30 @@ class PostWriteActivity : AppCompatActivity() {
 
     lateinit var imgPostWritePicture : ImageView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_write)
 
         imgPostWritePicture = findViewById(R.id.imgPostWritePicture)
-        val imgPostWriteUserNick = findViewById<TextView>(R.id.imgPostWriteUserNick)
+        val imgPostWriteUserNick = findViewById<TextView>(R.id.tvPostWriteUserNick)
         val etPostWriteTitle = findViewById<EditText>(R.id.etPostWriteTitle)
         val etPostWriteContent = findViewById<EditText>(R.id.etPostWriteContent)
         val btnPostWriteSend = findViewById<Button>(R.id.btnPostWriteSend)
         val imgPostWriteLocation = findViewById<ImageView>(R.id.imgPostWriteLocation)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
+        val email = sharedPreferences.getString("loginId", "")
+        val id = getUid()
+
+        Log.d("나와", email!!)
+        Log.d("나와2", id)
+
+
+
+        imgPostWriteUserNick.setText(email)
+
+
 
         imgPostWritePicture.setOnClickListener {
             //사진 데이터 준비
@@ -111,20 +127,29 @@ class PostWriteActivity : AppCompatActivity() {
             btnPostWriteSend.setOnClickListener {
 
                 //Firebase에 업로드하기
+
                 val title = etPostWriteTitle.text.toString()
                 val content = etPostWriteContent.text.toString()
                 val time = FBAuth.getTime()
                 val uid = FBAuth.getUid()
 
+
                 var key =  FBdataBase.getBoardRef().push().key.toString()
-                FBdataBase.getBoardRef().child(key).setValue(PostVO("지연",title, content,"일반", uid, time ))
+                FBdataBase.getBoardRef().child(key).setValue(PostVO(title, content,"일반", uid, time ))
                 imgUpload(key)
                 finish()
 
             }
 
 
-
+////        uid = intent.getStringExtra("uid")
+//        if(uid != null){
+//            val uid = intent.hasExtra("uid").toString()
+//            etPostWriteTitle.setText(title.toString())
+//
+//            Log.d("뭔데",uid )
+//
+//        }
 
 
     } // onCreate 밖

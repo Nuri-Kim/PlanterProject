@@ -59,7 +59,7 @@ class PostFragment : Fragment() {
                 val intent = Intent(requireActivity(), PostDetailActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
-                intent.putExtra("nick", PostList[position].nick)
+
                 intent.putExtra("content", PostList[position].content)
                 intent.putExtra("category", PostList[position].category)
                 intent.putExtra("time", PostList[position].time)
