@@ -20,6 +20,9 @@ import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBdataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -27,6 +30,7 @@ import com.google.firebase.storage.ktx.storage
 class MyPageFragment : Fragment() {
 
     lateinit var auth : FirebaseAuth
+    lateinit var nick : String
 
     lateinit var imgMypage : ImageView
 
@@ -41,17 +45,33 @@ class MyPageFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_my_page, container, false)
         imgMypage = view.findViewById(R.id.imgMypage)
+        val tvMypageNick = view.findViewById<TextView>(R.id.tvMypageNick)
         val btnMyPageLogOut = view.findViewById<Button>(R.id.btnMyPageLogOut)
         val tvMyPageDel = view.findViewById<TextView>(R.id.tvMyPageDel)
         val btnMyPageEdit = view.findViewById<Button>(R.id.btnMyPageEdit)
         //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
 
         val user = FBAuth.getUid()
-        getImageData(user)
 
-        val userInfo = FBdataBase.getJoinRef().orderByChild("uid").equalTo(user).get()
+        // 접속한 uid 닉네임 찾아오기
+        FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                nick = snapshot.child("nick").value as String
 
-        Log.d("userInfo",userInfo.toString())
+                getImageData(user)
+                tvMypageNick.text = nick
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+
+
 
 
 
