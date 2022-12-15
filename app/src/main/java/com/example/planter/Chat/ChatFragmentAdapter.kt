@@ -7,13 +7,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.planter.ChatVO
 import com.example.planter.R
+import com.example.planter.UserAuth.JoinVO
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 // 현재 로그인 유저 전체 채팅 목록
+
+lateinit var imgChatList : ImageView
 class ChatFragmentAdapter (val context: Context,
-                           val chatList : ArrayList<ChatVO>,
+                           val userList : ArrayList<JoinVO>,
                           ) : RecyclerView.Adapter<ChatFragmentAdapter.ViewHolder>() {
 
 
@@ -34,7 +40,6 @@ class ChatFragmentAdapter (val context: Context,
 
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val imgChatList : ImageView
         val tvChatListOther : TextView
 
         init {
@@ -64,10 +69,10 @@ class ChatFragmentAdapter (val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
+        getImageData(userList[position].uid)
 
-
-        holder.imgChatList.setImageResource(R.drawable.de_profile)
-        holder.tvChatListOther.text = chatList[position].sendUser
+        //imgChatList.setImageResource(R.drawable.de_profile)
+        holder.tvChatListOther.text = userList[position].nick
 
 
         // fireBase chatList 내 receiver 가 login user 와 일치하는 경우
@@ -78,6 +83,24 @@ class ChatFragmentAdapter (val context: Context,
     }
 
     override fun getItemCount(): Int {
-        return chatList.size
+        return userList.size
     }
+
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(context)
+                    .load(task.result)
+                    .into(imgChatList) //지역변수
+
+            }
+        }
+
+
+    }
+
+
 }

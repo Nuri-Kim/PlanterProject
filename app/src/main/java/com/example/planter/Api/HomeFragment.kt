@@ -13,9 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,9 +21,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.planter.R
 import com.example.planter.UserAuth.JoinVO
-import com.example.planter.databinding.ActivityMainBinding
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import org.json.JSONObject
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -42,6 +36,7 @@ import java.util.*
     val sdf = SimpleDateFormat("HH시 mm분")
 
     lateinit var tvHomeSet : TextView
+    var isSet : Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -49,6 +44,7 @@ import java.util.*
         savedInstanceState: Bundle?
     ): View? {
         //현재시간(ㅁ밀리)
+
         val currentMillis = LocalDateTime.now()
             .atZone(ZoneId.systemDefault())
             .toInstant()?.toEpochMilli() ?: 0
@@ -77,7 +73,7 @@ import java.util.*
 //                list[i]
 //            )
 //        }
-//
+
         //메시지 알람
         swHomeAlarm1.setOnCheckedChangeListener { compoundButton, ischecked ->
             if(ischecked){
@@ -90,10 +86,12 @@ import java.util.*
         //물주기 알람
         swHomeAlarm2.setOnCheckedChangeListener { compoundButton, ischecked ->
             if(ischecked){
-                var timePicker = TimePickerFragment()
-                timePicker.show(childFragmentManager,"Time picker")
+                isSet = true
+             var timePicker = TimePickerFragment()
+            timePicker.show(requireActivity().supportFragmentManager,"Timepicker")
             }else{
-                val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+                isSet = false
+                val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager?
                 val intent = Intent(context, AlertReceiver::class.java)
                 val pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0)
 
@@ -171,20 +169,8 @@ import java.util.*
 //        mNotificationHelper.getManager()?.notify(1, nb.build())
 //    }
 
-    override fun onTimeSet(timePicker: TimePicker?, hourOfDay: Int, minute: Int) {
-        Log.d("test", hourOfDay.toString())
-        val c = Calendar.getInstance()
-
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        c.set(Calendar.MINUTE, minute)
-        c.set(Calendar.SECOND, 0)
-
-        updateTimeText(c)
-        startAlarm(c)
-    }
-
     fun startAlarm(c: Calendar) {
-        val alarmManager: AlarmManager? = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+        val alarmManager: AlarmManager? = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager?
         val intent = Intent(context, AlertReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0)
         if (c.before(Calendar.getInstance())) {
@@ -197,11 +183,27 @@ import java.util.*
     fun updateTimeText(c: Calendar){
         var timeText = "물주기 알람시간 : "
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
-        tvHomeSet.setText(timeText)
-        var intent = Intent(requireContext(), AlertReceiver:: class.java)
+        tvHomeSet.text = timeText
+        var intent = Intent(requireActivity(), AlertReceiver:: class.java)
+        var intent2 = Intent(requireActivity(), TimePickerFragment:: class.java)
         intent.putExtra("time", timeText)
+        intent2.putExtra("time", timeText)
     }
 
-    //저장되어 있는 child값 전부 한번 돌고 조건을 줘서 이메일이 같으면 해당 세팅값만 변경하면됨
+        override fun onTimeSet(timePicker: TimePicker?, hourOfDay: Int, minute: Int) {
+            if(isSet) {
+                Log.d("test", "test")
+                val c = Calendar.getInstance()
+
+                c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                c.set(Calendar.MINUTE, minute)
+                c.set(Calendar.SECOND, 0)
+
+                updateTimeText(c)
+                startAlarm(c)
+            }
+        }
+
+        //저장되어 있는 child값 전부 한번 돌고 조건을 줘서 이메일이 같으면 해당 세팅값만 변경하면됨
 
 }

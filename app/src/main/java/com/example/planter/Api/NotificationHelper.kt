@@ -61,6 +61,7 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return NotificationCompat.Builder(applicationContext, channel2ID)
             .setContentTitle(title)
             .setContentText(message)
+            .setSmallIcon(R.drawable.stat_notify_sync)
     }
 
 }
