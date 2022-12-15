@@ -8,23 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.bumptech.glide.Glide
 import com.example.planter.MainActivity
 import com.example.planter.Post.PostFragment
 import com.example.planter.R
 import com.example.planter.Social.BookmarkFragment
 import com.example.planter.UserAuth.EditActivity
 import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBdataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 class MyPageFragment : Fragment() {
 
     lateinit var auth : FirebaseAuth
+
+    lateinit var imgMypage : ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +40,21 @@ class MyPageFragment : Fragment() {
 
         auth = Firebase.auth
 
+
         val view = inflater.inflate(R.layout.fragment_my_page, container, false)
+        imgMypage = view.findViewById(R.id.imgMypage)
         val btnMyPageLogOut = view.findViewById<Button>(R.id.btnMyPageLogOut)
         val tvMyPageDel = view.findViewById<TextView>(R.id.tvMyPageDel)
         val btnMyPageEdit = view.findViewById<Button>(R.id.btnMyPageEdit)
         //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
+
+        val user = FBAuth.getUid()
+        getImageData(user)
+
+        val userInfo = FBdataBase.getJoinRef().orderByChild("uid").equalTo(user).get()
+
+        Log.d("userInfo",userInfo.toString())
+
 
 
 
@@ -110,6 +126,19 @@ class MyPageFragment : Fragment() {
 
 
 
+    }
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(requireContext())
+                    .load(task.result)
+                    .into(imgMypage) //지역변수
+
+            }
+        }
     }
 
 
