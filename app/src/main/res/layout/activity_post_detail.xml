@@ -108,7 +108,7 @@
         app:layout_constraintTop_toTopOf="@+id/imgPostDetailComment" />
 
     <ImageView
-        android:id="@+id/imgMypage"
+        android:id="@+id/imgPostDetailLike"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
@@ -122,7 +122,7 @@
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgMypage"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailLike"
         app:srcCompat="@drawable/bookmark_empty" />
 
     <ImageView
@@ -130,20 +130,20 @@
         android:layout_width="30dp"
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgMypage"
-        app:layout_constraintStart_toEndOf="@+id/tvMypageNick"
-        app:layout_constraintTop_toTopOf="@+id/imgMypage"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostDetailLike"
+        app:layout_constraintStart_toEndOf="@+id/tvPostDetailLike"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailLike"
         app:srcCompat="@drawable/icon_comment" />
 
     <TextView
-        android:id="@+id/tvMypageNick"
+        android:id="@+id/tvPostDetailLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/imgMypage"
-        app:layout_constraintTop_toTopOf="@+id/imgMypage" />
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailLike"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailLike" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComment"
@@ -156,7 +156,7 @@
         app:layout_constraintBottom_toTopOf="@+id/etPostDetailComment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgMypage" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailLike" />
 
     <EditText
         android:id="@+id/etPostDetailComment"
