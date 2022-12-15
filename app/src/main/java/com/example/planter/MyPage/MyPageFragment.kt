@@ -52,7 +52,6 @@ class MyPageFragment : Fragment() {
         //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
 
         val user = FBAuth.getUid()
-
         // 접속한 uid 닉네임 찾아오기
         FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
