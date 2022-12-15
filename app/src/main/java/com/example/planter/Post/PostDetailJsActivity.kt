@@ -79,7 +79,7 @@ class PostDetailJsActivity : AppCompatActivity() {
         tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
         val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
 
-        imgPostDetailLike = findViewById<ImageView>(R.id.imageView4)
+        imgPostDetailLike = findViewById<ImageView>(R.id.dddd)
         tvPostDetailLike = findViewById<TextView>(R.id.testView3)
         val imgPostDetailComment = findViewById<ImageView>(R.id.imgPostDetailComment)
         imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)

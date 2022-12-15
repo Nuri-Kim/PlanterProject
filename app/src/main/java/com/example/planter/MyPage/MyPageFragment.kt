@@ -14,9 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.planter.MainActivity
-import com.example.planter.Post.PostFragment
 import com.example.planter.R
-import com.example.planter.Social.BookmarkFragment
 import com.example.planter.UserAuth.EditActivity
 import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBdataBase

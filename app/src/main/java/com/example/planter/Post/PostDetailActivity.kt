@@ -65,14 +65,14 @@ class PostDetailActivity : AppCompatActivity() {
         val tvPostDetailTime = findViewById<TextView>(R.id.tvPostDetailTime)
         val tvPostDetailTitle = findViewById<TextView>(R.id.tvPostDetailTitle)
         tvPostDetailUserNick = findViewById(R.id.tvPostDetailUserNick)
-        val tvPostDetailCategory = findViewById<TextView>(R.id.tvPostDetailCategory)
+//        val tvPostDetailCategory = findViewById<TextView>(R.id.tvPostDetailCategory)
         val tvPostDetailModify = findViewById<TextView>(R.id.tvPostDetailModify)
         val tvPostDetailDelete = findViewById<TextView>(R.id.tvPostDetailDelete)
         val tvPostDetailContent = findViewById<TextView>(R.id.tvPostDetailContent)
         val tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
         val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
 
-        val imgPostDetailLike = findViewById<ImageView>(R.id.imageView4)
+        val imgPostDetailLike = findViewById<ImageView>(R.id.imgPostDetailLike)
         val imgPostDetailComment = findViewById<ImageView>(R.id.imgPostDetailComment)
         val imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
         val tvPostDetailCmtAdd = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
@@ -125,26 +125,26 @@ class PostDetailActivity : AppCompatActivity() {
         }
 
 
-            tvPostDetailModify.setOnClickListener {
+        tvPostDetailModify.setOnClickListener {
 
-                val db = Firebase.database
+            val db = Firebase.database
 
-                val Content = db.getReference("board").child(key.toString())
+            val Content = db.getReference("board").child(key.toString())
 //                Content.setValue(null)
 
-                val intent = Intent(this, PostWriteActivity::class.java)
-                intent.putExtra("title", title)
-                intent.putExtra("content", content)
-                intent.putExtra("key", key)
+            val intent = Intent(this, PostWriteActivity::class.java)
+            intent.putExtra("title", title)
+            intent.putExtra("content", content)
+            intent.putExtra("key", key)
 
-                if (uid != null) {
-                    Log.d("나와보내는uid", uid)
-                    startActivity(intent)
-                }
-
-                finish()
-
+            if (uid != null) {
+                Log.d("나와보내는uid", uid)
+                startActivity(intent)
             }
+
+            finish()
+
+        }
 
         tvPostDetailDelete.setOnClickListener {
             val db = Firebase.database
@@ -258,5 +258,3 @@ class PostDetailActivity : AppCompatActivity() {
 
 
 }
-
-
