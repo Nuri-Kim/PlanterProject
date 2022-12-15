@@ -2,7 +2,6 @@ package com.example.planter.Post
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -70,7 +69,7 @@ class PostWriteActivity : AppCompatActivity() {
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
         val uid = FBAuth.getUid()
-        val uidsended = intent.getStringExtra(uid)
+        //val uidsended = intent.getStringExtra(uid)
 
 
         FBdataBase.getJoinRef().child(id).addValueEventListener(object : ValueEventListener{
@@ -301,7 +300,7 @@ class PostWriteActivity : AppCompatActivity() {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
-                    .into(imgPostWritePicture) //지역변수
+                    //.into(imgPostWritePicture) //지역변수
 
             }
         }
