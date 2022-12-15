@@ -1,6 +1,7 @@
 package com.example.planter.Post
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -24,6 +25,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -31,27 +33,30 @@ class PostDetailJsActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
     lateinit var tvPostDetailUserNick: TextView
-
     lateinit var imgPostDetailPicture: ImageView
-
-    //~정선추가
     lateinit var adapter: CommentAdapter
     var commentList = ArrayList<CommentVO>()
     var keyData = ArrayList<String>()
-    //~
+    var commentCnt : Int = 0
+    lateinit var tvPostDetailCount : TextView
+    var bookmarkCk = false
+    lateinit var imgPostDetailBookmark : ImageView
+    var likeCk = false
+    lateinit var imgPostDetailLike : ImageView
+    lateinit var tvPostDetailLike : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post_detail_js)
+        setContentView(R.layout.activity_post_detail)
+
+
 
         auth = Firebase.auth
 
-        //~정선추가
         val database = Firebase.database
-        val bookMarkRef = database.getReference("BookMarkList")
+        val bookmarkRef = database.getReference("BookMarkList")
         val commentRef = database.getReference("CommentList")
         val likeRef = database.getReference("LikeList")
-        //~
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
         val email = sharedPreferences.getString("loginId", "")
@@ -67,29 +72,22 @@ class PostDetailJsActivity : AppCompatActivity() {
         val tvPostDetailTime = findViewById<TextView>(R.id.tvPostDetailTime)
         val tvPostDetailTitle = findViewById<TextView>(R.id.tvPostDetailTitle)
         tvPostDetailUserNick = findViewById(R.id.tvPostDetailUserNick)
-        val tvPostDetailCategory = findViewById<TextView>(R.id.tvPostDetailCategory)
+//        val tvPostDetailCategory = findViewById<TextView>(R.id.tvPostDetailCategory)
         val tvPostDetailModify = findViewById<TextView>(R.id.tvPostDetailModify)
         val tvPostDetailDelete = findViewById<TextView>(R.id.tvPostDetailDelete)
         val tvPostDetailContent = findViewById<TextView>(R.id.tvPostDetailContent)
-        val tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
-//        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailWrite)
+        tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
+        val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
 
-        // ~정선 추가
-        val imgPostDetailLike = findViewById<ImageView>(R.id.imageView4)
+        imgPostDetailLike = findViewById<ImageView>(R.id.imageView4)
+        tvPostDetailLike = findViewById<TextView>(R.id.testView3)
         val imgPostDetailComment = findViewById<ImageView>(R.id.imgPostDetailComment)
-        val imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
+        imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
         val tvPostDetailCmtAdd = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
         val etPostDetailComment = findViewById<EditText>(R.id.etPostDetailComment)
         val rvComment = findViewById<RecyclerView>(R.id.rvComment)
 
 
-//        if(bookmarkList.contains(keyData[position])){
-//            imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
-//        }else{
-//            imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
-//        }
-
-        // ~
 
 
 
@@ -98,6 +96,9 @@ class PostDetailJsActivity : AppCompatActivity() {
         val nick = intent.getStringExtra("nick")
         val time = intent.getStringExtra("time")
         var uid = intent.getStringExtra("uid")
+
+        val prePost = PostVO(title!!, content!!, "일반", uid!!, time!!)
+        Log.d("뭐야", prePost.toString())
 
 
 
@@ -122,30 +123,59 @@ class PostDetailJsActivity : AppCompatActivity() {
 
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
-        if(uid == id) {
+        if(uid != id) {
             tvPostDetailModify.visibility = View.INVISIBLE
             tvPostDetailDelete.visibility = View.INVISIBLE
 
+        }else{
+            tvPostDetailModify.visibility = View.VISIBLE
+            tvPostDetailDelete.visibility = View.VISIBLE
         }
 
-//        if () {
-//
-//
-//
-//
-//            tvPostDetailModify.setOnClickListener {
-//
-//                val db = Firebase.database
-//
-//                val Content = db.getReference("board").child(key.toString())
+
+        tvPostDetailModify.setOnClickListener {
+
+            val db = Firebase.database
+
+            val Content = db.getReference("board").child(key.toString())
 //                Content.setValue(null)
-//
-//                val intent = Intent(this, PostWriteActivity::class.java)
-//                intent.putExtra("uid", uid)
-//                Log.d("나와", uid)
-//                startActivity(intent)
-//
-//            }
+
+            val intent = Intent(this, PostWriteActivity::class.java)
+            intent.putExtra("title", title)
+            intent.putExtra("content", content)
+            intent.putExtra("key", key)
+
+            if (uid != null) {
+                Log.d("나와보내는uid", uid)
+                startActivity(intent)
+            }
+
+            finish()
+
+        }
+
+        tvPostDetailDelete.setOnClickListener {
+            val db = Firebase.database
+
+            val Content = db.getReference("board").child(key.toString())
+            Content.setValue(null)
+            finish()
+        }
+
+        //댓글 정보, 리스트
+        getCommentData(key)
+        adapter = CommentAdapter(this, commentList)
+        rvComment.adapter = adapter
+        rvComment.layoutManager = LinearLayoutManager(this)
+
+        //북마크 정보
+        getBookmarkData(key)
+
+        //좋아요 정보
+        getLikeData(key)
+        getLikeCntData(key)
+
+
 //
 //            tvPostDetailDelete.setOnClickListener {
 //
@@ -158,35 +188,35 @@ class PostDetailJsActivity : AppCompatActivity() {
 //
 //        }
 
+        // 좋아요 이벤트
+        imgPostDetailLike.setOnClickListener{
 
-        // ~정선 추가 - 소셜 기능
-        val cmtData = ArrayList<CommentVO>()
-        getCommentData(key)
-        adapter = CommentAdapter(this, commentList)
-        rvComment.adapter = adapter
-        rvComment.layoutManager = LinearLayoutManager(this)
+            if(likeCk){
+                imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
+                likeRef.child(key!!).child(auth.currentUser!!.uid).removeValue()
+            } else{
+                imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+                likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
 
-        // ~
-
-
-       imgPostDetailLike.setOnClickListener{
-
-           imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
-
-           likeRef.child(key!!).child("count").setValue("good")
-//           likeRef.child(key!!).child("count").setValue("good")
-
-           likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
+            }
 
         }
 
+        // 북마크 이벤트
         imgPostDetailBookmark.setOnClickListener {
 
-            imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
-            bookMarkRef.child(auth.currentUser!!.uid).child(key!!).setValue("bookmark")
+            if(bookmarkCk){
+                imgPostDetailBookmark.setImageResource(R.drawable.bookmark_empty)
+                bookmarkRef.child(auth.currentUser!!.uid).child(key!!).removeValue()
+            } else{
+                imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
+                bookmarkRef.child(auth.currentUser!!.uid).child(key!!).setValue("bookmark")
+            }
+
 
         }
 
+        // 댓글 등록 이벤트
         tvPostDetailCmtAdd.setOnClickListener {
 
             val comment = etPostDetailComment.text.toString()
@@ -200,8 +230,6 @@ class PostDetailJsActivity : AppCompatActivity() {
             etPostDetailComment.setText("")
 
         }
-
-
     }
 
     fun getImageData(key: String) {
@@ -221,8 +249,7 @@ class PostDetailJsActivity : AppCompatActivity() {
     }
 
 
-    // 정선 추가
-    // post에 있는 데이터 다~ 가져오는 함수
+    // 댓글 데이터 받아오기
     fun getCommentData(key: String?) {
         val commentListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -241,10 +268,13 @@ class PostDetailJsActivity : AppCompatActivity() {
                 }
 
                 // adapter 새로고침 받아오는 속도가 다르니까
+                commentCnt = commentList.size
+                tvPostDetailCount.text = commentCnt.toString()
+
                 commentList.reverse()
                 keyData.reverse()
+                Log.d("댓글",commentCnt.toString())
                 adapter.notifyDataSetChanged()
-
 
             }
 
@@ -257,7 +287,86 @@ class PostDetailJsActivity : AppCompatActivity() {
         FBdataBase.getCommentRef().child(key!!).addValueEventListener(commentListener)
     }
 
+    // 좋아요 데이터 받아오기
+    fun getLikeData(key: String?) {
+        val bookmarkListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var value = snapshot.getValue<String>()
 
+                if(value == null){
+                    likeCk = false
+                    imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
+                }else{
+                    likeCk = true
+                    imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        }
+
+        FBdataBase.getLikeRef().child(key!!).child(getUid()).addValueEventListener(bookmarkListener)
+
+    }
+
+    // 좋아요 개수 데이터
+    fun getLikeCntData(key: String?) {
+        val likeCntListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var likeCntList = ArrayList<String>()
+
+                for (model in snapshot.children) {
+                    val item = model.getValue<String>()
+
+                    if (item != null) {
+                        likeCntList.add(item)
+                    }
+
+                }
+
+                // adapter 새로고침 받아오는 속도가 다르니까
+                tvPostDetailLike.text = likeCntList.size.toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // 오류가 발생했을 경우 실행되는 함수
+            }
+
+        }
+
+        FBdataBase.getLikeRef().child(key!!).addValueEventListener(likeCntListener)
+    }
+
+
+    // 북마크 데이터 받아오기
+    fun getBookmarkData(key: String?) {
+        val bookmarkListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var value = snapshot.getValue<String>()
+
+                if(value == null){
+                    bookmarkCk = false
+                    imgPostDetailBookmark.setImageResource(R.drawable.bookmark_empty)
+                }else{
+                    bookmarkCk = true
+                    imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        }
+
+        FBdataBase.getBookMarkRef().child(getUid()).child(key!!).addValueEventListener(bookmarkListener)
+
+    }
 
 }
 

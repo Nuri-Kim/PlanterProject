@@ -55,7 +55,7 @@ class PostFragment : Fragment() {
 
                 // BoardInsideActivity로 넘어가자
 
-                val intent = Intent(requireActivity(), PostDetailActivity::class.java)
+                val intent = Intent(requireActivity(), PostDetailJsActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
 
