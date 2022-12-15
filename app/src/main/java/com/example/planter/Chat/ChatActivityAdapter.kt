@@ -1,14 +1,22 @@
 package com.example.planter.Chat
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.planter.ChatVO
 import com.example.planter.R
+import com.example.planter.utils.FBdataBase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class ChatActivityAdapter(val context: Context,
                           val chatList : ArrayList<ChatVO>,
@@ -59,6 +67,24 @@ class ChatActivityAdapter(val context: Context,
 
         }else{
 
+
+
+       // 상대 프로필 불러오는 코드
+        val storageReference = Firebase.storage.reference.child("${chatList[position].sendUser}.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(context)
+                    .load(task.result)
+                    .into(holder.imgChatList) //지역변수
+
+            }
+        }
+
+
+
+
             holder.imgChatList.visibility=View.VISIBLE
             holder.tvChatTemplateName.visibility=View.VISIBLE
             holder.tvChatTemplateContent.visibility=View.VISIBLE
@@ -67,8 +93,8 @@ class ChatActivityAdapter(val context: Context,
             holder.tvChatTemplateMyContent.visibility=View.GONE
             holder.tvChatTemplateMyTime.visibility=View.GONE
 
-            holder.imgChatList.setImageResource(R.drawable.de_profile)
-            holder.tvChatTemplateName.text=chatList[position].sendUser
+
+            holder.tvChatTemplateName.text=chatList[position].senderName
             holder.tvChatTemplateContent.text=chatList[position].msg
             holder.tvChatTemplateTime.text = chatList[position].time
 
@@ -78,5 +104,6 @@ class ChatActivityAdapter(val context: Context,
     override fun getItemCount(): Int {
         return chatList.size
     }
+
 
 }
