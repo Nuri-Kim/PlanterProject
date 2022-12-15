@@ -159,7 +159,6 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
 
         Log.d("sec",(currentMillis/1000).toString())
-        var city = "Gwangju"
 
         val requestList = ArrayList<StringRequest>()
 
@@ -187,6 +186,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 //                    val time1 = Instant.ofEpochMilli((sys.getString("sunrise").toLong())*1000).
 //                    atZone(ZoneId.systemDefault()).toLocalDateTime()
 //                    DateTimeFormatter.ofPattern("HH시 mm분").format(time1)
+                var city = sys.getString("country")
                 val time1 = (sys.getString("sunrise").toLong()) * 1000
                 val date1 = Date(time1)
                 var sunrise = sdf.format(date1)

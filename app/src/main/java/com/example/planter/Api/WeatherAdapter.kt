@@ -37,7 +37,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<WeatherVO>
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvHomeTime.setText("${weatherList.get(position).time} 기준")
-        holder.tvHomeLoc.setText(weatherList.get(position).city)
+        holder.tvHomeLoc.setText("현재 위치:${weatherList.get(position).city}")
         holder.tvHomeState.setText(weatherList.get(position).state)
         holder.tvHomeTemp.setText(weatherList.get(position).temp)
         holder.tvHomeHum.setText(weatherList.get(position).humidity)
