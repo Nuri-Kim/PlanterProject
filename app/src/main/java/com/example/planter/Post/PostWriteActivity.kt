@@ -72,6 +72,11 @@ class PostWriteActivity : AppCompatActivity() {
 
 
         getImageData(key.toString())
+        if (key != null) {
+            Log.d("수정 key 찍기 : ", key )
+            etPostWriteTitle.setText(title)
+            etPostWriteContent.setText(content)
+        }
 
 
 
@@ -79,8 +84,10 @@ class PostWriteActivity : AppCompatActivity() {
 //            Log.d("나와", email)
 //        }
 
-        Log.d("나와uidsended_WriteActivity", id)
-        Log.d("나와uid_WriteActivity", uid)
+//        Log.d("나와uidsended_WriteActivity", id)
+//        Log.d("나와uid_WriteActivity", uid)
+
+
 
         imgPostWriteUserNick.setText(email)
 //        imgPostWriteUserNick.text = Firebase.database.getReference(uid).toString()
@@ -92,8 +99,8 @@ class PostWriteActivity : AppCompatActivity() {
 
 
 //        // 수정 버튼 클릭 시 View 값 이전 게시물에서 가져오기
-        etPostWriteTitle.setText(title)
-        etPostWriteContent.setText(content)
+
+
 //        imgPostWriteUserNick.setText(sp.getString("loginId",""))
 
         fun getImageData(key: String) {
@@ -196,26 +203,31 @@ class PostWriteActivity : AppCompatActivity() {
             val uid = FBAuth.getUid()
 
 
-            var key2 = FBdataBase.getBoardRef().child(uid).key.toString()
+
+            var newKey = FBdataBase.getBoardRef().push().key.toString()
+
+            if(key==newKey){
+
+                editPostData(key.toString())
+                imgUpload(key!!)
+            }
 
 
-            Log.d("작성 글 key 찍기", key2)
+            Log.d("작성 글 key 찍기", newKey)
+
 //                    var etPost = FBdataBase.getBoardRef().child(key2)
 //                        .setValue(PostVO(title, content, "일반", uid, time))
 
-            if(key==null) {
-                FBdataBase.getBoardRef().child(key2!!)
+
+                FBdataBase.getBoardRef().child(newKey!!)
                     .setValue(PostVO(title, content, "일반", uid, time))
 //                    Log.d("etPost", etPost.toString())
-                imgUpload(key2!!)
+                imgUpload(newKey!!)
 
                 finish()
 
 
-            }else{
-                editPostData(key.toString())
-                imgUpload(key!!)
-            }
+
         }
 
 
