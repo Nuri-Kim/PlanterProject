@@ -94,7 +94,7 @@ class ChatActivityAdapter(val context: Context,
             holder.tvChatTemplateMyTime.visibility=View.GONE
 
 
-            holder.tvChatTemplateName.text=chatList[position].sendUser
+            holder.tvChatTemplateName.text=chatList[position].senderName
             holder.tvChatTemplateContent.text=chatList[position].msg
             holder.tvChatTemplateTime.text = chatList[position].time
 
