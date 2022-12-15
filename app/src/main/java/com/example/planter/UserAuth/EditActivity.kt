@@ -88,7 +88,7 @@ class EditActivity : AppCompatActivity() {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
-                    .into() //지역변수
+                    .into(imgEditimg) //지역변수
 
             }
         }
