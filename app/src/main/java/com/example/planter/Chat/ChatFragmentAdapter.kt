@@ -1,5 +1,6 @@
 package com.example.planter.Chat
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,7 @@ class ChatFragmentAdapter (val context: Context,
         return ViewHolder(view)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
