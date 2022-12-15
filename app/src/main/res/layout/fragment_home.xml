@@ -7,31 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".Api.HomeFragment">
 
-    <Switch
-        android:id="@+id/swHomeMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:text="메시지 알림"
-        app:layout_constraintEnd_toStartOf="@+id/tvHome1"
-        app:layout_constraintTop_toBottomOf="@+id/tvHome1" />
-
-    <Switch
-        android:id="@+id/swHomeAlarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:text="물주기 알림"
-        app:layout_constraintStart_toEndOf="@+id/tvHome1"
-        app:layout_constraintTop_toBottomOf="@+id/tvHome1" />
-
     <TextView
         android:id="@+id/tvHome1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         android:text="알람 설정"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,5 +50,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvHome" />
+
+    <Switch
+        android:id="@+id/swHomeAlarm1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="40dp"
+        android:text="msg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/swHomeAlarm2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="40dp"
+        android:text="water"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHomeSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/swHomeAlarm2"
+        app:layout_constraintTop_toBottomOf="@+id/swHomeAlarm2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
