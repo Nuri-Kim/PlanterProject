@@ -18,9 +18,9 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBAuth.Companion.getUid
+import com.example.planter.utils.FBdataBase
 import com.example.planter.Map.MapsActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth

@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fullstackapplication.ChatVO
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBdataBase
+import com.example.planter.ChatVO
+import com.example.planter.utils.FBAuth
 import com.example.planter.R
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -50,7 +50,7 @@ class ChatFragment : Fragment() {
         //더미데이터 생성
         val chatListRef = FBdataBase.getChatListRef()
         val nowTime = FBAuth.getTime()
-        //chatListRef.push().setValue(ChatVO("edxi2TvzmvWhaL0VZb1kCcpmNGj2",user,"test msg","",nowTime))
+        //chatListRef.push().setValue(ChatVO(user,"누리","edxi2TvzmvWhaL0VZb1kCcpmNGj2","test msg","",nowTime))
 
 
 

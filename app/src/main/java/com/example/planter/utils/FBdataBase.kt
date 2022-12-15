@@ -1,4 +1,4 @@
-package com.example.fullstackapplication.utils
+package com.example.planter.utils
 
 import android.provider.ContactsContract.Data
 import com.google.firebase.database.DatabaseReference

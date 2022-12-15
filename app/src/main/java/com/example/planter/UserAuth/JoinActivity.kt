@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.widget.*
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth.Companion.auth
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBAuth.Companion.auth
+import com.example.planter.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -115,10 +116,18 @@ class JoinActivity : AppCompatActivity() {
 
                             Toast.makeText(this, "플랜터에 온 걸 환영합니다", Toast.LENGTH_SHORT).show()
 
+                            val uid = FBAuth.getUid()
+
+
+                            if(uid != null && email != null && nick != null){
+                                val userList = FBdataBase.getJoinRef()
+                                userList.child(uid).setValue(JoinVO(email,nick,true,true))
+                            }
+
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
-                            intent.putExtra("email",email)
-                            intent.putExtra("nick",nick)
-                            startActivity(intent)
+//                            intent.putExtra("email",email)
+//                            intent.putExtra("nick",nick)
+//                            startActivity(intent)
                             finish()
                         } else {
                             Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()

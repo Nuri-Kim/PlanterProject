@@ -6,9 +6,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fullstackapplication.ChatVO
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.ChatVO
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBdataBase
 import com.example.planter.R
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot

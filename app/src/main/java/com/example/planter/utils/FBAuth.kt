@@ -1,4 +1,4 @@
-package com.example.fullstackapplication.utils
+package com.example.planter.utils
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
