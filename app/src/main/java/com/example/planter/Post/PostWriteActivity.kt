@@ -40,6 +40,8 @@ class PostWriteActivity : AppCompatActivity() {
     lateinit var imgPostWritePicture : ImageView
     lateinit var etPostWriteTitle : EditText
     lateinit var etPostWriteContent : EditText
+    lateinit var tvPostWriteUserNick : TextView
+    lateinit var nick : String
 
 
 
@@ -70,6 +72,20 @@ class PostWriteActivity : AppCompatActivity() {
         val uid = FBAuth.getUid()
         val uidsended = intent.getStringExtra(uid)
 
+
+        FBdataBase.getJoinRef().child(id).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                nick = snapshot.child("nick").value as String
+
+                getImageData(id)
+                imgPostWriteUserNick.text = nick
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         getImageData(key.toString())
         if (key != null) {
@@ -193,7 +209,7 @@ class PostWriteActivity : AppCompatActivity() {
 
 
         btnPostWriteSend.setOnClickListener {
-
+            val db = Firebase.database
             //Firebase에 업로드하기
 
             val title = etPostWriteTitle.text.toString()
@@ -203,9 +219,13 @@ class PostWriteActivity : AppCompatActivity() {
 
 
 
+
             var newKey = FBdataBase.getBoardRef().push().key.toString()
 
             if(key==newKey){
+
+                val Content = db.getReference("board").child(key.toString())
+                Content.setValue(null)
 
                 editPostData(key.toString())
                 imgUpload(key!!)
@@ -219,7 +239,7 @@ class PostWriteActivity : AppCompatActivity() {
 
 
                 FBdataBase.getBoardRef().child(newKey!!)
-                    .setValue(PostVO(title, content, "일반", uid, time))
+                    .setValue(PostVO(title, content, nick, uid, time))
 //                    Log.d("etPost", etPost.toString())
                 imgUpload(newKey!!)
 

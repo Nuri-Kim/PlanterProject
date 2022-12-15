@@ -60,7 +60,7 @@ class PostFragment : Fragment() {
                 intent.putExtra("title", PostList[position].title)
 
                 intent.putExtra("content", PostList[position].content)
-                intent.putExtra("category", PostList[position].category)
+                intent.putExtra("nick", PostList[position].nick)
                 intent.putExtra("time", PostList[position].time)
                 intent.putExtra("uid", PostList[position].uid)
                 

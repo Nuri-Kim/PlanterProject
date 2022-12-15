@@ -37,12 +37,12 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
 
             val tvPostListTitle : TextView
             val tvPostListContent : TextView
-            val tvPostListCategory : TextView
+            val tvPostListWriter : TextView
 
             init {
                 tvPostListTitle = itemView.findViewById(R.id.tvPostListTitle)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
-                tvPostListCategory = itemView.findViewById(R.id.tvPostListWriter)
+                tvPostListWriter = itemView.findViewById(R.id.tvPostListWriter)
 
                 itemView.setOnClickListener {
                     val position = adapterPosition
@@ -69,7 +69,7 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvPostListTitle.text = PostList[position].title
         holder.tvPostListContent.text = PostList[position].content
-        holder.tvPostListCategory.text = PostList[position].category
+        holder.tvPostListWriter.text = PostList[position].nick
 
 
 
