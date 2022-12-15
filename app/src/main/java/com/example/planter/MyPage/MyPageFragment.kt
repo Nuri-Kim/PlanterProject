@@ -38,7 +38,7 @@ class MyPageFragment : Fragment() {
         val btnMyPageLogOut = view.findViewById<Button>(R.id.btnMyPageLogOut)
         val tvMyPageDel = view.findViewById<TextView>(R.id.tvMyPageDel)
         val btnMyPageEdit = view.findViewById<Button>(R.id.btnMyPageEdit)
-        val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
+        //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
 
 
 
