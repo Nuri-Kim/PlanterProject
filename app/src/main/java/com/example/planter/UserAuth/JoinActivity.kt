@@ -1,27 +1,33 @@
 package com.example.planter.UserAuth
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputFilter
 import android.widget.*
-import com.bumptech.glide.Glide
-import com.example.planter.utils.FBAuth
-import com.example.planter.utils.FBAuth.Companion.auth
-import com.example.planter.utils.FBdataBase
-import com.example.planter.MainActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.planter.R
+import com.example.planter.utils.FBAuth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import org.w3c.dom.Text
 import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
 
     lateinit var auth : FirebaseAuth
+    lateinit var etJoinEmail : EditText
+    lateinit var etJoinPw : EditText
     lateinit var imgJoinUser : ImageView
+    lateinit var imgJoinEditBtn : ImageView
+    lateinit var storage: FirebaseStorage
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,24 +35,29 @@ class JoinActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        val etJoinEmail = findViewById<EditText>(R.id.etJoinEmail)
-        val etJoinPw = findViewById<EditText>(R.id.etJoinPw)
+        etJoinEmail = findViewById<EditText>(R.id.etJoinEmail)
+        etJoinPw = findViewById<EditText>(R.id.etJoinPw)
         val etJoinCk = findViewById<EditText>(R.id.etJoinCk)
         val etJoinNick = findViewById<EditText>(R.id.etJoinNick)
         val btnJoinJoin = findViewById<Button>(R.id.btnJoinJoin)
+        val uid = FBAuth.getUid()
         imgJoinUser = findViewById(R.id.imgJoinUser)
-        val imgJoinEditIcon = findViewById<ImageView>(R.id.imgJoinEditIcon)
+        imgJoinEditBtn = findViewById<ImageView>(R.id.imgJoinEditBtn)
+
+        storage= FirebaseStorage.getInstance()
 
 
-        val img = intent.getStringExtra("key")
+        // 사진 클릭 버튼
+        imgJoinEditBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            launcher.launch(intent)
+        }
 
-        getJoinImageData(img.toString())
 
 
 
-
-
-
+        // 비밀번호 유효성 검사
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
             val pwRegex = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
             val pwPattern = Pattern.compile(pwRegex)
@@ -58,6 +69,8 @@ class JoinActivity : AppCompatActivity() {
         })
 
 
+
+
         btnJoinJoin.setOnClickListener {
 
             var isJoin = true // 회원가입 조건 확인하는거임!
@@ -65,6 +78,8 @@ class JoinActivity : AppCompatActivity() {
             val pw = etJoinPw.text.toString()
             val checkPw = etJoinCk.text.toString()
             val nick = etJoinNick.text.toString()
+
+
 
 
 
@@ -114,21 +129,19 @@ class JoinActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
 
+
+                            imgUpload(uid)
+
                             Toast.makeText(this, "플랜터에 온 걸 환영합니다", Toast.LENGTH_SHORT).show()
 
-                            val uid = FBAuth.getUid()
-
-
-                            if(uid != null && email != null && nick != null){
-                                val userList = FBdataBase.getJoinRef()
-                                userList.child(uid).setValue(JoinVO(email,nick,true,true))
-                            }
-
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
-//                            intent.putExtra("email",email)
-//                            intent.putExtra("nick",nick)
-//                            startActivity(intent)
+                            intent.putExtra("email",email)
+                            intent.putExtra("nick",nick)
+                            startActivity(intent)
                             finish()
+
+
+
                         } else {
                             Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
                         }
@@ -136,17 +149,39 @@ class JoinActivity : AppCompatActivity() {
             }
         }
     }
-    fun getJoinImageData(key: String) {
-        val storageReference = Firebase.storage.reference.child("$key.png")
 
-        storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
-                Glide.with(this)
-                    .load(task.result)
-                    .into(imgJoinUser) //지역변수
 
-            }
+    val launcher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {
+
+        if (it.resultCode == RESULT_OK) {
+            imgJoinUser.setImageURI(it.data?.data)
         }
     }
+
+    fun imgUpload(key:String){
+
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val mountainsRef = storageRef.child("$key.png")
+
+        // Get the data from an ImageView as bytes
+        imgJoinUser.isDrawingCacheEnabled = true
+        imgJoinUser.buildDrawingCache()
+        val bitmap = (imgJoinUser .drawable as BitmapDrawable).bitmap
+        val baos = java.io.ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = mountainsRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+        }
+    }
+
+
+
 }

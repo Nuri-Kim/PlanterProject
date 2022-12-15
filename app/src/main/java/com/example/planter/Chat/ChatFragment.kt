@@ -50,7 +50,7 @@ class ChatFragment : Fragment() {
         //더미데이터 생성
         val chatListRef = FBdataBase.getChatListRef()
         val nowTime = FBAuth.getTime()
-        //chatListRef.push().setValue(ChatVO(user,"누리","edxi2TvzmvWhaL0VZb1kCcpmNGj2","test msg","",nowTime))
+        //chatListRef.push().setValue(ChatVO(user,"누리","NxkQclLR2def7gGLudo8i4pkoWg2","test msg","",nowTime))
 
 
 
