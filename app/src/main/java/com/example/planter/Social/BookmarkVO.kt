@@ -1,5 +1,5 @@
 package com.example.planter.Social
 
-class BookmarkVO{
+class BookmarkVO(var uid : String = ""){
 
 }

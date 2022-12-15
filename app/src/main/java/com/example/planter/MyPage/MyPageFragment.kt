@@ -2,6 +2,7 @@ package com.example.planter.MyPage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.planter.MainActivity
+import com.example.planter.Post.PostFragment
 import com.example.planter.R
+import com.example.planter.Social.BookmarkFragment
 import com.example.planter.UserAuth.EditActivity
+import com.example.planter.utils.FBAuth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -34,6 +38,7 @@ class MyPageFragment : Fragment() {
         val btnMyPageLogOut = view.findViewById<Button>(R.id.btnMyPageLogOut)
         val tvMyPageDel = view.findViewById<TextView>(R.id.tvMyPageDel)
         val btnMyPageEdit = view.findViewById<Button>(R.id.btnMyPageEdit)
+        //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
 
 
 
@@ -87,6 +92,16 @@ class MyPageFragment : Fragment() {
 
 
         }
+
+//        btnMyBookmark.setOnClickListener {
+//
+////            var uid = FBAuth.getUid()
+////            Log.d("나와 북마크용 uid", uid)
+//            val intent = Intent(requireContext(), BookmarkFragment::class.java)
+////            intent.putExtra("uid", uid.toString())
+//            startActivity(intent)
+//
+//        }
 
 
         return view

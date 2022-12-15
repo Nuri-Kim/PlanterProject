@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fullstackapplication.ChatVO
+import com.example.planter.ChatVO
 import com.example.planter.R
 
 class ChatActivityAdapter(val context: Context,

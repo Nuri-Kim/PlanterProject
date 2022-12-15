@@ -13,7 +13,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBdataBase
 import com.example.planter.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -55,7 +55,7 @@ class PostFragment : Fragment() {
 
                 // BoardInsideActivity로 넘어가자
 
-                val intent = Intent(requireActivity(), PostDetailActivity::class.java)
+                val intent = Intent(requireActivity(), PostDetailJsActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
 

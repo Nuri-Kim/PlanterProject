@@ -8,8 +8,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBdataBase
 import com.example.planter.MainActivity
 import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
@@ -44,10 +44,8 @@ class LoginActivity : AppCompatActivity() {
         val getEmail = intent.getStringExtra("email").toString()
         val getNick = intent.getStringExtra("nick").toString()
 
-        if(getEmail != null && getNick != null){
-            val userList = FBdataBase.getJoinRef()
-            userList.child(uid).setValue(JoinVO(getEmail,getNick,true,true))
-        }
+
+
 
 
         btnLoginLogin.setOnClickListener {

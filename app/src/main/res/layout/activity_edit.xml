@@ -7,7 +7,7 @@
     tools:context=".UserAuth.EditActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgEditimg"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
@@ -18,14 +18,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageView
-        android:id="@+id/btnEditImg"
+        android:id="@+id/imgEditBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/btn_style"
         android:padding="5dp"
         android:src="@drawable/icon_edit"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgEditimg"
+        app:layout_constraintEnd_toEndOf="@+id/imgEditimg" />
 
     <View
         android:id="@+id/background4"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/etEditEmail"
+        android:id="@+id/tvEditEmail"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
@@ -93,7 +93,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/imgEditimg" />
 
     <TextView
         android:id="@+id/textView2"
@@ -126,8 +126,8 @@
         android:layout_marginTop="16dp"
         android:text="비밀번호"
         android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="@+id/etEditEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEditEmail" />
+        app:layout_constraintStart_toStartOf="@+id/tvEditEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditEmail" />
 
     <TextView
         android:id="@+id/textView6"

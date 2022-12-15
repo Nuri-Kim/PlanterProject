@@ -18,9 +18,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
-import com.example.fullstackapplication.utils.FBdataBase
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBAuth.Companion.getUid
+import com.example.planter.utils.FBdataBase
 import com.example.planter.Map.MapsActivity
 import com.example.planter.R
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream

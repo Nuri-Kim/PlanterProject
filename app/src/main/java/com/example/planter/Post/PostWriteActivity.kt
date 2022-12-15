@@ -18,17 +18,18 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
-import com.example.fullstackapplication.utils.FBAuth
-import com.example.fullstackapplication.utils.FBAuth.Companion.getUid
-import com.example.fullstackapplication.utils.FBdataBase
 import com.example.planter.Map.MapsActivity
 import com.example.planter.R
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBAuth.Companion.getUid
+import com.example.planter.utils.FBdataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -69,7 +70,13 @@ class PostWriteActivity : AppCompatActivity() {
         val uid = FBAuth.getUid()
         val uidsended = intent.getStringExtra(uid)
 
+
         getImageData(key.toString())
+        if (key != null) {
+            Log.d("수정 key 찍기 : ", key )
+            etPostWriteTitle.setText(title)
+            etPostWriteContent.setText(content)
+        }
 
 
 
@@ -77,10 +84,13 @@ class PostWriteActivity : AppCompatActivity() {
 //            Log.d("나와", email)
 //        }
 
-        Log.d("나와uidsended_WriteActivity", id)
-         Log.d("나와uid_WriteActivity", uid)
+//        Log.d("나와uidsended_WriteActivity", id)
+//        Log.d("나와uid_WriteActivity", uid)
+
+
 
         imgPostWriteUserNick.setText(email)
+//        imgPostWriteUserNick.text = Firebase.database.getReference(uid).toString()
 
 
 
@@ -89,9 +99,9 @@ class PostWriteActivity : AppCompatActivity() {
 
 
 //        // 수정 버튼 클릭 시 View 값 이전 게시물에서 가져오기
-        etPostWriteTitle.setText(title)
-        etPostWriteContent.setText(content)
-        imgPostWriteUserNick.setText(sp.getString("loginId",""))
+
+
+//        imgPostWriteUserNick.setText(sp.getString("loginId",""))
 
         fun getImageData(key: String) {
             val storageReference = Firebase.storage.reference.child("$key.png")
@@ -167,7 +177,7 @@ class PostWriteActivity : AppCompatActivity() {
                 }
 
                 manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                10_000L,10f,locationListener)
+                    10_000L,10f,locationListener)
 //                manager.removeUpdates(locationListener)
 
                 val intent = Intent(this, MapsActivity::class.java)
@@ -183,36 +193,41 @@ class PostWriteActivity : AppCompatActivity() {
         }
 
 
-                btnPostWriteSend.setOnClickListener {
+        btnPostWriteSend.setOnClickListener {
 
-                    //Firebase에 업로드하기
+            //Firebase에 업로드하기
 
-                    val title = etPostWriteTitle.text.toString()
-                    val content = etPostWriteContent.text.toString()
-                    val time = FBAuth.getTime()
-                    val uid = FBAuth.getUid()
-
-
-                    var key2 = FBdataBase.getBoardRef().child(uid).key.toString()
+            val title = etPostWriteTitle.text.toString()
+            val content = etPostWriteContent.text.toString()
+            val time = FBAuth.getTime()
+            val uid = FBAuth.getUid()
 
 
-                    Log.d("작성 글 key 찍기", key2)
-//                    var etPost = FBdataBase.getBoardRef().child(key2)
-//                        .setValue(PostVO(title, content, "일반", uid, time))
 
-                    if(key==null) {
-                    FBdataBase.getBoardRef().child(key2!!)
-                        .setValue(PostVO(title, content, "일반", uid, time))
-//                    Log.d("etPost", etPost.toString())
-                    imgUpload(key2!!)
+            var newKey = FBdataBase.getBoardRef().push().key.toString()
 
-                    finish()
+            if(key==newKey){
 
-
-            }else{
                 editPostData(key.toString())
                 imgUpload(key!!)
             }
+
+
+            Log.d("작성 글 key 찍기", newKey)
+
+//                    var etPost = FBdataBase.getBoardRef().child(key2)
+//                        .setValue(PostVO(title, content, "일반", uid, time))
+
+
+                FBdataBase.getBoardRef().child(newKey!!)
+                    .setValue(PostVO(title, content, "일반", uid, time))
+//                    Log.d("etPost", etPost.toString())
+                imgUpload(newKey!!)
+
+                finish()
+
+
+
         }
 
 

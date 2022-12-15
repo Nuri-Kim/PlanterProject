@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fullstackapplication.ChatVO
+import com.example.planter.ChatVO
 import com.example.planter.R
 
 
@@ -36,14 +36,10 @@ class ChatFragmentAdapter (val context: Context,
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val imgChatList : ImageView
         val tvChatListOther : TextView
-        val tvChatListContent : TextView
-        val tvChatTime : TextView
 
         init {
             imgChatList=itemView.findViewById(R.id.imgChatList)
             tvChatListOther=itemView.findViewById(R.id.tvChatListOther)
-            tvChatListContent=itemView.findViewById(R.id.tvChatListContent)
-            tvChatTime = itemView.findViewById(R.id.tvChatTime)
 
 
             // 채팅 리스트 내 행 클릭 시 채팅창으로 이동
@@ -72,8 +68,6 @@ class ChatFragmentAdapter (val context: Context,
 
         holder.imgChatList.setImageResource(R.drawable.de_profile)
         holder.tvChatListOther.text = chatList[position].sendUser
-        holder.tvChatListContent.text = chatList[position].msg
-        holder.tvChatTime.text = chatList[position].time
 
 
         // fireBase chatList 내 receiver 가 login user 와 일치하는 경우
