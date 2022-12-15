@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.fullstackapplication.utils.FBAuth
 import com.example.planter.R
 import com.example.planter.UserAuth.JoinVO
 import com.example.planter.databinding.ActivityMainBinding
