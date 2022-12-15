@@ -159,7 +159,6 @@ class PostWriteActivity : AppCompatActivity() {
                     val longitude = location.longitude
                     val accuracy = location.accuracy
                     Log.d("gps 받아오기","{$latitude}, {$longitude}")
-
                 }
 
                 val locationListener : LocationListener = object : LocationListener{
