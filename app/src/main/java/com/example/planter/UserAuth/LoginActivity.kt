@@ -40,9 +40,6 @@ class LoginActivity : AppCompatActivity() {
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
 
-
-        Log.d("TEST_LOG_가입 후 로그인 UID ","${FBAuth.getUid()}")
-
         val uid = FBAuth.getUid()
         val getEmail = intent.getStringExtra("email").toString()
         val getNick = intent.getStringExtra("nick").toString()
