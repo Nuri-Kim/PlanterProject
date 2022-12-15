@@ -105,6 +105,8 @@ class MyPageFragment : Fragment() {
 //                public void onClick(DialogInterface dialog, int which) {
 //                    Toast.makeText(getApplicationContext(), "Yeah!!", Toast.LENGTH_LONG).show();
 //                }
+            builder.setTitle("탈퇴")
+            builder.setMessage("탈퇴하시겠습니까?")
             builder.setPositiveButton("탈퇴하기"){dialogInterface, it ->
 
 

@@ -65,7 +65,7 @@ class EditActivity : AppCompatActivity() {
 
         getImageData(img.toString())
 
-
+        updateData(etEditPw.toString())
 
         // 회원 프로필 사진 변경 버튼
         imgEditBtn.setOnClickListener {
@@ -118,7 +118,7 @@ class EditActivity : AppCompatActivity() {
                                 val userList = FBdataBase.getJoinRef()
                                 userList.child(uid).setValue(JoinVO(email,nick,uid))
                             }
-                            updateData(etEditPw.toString())
+
                             imgUpload(uid)
 
                             val intent = Intent(this@EditActivity,LoginActivity::class.java)
