@@ -4,7 +4,7 @@ data class PostVO(
 
     var title : String = "",
     var content : String ="",
-    var category : String = "",
+    var nick : String = "",
     var uid : String = "",
     var time : String = "" ) {
 }
