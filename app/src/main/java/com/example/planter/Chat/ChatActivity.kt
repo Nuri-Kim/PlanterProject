@@ -42,6 +42,7 @@ class ChatActivity : AppCompatActivity() {
         rvChat.layoutManager=LinearLayoutManager(this)
 
 
+
         // 접속한 uid 닉네임 가져오기
         FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -69,6 +70,8 @@ class ChatActivity : AppCompatActivity() {
                 val chatItem = snapshot.getValue<ChatVO> () as ChatVO
 
                 chatList.add(chatItem)
+
+                rvChat.scrollToPosition(chatList.size-1);
 
                 adapter.notifyDataSetChanged()
             }
