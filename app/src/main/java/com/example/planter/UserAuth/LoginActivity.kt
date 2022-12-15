@@ -41,7 +41,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
         btnLoginLogin.setOnClickListener {
             val email = etLoginEmail.text.toString()
             val pw = etLoginPw.text.toString()
