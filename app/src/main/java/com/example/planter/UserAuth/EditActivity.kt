@@ -10,12 +10,20 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.planter.R
+import com.example.planter.utils.FBAuth.Companion.getUid
+import com.example.planter.utils.FBdataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 class EditActivity : AppCompatActivity() {
 
@@ -24,18 +32,26 @@ class EditActivity : AppCompatActivity() {
     lateinit var imgEditimg: ImageView
     lateinit var imgEditBtn: ImageView
 
+    lateinit var tvEditEmail : TextView
+    lateinit var etEditPw : EditText
+    lateinit var etEditNick : EditText
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
         auth = Firebase.auth
 
-        val tvEditEmail = findViewById<TextView>(R.id.tvEditEmail)
-        val etEditPw = findViewById<EditText>(R.id.etEditPw)
-        val etEditNick = findViewById<EditText>(R.id.etEditNick)
+        tvEditEmail = findViewById<TextView>(R.id.tvEditEmail)
+        etEditPw = findViewById<EditText>(R.id.etEditPw)
+        etEditNick = findViewById<EditText>(R.id.etEditNick)
         val imgEditBtn = findViewById<ImageView>(R.id.imgEditBtn)
         val btnEditEdit = findViewById<Button>(R.id.btnEditEdit)
         imgEditimg = findViewById(R.id.imgEditimg)
+
+
+
 
 
         storage = FirebaseStorage.getInstance()
@@ -58,13 +74,44 @@ class EditActivity : AppCompatActivity() {
 
         // 회원정보수정 완료 버튼
         btnEditEdit.setOnClickListener {
-            val profileUpdates = userProfileChangeRequest {
-                displayName = "Jane Q. User"
-                photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
+
+
+
+        }
+
+    }
+    fun getImageData(key: String) {
+        val storageReference = Firebase.storage.reference.child("$key.png")
+
+        storageReference.downloadUrl.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+                Glide.with(this)
+                    .load(task.result)
+                    .into() //지역변수
+
+            }
+        }
+
+
+    }
+
+    fun getUserData(key: String?) {
+        val userListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var value = snapshot.getValue<JoinVO>()
+
+                value.email
+                value.nick
+
             }
 
-            finish()
+            override fun onCancelled(error: DatabaseError) {
+            }
+
         }
+
+        FBdataBase.getJoinRef().child(getUid()).addValueEventListener(userListener)
 
     }
 
@@ -76,4 +123,7 @@ class EditActivity : AppCompatActivity() {
             imgEditimg.setImageURI(it.data?.data)
         }
     }
+
+
+
 }
