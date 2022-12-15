@@ -138,11 +138,11 @@ class JoinActivity : AppCompatActivity() {
 
                             if(getEmail != null && getNick != null){
                                 val userList = FBdataBase.getJoinRef()
-                                userList.child(uid).setValue(JoinVO(email,nick,true,true))
+                                userList.child(uid).setValue(JoinVO(email,nick,uid))
                             }
 
 
-                            imgUpload(key)
+                            imgUpload(uid)
 
 
 

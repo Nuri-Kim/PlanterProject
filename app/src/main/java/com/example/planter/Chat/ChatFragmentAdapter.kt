@@ -69,9 +69,9 @@ class ChatFragmentAdapter (val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
-        getImageData(userList[position].email)
+        getImageData(userList[position].uid)
 
-        imgChatList.setImageResource(R.drawable.de_profile)
+        //imgChatList.setImageResource(R.drawable.de_profile)
         holder.tvChatListOther.text = userList[position].nick
 
 
