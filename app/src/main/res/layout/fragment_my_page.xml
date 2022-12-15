@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/background3" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imgMypage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="200dp"
@@ -56,16 +56,16 @@
         app:layout_constraintTop_toTopOf="@+id/btnMyPageEdit" />
 
     <TextView
-        android:id="@+id/testView3"
+        android:id="@+id/tvMypageNick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="접속자 이름"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintEnd_toEndOf="@+id/imgMypage"
+        app:layout_constraintStart_toStartOf="@+id/imgMypage"
+        app:layout_constraintTop_toBottomOf="@+id/imgMypage" />
 
     <Button
         android:id="@+id/btnMyPageEdit"
@@ -79,7 +79,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMypageNick" />
 
     <TextView
         android:id="@+id/tvHome"

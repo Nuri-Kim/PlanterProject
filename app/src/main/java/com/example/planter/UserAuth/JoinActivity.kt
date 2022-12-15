@@ -1,10 +1,14 @@
 package com.example.planter.UserAuth
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.InputFilter
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBAuth.Companion.auth
@@ -14,14 +18,18 @@ import com.example.planter.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import org.w3c.dom.Text
+import java.io.ByteArrayOutputStream
 import java.util.regex.Pattern
 
 class JoinActivity : AppCompatActivity() {
 
     lateinit var auth : FirebaseAuth
     lateinit var imgJoinUser : ImageView
+    lateinit var storage: FirebaseStorage
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +46,21 @@ class JoinActivity : AppCompatActivity() {
         val imgJoinEditIcon = findViewById<ImageView>(R.id.imgJoinEditBtn)
 
 
+        storage = FirebaseStorage.getInstance()
+
+        var key = FBdataBase.getJoinRef().push().key.toString()
         val img = intent.getStringExtra("key")
 
         getJoinImageData(img.toString())
 
-
-
-
+        // 회원 프로필 사진 변경 버튼
+        imgJoinEditIcon.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            )
+            launcher.launch(intent)
+        }
 
 
         etJoinPw.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
@@ -122,8 +138,13 @@ class JoinActivity : AppCompatActivity() {
 
                             if(getEmail != null && getNick != null){
                                 val userList = FBdataBase.getJoinRef()
-                                userList.child(uid).setValue(JoinVO(email,nick,true,true))
+                                userList.child(uid).setValue(JoinVO(email,nick,uid))
                             }
+
+
+                            imgUpload(uid)
+
+
 
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
                             intent.putExtra("email",email)
@@ -136,7 +157,32 @@ class JoinActivity : AppCompatActivity() {
                     }
             }
         }
+    }// onCreate 밖
+    fun imgUpload(key:String){
+
+        val storage = Firebase.storage
+        val storageRef = storage.reference
+        val mountainsRef = storageRef.child("$key.png")
+
+        // Get the data from an ImageView as bytes
+        imgJoinUser.isDrawingCacheEnabled = true
+        imgJoinUser.buildDrawingCache()
+        val bitmap = (imgJoinUser.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = mountainsRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+        }
     }
+
+
+
     fun getJoinImageData(key: String) {
         val storageReference = Firebase.storage.reference.child("$key.png")
 
@@ -150,4 +196,19 @@ class JoinActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    val launcher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+
+        if (it.resultCode == RESULT_OK) {
+            imgJoinUser.setImageURI(it.data?.data)
+        }
+    }
+
+
+
+
+
 }
