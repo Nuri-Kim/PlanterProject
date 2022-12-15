@@ -37,12 +37,12 @@ import com.google.firebase.storage.ktx.storage
 class PostWriteActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
-    lateinit var imgPostWritePicture : ImageView
-    lateinit var etPostWriteTitle : EditText
-    lateinit var etPostWriteContent : EditText
-    lateinit var tvPostWriteUserNick : TextView
-    lateinit var nick : String
-
+    lateinit var imgPostWritePicture: ImageView
+    lateinit var etPostWriteTitle: EditText
+    lateinit var etPostWriteContent: EditText
+    lateinit var tvPostWriteUserNick: TextView
+    lateinit var nick: String
+    var imgUpload = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,18 +66,18 @@ class PostWriteActivity : AppCompatActivity() {
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
         val uid = FBAuth.getUid()
         val uidsended = intent.getStringExtra(uid)
 
 
-        FBdataBase.getJoinRef().child(id).addValueEventListener(object : ValueEventListener{
+        FBdataBase.getJoinRef().child(id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 nick = snapshot.child("nick").value as String
 
-                getImageData(id)
+                //getImageData(id)
                 imgPostWriteUserNick.text = nick
 
             }
@@ -87,13 +87,12 @@ class PostWriteActivity : AppCompatActivity() {
             }
         })
 
-        getImageData(key.toString())
+        //getImageData(key.toString())
         if (key != null) {
-            Log.d("수정 key 찍기 : ", key )
+            Log.d("수정 key 찍기 : ", key)
             etPostWriteTitle.setText(title)
             etPostWriteContent.setText(content)
         }
-
 
 
 //        if (email != null) {
@@ -104,20 +103,15 @@ class PostWriteActivity : AppCompatActivity() {
 //        Log.d("나와uid_WriteActivity", uid)
 
 
-
         imgPostWriteUserNick.setText(email)
 //        imgPostWriteUserNick.text = Firebase.database.getReference(uid).toString()
-
-
-
-
-
 
 
 //        // 수정 버튼 클릭 시 View 값 이전 게시물에서 가져오기
 
 
 //        imgPostWriteUserNick.setText(sp.getString("loginId",""))
+
 
         fun getImageData(key: String) {
             val storageReference = Firebase.storage.reference.child("$key.png")
@@ -144,6 +138,7 @@ class PostWriteActivity : AppCompatActivity() {
 
         imgPostWritePicture.setOnClickListener {
             //사진 데이터 준비
+            imgUpload= true
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             launcher.launch(intent)
         }
@@ -166,20 +161,20 @@ class PostWriteActivity : AppCompatActivity() {
 
                 return@setOnClickListener
                 // label을 사용해 다시 setOnClickListener 돌아가 생명주기가 돌아가게끔
-            } else{
+            } else {
 
                 val manager = getSystemService(LOCATION_SERVICE) as LocationManager
                 val location: Location? = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                location?.let{
+                location?.let {
                     val latitude = location.latitude
                     val longitude = location.longitude
                     val accuracy = location.accuracy
-                    Log.d("gps 받아오기","{$latitude}, {$longitude}")
+                    Log.d("gps 받아오기", "{$latitude}, {$longitude}")
                 }
 
-                val locationListener : LocationListener = object : LocationListener{
+                val locationListener: LocationListener = object : LocationListener {
                     override fun onLocationChanged(location: Location) {
-                        Log.d("gps 받아오기2","${location?.latitude},${location?.longitude}")
+                        Log.d("gps 받아오기2", "${location?.latitude},${location?.longitude}")
                     }
 
                     override fun onProviderEnabled(provider: String) {
@@ -191,8 +186,10 @@ class PostWriteActivity : AppCompatActivity() {
                     }
                 }
 
-                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    10_000L,10f,locationListener)
+                manager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    10_000L, 10f, locationListener
+                )
 //                manager.removeUpdates(locationListener)
 
                 val intent = Intent(this, MapsActivity::class.java)
@@ -201,8 +198,6 @@ class PostWriteActivity : AppCompatActivity() {
 
 
             }
-
-
 
 
         }
@@ -218,17 +213,16 @@ class PostWriteActivity : AppCompatActivity() {
             val uid = FBAuth.getUid()
 
 
-
-
             var newKey = FBdataBase.getBoardRef().push().key.toString()
 
-            if(key==newKey){
+            if (key == newKey) {
 
                 val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
 
                 editPostData(key.toString())
-                imgUpload(key!!)
+
+                if (imgUpload) imgUpload(key!!)
             }
 
 
@@ -238,13 +232,12 @@ class PostWriteActivity : AppCompatActivity() {
 //                        .setValue(PostVO(title, content, "일반", uid, time))
 
 
-                FBdataBase.getBoardRef().child(newKey!!)
-                    .setValue(PostVO(title, content, nick, uid, time))
+            FBdataBase.getBoardRef().child(newKey!!)
+                .setValue(PostVO(title, content, nick, uid, time))
 //                    Log.d("etPost", etPost.toString())
-                imgUpload(newKey!!)
 
-                finish()
 
+            finish()
 
 
         }
@@ -269,7 +262,7 @@ class PostWriteActivity : AppCompatActivity() {
 
     }
 
-    fun imgUpload(key : String) {
+    fun imgUpload(key: String) {
 
         val storage = Firebase.storage
         val storageRef = storage.reference
@@ -293,35 +286,36 @@ class PostWriteActivity : AppCompatActivity() {
         }
     }
 
-    fun getImageData(key: String) {
-        val storageReference = Firebase.storage.reference.child("$key.png")
+//    fun getImageData(key: String) {
+//        val storageReference = Firebase.storage.reference.child("$key.png")
+//
+//        storageReference.downloadUrl.addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+//                Glide.with(this)
+//                    .load(task.result)
+//                    .into(imgPostWritePicture) //지역변수
+//
+//            }
+//        }
+//
+//
+//    }
 
-        storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
-                Glide.with(this)
-                    .load(task.result)
-                    .into(imgPostWritePicture) //지역변수
-
-            }
-        }
-
-
-    }
-
-    fun editPostData(key: String){
-        FBdataBase.getBoardRef().child(key).setValue(PostVO(
-            etPostWriteTitle.text.toString(),
-            etPostWriteContent.text.toString(),
-            "일반",
-            FBAuth.getUid(),
-            FBAuth.getTime()
-        ))
+    fun editPostData(key: String) {
+        FBdataBase.getBoardRef().child(key).setValue(
+            PostVO(
+                etPostWriteTitle.text.toString(),
+                etPostWriteContent.text.toString(),
+                "일반",
+                FBAuth.getUid(),
+                FBAuth.getTime()
+            )
+        )
         // 수정 확인 메시지
         Toast.makeText(this, "게시글이 수정되었습니다", Toast.LENGTH_SHORT).show()
         finish()
     }
-
 
 
 }

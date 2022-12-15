@@ -206,17 +206,21 @@ class PostDetailActivity : AppCompatActivity() {
     }
 
     fun getImageData(key: String) {
-        val storageReference = Firebase.storage.reference.child("$key.png")
 
+        val storageReference = Firebase.storage.reference.child("$key.png")
         storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+            if (task.isSuccessful && task.result != null) {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
                     .into(imgPostDetailPicture) //지역변수
 
+            }else{
+                imgPostDetailPicture.visibility = View.GONE
             }
         }
+
+
 
 
     }
