@@ -40,12 +40,6 @@ class LoginActivity : AppCompatActivity() {
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
 
-        val uid = FBAuth.getUid()
-        val getEmail = intent.getStringExtra("email").toString()
-        val getNick = intent.getStringExtra("nick").toString()
-
-
-
 
 
         btnLoginLogin.setOnClickListener {
