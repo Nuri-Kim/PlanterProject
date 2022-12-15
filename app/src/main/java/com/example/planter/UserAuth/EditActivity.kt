@@ -108,17 +108,17 @@ class EditActivity : AppCompatActivity() {
                     ?.addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
 
-                            Toast.makeText(this, "플랜터에 온 걸 환영합니다", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "정보 수정 완료", Toast.LENGTH_SHORT).show()
 
                             val uid = FBAuth.getUid()
-                            val getEmail = intent.getStringExtra("email").toString()
+                            val getPw = intent.getStringExtra("email").toString()
                             val getNick = intent.getStringExtra("nick").toString()
 
-                            if(getEmail != null && getNick != null){
+                            if(getPw != null && getNick != null){
                                 val userList = FBdataBase.getJoinRef()
                                 userList.child(uid).setValue(JoinVO(email,nick,uid))
                             }
-
+                            updateData(etEditPw.toString())
                             imgUpload(uid)
 
                             val intent = Intent(this@EditActivity,LoginActivity::class.java)
@@ -127,7 +127,7 @@ class EditActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "정보를 다시 확인해주세요", Toast.LENGTH_SHORT).show()
                         }
 
             }
