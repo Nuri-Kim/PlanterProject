@@ -146,7 +146,6 @@ class JoinActivity : AppCompatActivity() {
                             imgUpload(uid)
 
 
-
                             val intent = Intent(this@JoinActivity,LoginActivity::class.java)
                             intent.putExtra("email",email)
                             intent.putExtra("nick",nick)
