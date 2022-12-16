@@ -111,9 +111,9 @@
         android:id="@+id/imgPostDetailLike"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailLocation"
         app:srcCompat="@drawable/icon_like_white" />
 
     <ImageView
@@ -185,5 +185,25 @@
         app:layout_constraintBottom_toBottomOf="@+id/etPostDetailComment"
         app:layout_constraintEnd_toEndOf="@+id/etPostDetailComment"
         app:layout_constraintTop_toTopOf="@+id/etPostDetailComment" />
+
+    <ImageView
+        android:id="@+id/imgPostDetailLocation"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
+        app:srcCompat="@drawable/icon_detail_location" />
+
+    <TextView
+        android:id="@+id/tvPostDetailLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="위치 정보"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostDetailLocation"
+        app:layout_constraintEnd_toEndOf="@+id/tvPostDetailContent"
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailLocation"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

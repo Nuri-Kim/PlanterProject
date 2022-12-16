@@ -1,6 +1,7 @@
 package com.example.planter.Post
 
 import android.content.Context
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +11,17 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.planter.R
+import com.example.planter.utils.FBdataBase
 import com.google.android.gms.auth.api.signin.internal.Storage
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
-class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
+class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>, var keyData: ArrayList<String>)
     :RecyclerView.Adapter<PostAdapter.ViewHolder>(){
 
     val database = Firebase.database
@@ -45,12 +50,16 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
             val tvPostListContent : TextView
             val tvPostListWriter : TextView
             val imgPostListPicture : ImageView
+            val tvPostLikeCount : TextView
+            val tvPostCmtCount : TextView
 
             init {
                 tvPostListTitle = itemView.findViewById(R.id.tvPostListTitle)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
                 tvPostListWriter = itemView.findViewById(R.id.tvPostListWriter)
                 imgPostListPicture = itemView.findViewById(R.id.imgPostListPicture)
+                tvPostLikeCount = itemView.findViewById(R.id.tvPostLikeCount)
+                tvPostCmtCount = itemView.findViewById(R.id.tvPostCmtCount)
 
                 itemView.setOnClickListener {
                     val position = adapterPosition
@@ -82,7 +91,25 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
         holder.tvPostListWriter.text = PostList[position].nick
 
 
+        FBdataBase.getCommentRef().child(keyData[position]).addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                holder.tvPostCmtCount.text = snapshot.childrenCount.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
+        FBdataBase.getLikeRef().child(keyData[position]).addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                holder.tvPostLikeCount.text = snapshot.childrenCount.toString()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
 
 

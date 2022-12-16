@@ -6,5 +6,7 @@ data class PostVO(
     var content : String ="",
     var nick : String = "",
     var uid : String = "",
-    var time : String = "" ) {
+    var time : String = "",
+    var longitude : String = "",
+    var latitude: String = "") {
 }

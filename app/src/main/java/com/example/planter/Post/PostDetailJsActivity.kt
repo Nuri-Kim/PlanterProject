@@ -2,6 +2,9 @@ package com.example.planter.Post
 
 import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -13,6 +16,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.planter.Map.MapsActivity
 import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBAuth.Companion.getUid
 import com.example.planter.utils.FBdataBase
@@ -44,6 +48,10 @@ class PostDetailJsActivity : AppCompatActivity() {
     var likeCk = false
     lateinit var imgPostDetailLike : ImageView
     lateinit var tvPostDetailLike : TextView
+    lateinit var tvPostDetailLocation : TextView
+    lateinit var imgPostDetailLocation : ImageView
+    var addr = "위치 정보를 불러올 수 없습니다"
+    var currentNick = "닉네임"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +95,8 @@ class PostDetailJsActivity : AppCompatActivity() {
         val etPostDetailComment = findViewById<EditText>(R.id.etPostDetailComment)
         val rvComment = findViewById<RecyclerView>(R.id.rvComment)
 
+        tvPostDetailLocation = findViewById<TextView>(R.id.tvPostDetailLocation)
+        imgPostDetailLocation = findViewById<ImageView>(R.id.imgPostDetailLocation)
 
 
 
@@ -97,7 +107,10 @@ class PostDetailJsActivity : AppCompatActivity() {
         val time = intent.getStringExtra("time")
         var uid = intent.getStringExtra("uid")
 
-        val prePost = PostVO(title!!, content!!, "일반", uid!!, time!!)
+        var longitude = intent.getStringExtra("longitude")
+        var latitude = intent.getStringExtra("latitude")
+
+        val prePost = PostVO(title!!, content!!, nick!!, uid!!, time!!,longitude!!,latitude!!)
         Log.d("뭐야", prePost.toString())
 
 
@@ -133,6 +146,39 @@ class PostDetailJsActivity : AppCompatActivity() {
         }
 
 
+
+        if(longitude.length == 0  && latitude.length == 0)
+        {
+            tvPostDetailLocation.visibility = View.INVISIBLE
+            imgPostDetailLocation.visibility = View.INVISIBLE
+        }else{
+            tvPostDetailLocation.visibility = View.VISIBLE
+            imgPostDetailLocation.visibility = View.VISIBLE
+
+
+            val geocoder = Geocoder(this)
+                //GRPC 오류? try catch 문으로 오류 대처
+                try {
+                    addr = geocoder.getFromLocation(latitude.toDouble(), longitude.toDouble(), 1).first().getAddressLine(0)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            tvPostDetailLocation.text = addr
+
+        }
+
+        tvPostDetailLocation.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("lon", longitude.toString())
+            intent.putExtra("lat", latitude.toString())
+            intent.putExtra("addr",addr)
+            startActivity(intent)
+
+        }
+
+
+
         tvPostDetailModify.setOnClickListener {
 
             val db = Firebase.database
@@ -164,7 +210,7 @@ class PostDetailJsActivity : AppCompatActivity() {
 
         //댓글 정보, 리스트
         getCommentData(key)
-        adapter = CommentAdapter(this, commentList)
+        adapter = CommentAdapter(this, commentList, keyData, key!!)
         rvComment.adapter = adapter
         rvComment.layoutManager = LinearLayoutManager(this)
 
@@ -175,6 +221,14 @@ class PostDetailJsActivity : AppCompatActivity() {
         getLikeData(key)
         getLikeCntData(key)
 
+        FBdataBase.getJoinRef().child(auth.currentUser!!.uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                currentNick = snapshot.child("nick").value as String
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
 //
 //            tvPostDetailDelete.setOnClickListener {
@@ -207,8 +261,8 @@ class PostDetailJsActivity : AppCompatActivity() {
 
             if(bookmarkCk){
                 imgPostDetailBookmark.setImageResource(R.drawable.bookmark_empty)
-                bookmarkRef.child(auth.currentUser!!.uid).child(key!!).removeValue()
-            } else{
+
+            } else{ bookmarkRef.child(auth.currentUser!!.uid).child(key!!).removeValue()
                 imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
                 bookmarkRef.child(auth.currentUser!!.uid).child(key!!).setValue("bookmark")
             }
@@ -219,11 +273,12 @@ class PostDetailJsActivity : AppCompatActivity() {
         // 댓글 등록 이벤트
         tvPostDetailCmtAdd.setOnClickListener {
 
+
             val comment = etPostDetailComment.text.toString()
             val time = FBAuth.getTime()
             val comKey = FBdataBase.getCommentRef().child(key!!).push().key.toString()
             FBdataBase.getCommentRef().child(key).child(comKey)
-                .setValue(CommentVO("닉네임", id,comment,time))
+                .setValue(CommentVO(currentNick,id,comment,time))
 //            FBdataBase.getCommentRef().child(key)
 //                .setValue(CommentVO("닉네임", id,comment,time))
 
