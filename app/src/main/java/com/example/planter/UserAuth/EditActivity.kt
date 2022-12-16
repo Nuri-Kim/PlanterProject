@@ -40,7 +40,7 @@ class EditActivity : AppCompatActivity() {
     lateinit var storage: FirebaseStorage
     lateinit var imgEditimg: ImageView
     lateinit var imgEditBtn: ImageView
-    lateinit var  btnEditEdit : Button
+    lateinit var btnEditEdit : Button
     lateinit var password : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,20 +86,20 @@ class EditActivity : AppCompatActivity() {
 
         })
 
-            // 접속한 uid 닉네임 찾아오기
-            FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    nick = snapshot.child("nick").value as String
+        // 접속한 uid 닉네임 찾아오기
+        FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                nick = snapshot.child("nick").value as String
 
 
-                   etEditNick.setHint(nick)
-                }
+                etEditNick.setHint(nick)
+            }
 
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
 
-            })
+        })
 
 
 
@@ -113,79 +113,80 @@ class EditActivity : AppCompatActivity() {
         }
 
         btnEditEdit.setOnClickListener {
-         //   val uid = FBAuth.getUid()
-
+            //val uid = FBAuth.getUid()
+            var isEdit = true // 조건 확인하는 변수!
             val pw = etEditPw.text.toString()
 
-            if(pw.isEmpty()){
-
+            if (pw.isEmpty()) {
+                isEdit = false
                 Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
 
             }
+            if (pw.length < 8 ){
+                isEdit = false
+                Toast.makeText(this, "비밀번호는 8자리 이상 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
 
-            val intent = Intent(this@EditActivity,MyPageFragment::class.java)
+            if (isEdit) {
 
-
-           // imgUpload(uid)
-            startActivity(intent)
-        }
-
-
-
-
-
-    }// oncreate 밖
-
-    fun imgUpload(key : String) {
-
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-        val mountainsRef = storageRef.child("$key.png")
-
-        imgEditimg.isDrawingCacheEnabled = true
-        imgEditimg.buildDrawingCache()
-        val bitmap = (imgEditimg.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        //quality:압축 퀄리티 1~100.
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
-        val data = baos.toByteArray()
-
-        //mountainsRef : 스토리지 경로 지정하는 키워드.
-        var uploadTask = mountainsRef.putBytes(data)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
-        }
-    }
-
-
-
-
-
-    fun getImageData(key: String) {
-        val storageReference = Firebase.storage.reference.child("$key.png")
-
-        storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                //Gilde: 웹에 있는 이미지 적용하는 라이브러리
-                Glide.with(this)
-                    .load(task.result)
-                    .into(imgEditimg) //지역변수
-
+                val intent = Intent(this@EditActivity, MyPageFragment::class.java)
+                startActivity(intent)
+                finish()
             }
         }
+
+
+
+
+
+}// oncreate 밖
+
+fun imgUpload(key : String) {
+
+    val storage = Firebase.storage
+    val storageRef = storage.reference
+    val mountainsRef = storageRef.child("$key.png")
+
+    imgEditimg.isDrawingCacheEnabled = true
+    imgEditimg.buildDrawingCache()
+    val bitmap = (imgEditimg.drawable as BitmapDrawable).bitmap
+    val baos = ByteArrayOutputStream()
+    //quality:압축 퀄리티 1~100.
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+    val data = baos.toByteArray()
+
+    //mountainsRef : 스토리지 경로 지정하는 키워드.
+    var uploadTask = mountainsRef.putBytes(data)
+    uploadTask.addOnFailureListener {
+        // Handle unsuccessful uploads
+    }.addOnSuccessListener { taskSnapshot ->
+        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+        // ...
     }
+}
 
 
 
-    val launcher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
+fun getImageData(key: String) {
+    val storageReference = Firebase.storage.reference.child("$key.png")
 
-        if (it.resultCode == RESULT_OK) {
-            imgEditimg.setImageURI(it.data?.data)
+    storageReference.downloadUrl.addOnCompleteListener { task ->
+        if (task.isSuccessful) {
+            //Gilde: 웹에 있는 이미지 적용하는 라이브러리
+            Glide.with(this)
+                .load(task.result)
+                .into(imgEditimg) //지역변수
+
         }
     }
+}
+
+val launcher = registerForActivityResult(
+    ActivityResultContracts.StartActivityForResult()
+) {
+
+    if (it.resultCode == RESULT_OK) {
+        imgEditimg.setImageURI(it.data?.data)
+    }
+}
 }
