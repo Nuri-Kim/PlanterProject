@@ -64,7 +64,7 @@ class ChatFragment : Fragment() {
         // 어댑터 생성
         adapter = ChatFragmentAdapter(requireContext(),userList)
         rvChat.adapter = adapter
-        rvChat.layoutManager = GridLayoutManager(requireContext(),2)
+        rvChat.layoutManager = LinearLayoutManager(requireContext())
 
 
 
