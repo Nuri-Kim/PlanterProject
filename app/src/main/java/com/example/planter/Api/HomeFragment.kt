@@ -143,30 +143,28 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     fun openWeather() {
 
-        loop@if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-            PackageManager.PERMISSION_GRANTED
-        ) {
-            // 승인이 안되어있는 상태라면 알림창을 띄워서 승인할 수 있도록
-            // ActivityCompat은 확인하는 기능, 요청하는 기능이 둘 다 들어가 있음
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0
-            )
-            // requestCode: 내가 뭘 요청한 건지 구분하기 위한 숫자
-            return
-            // label을 사용해 다시 setOnClickListener 돌아가 생명주기가 돌아가게끔
-        } else {
-            val manager =
-                requireActivity().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
-            val location: Location? = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            location?.let {
-                latitude = location.latitude
-                longitude = location.longitude
-                Log.d("loc", "{$latitude}, {$longitude}")
+            if (ActivityCompat.checkSelfPermission(
+                    requireActivity(),
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                ) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                // 승인이 안되어있는 상태라면 알림창을 띄워서 승인할 수 있도록
+                // ActivityCompat은 확인하는 기능, 요청하는 기능이 둘 다 들어가 있음
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0
+                )
+                // requestCode: 내가 뭘 요청한 건지 구분하기 위한 숫자
+                // label을 사용해 다시 setOnClickListener 돌아가 생명주기가 돌아가게끔
             }
+        val manager =
+            requireActivity().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+        val location: Location? = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        location?.let {
+            latitude = location.latitude
+            longitude = location.longitude
+            Log.d("loc", "{$latitude}, {$longitude}")
         }
 
         Log.d("sec", (currentMillis / 1000).toString())
