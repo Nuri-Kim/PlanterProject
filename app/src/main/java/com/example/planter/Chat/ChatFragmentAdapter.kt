@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView.ItemView
@@ -43,13 +44,15 @@ class ChatFragmentAdapter (val context: Context,
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val tvChatListOther : TextView
         val imgChatList : ImageView
+        val btnChatList : Button
         init {
             tvChatListOther=itemView.findViewById(R.id.tvChatListOther)
             imgChatList = itemView.findViewById(R.id.imgChatList)
+            btnChatList = itemView.findViewById(R.id.btnChatList)
 
 
             // 채팅 리스트 내 행 클릭 시 채팅창으로 이동
-            itemView.setOnClickListener{
+            btnChatList.setOnClickListener{
                 val position = adapterPosition
                 if(position != RecyclerView.NO_POSITION){
                     mOnItemClickListener.onItemClick(itemView,position)
