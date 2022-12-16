@@ -46,7 +46,52 @@ class BookmarkActivity : AppCompatActivity() {
         //3.Item 결정 : BookmarkVO
 
         Log.d("dd",getUid().toString())
-        getBookmarkListData(getUid())
+//        getBookmarkListData(getUid())
+
+        val bookmarkListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Firebase에서 snapshot으로 데이터를 받아온 경우
+                // 게시물의 uid
+                //        -BoardVO
+                //저장/삭제마다 데이터 누적으로 인한 게시글 중복 저장 방지
+                BookmarkList.clear()
+                //snapshot 내부 데이터 모델 형식으로 지정정
+                for (model in snapshot.children) {
+                    Log.d("갖고 snapshot", snapshot.toString())
+                    Log.d("갖고 model", model.toString())
+                    val item = model.key
+                    Log.d("갖고 item", item.toString())
+
+                    if (item != null) {
+                        //게시글 목록에 item(게시글)삽입
+                        BookmarkList.add(item)
+                        Log.d("갖고 in", BookmarkList.toString() )
+                    }
+                    //게시글 키 목록으로 String변환 넣음
+                    keyData.add(model.key.toString())
+
+
+
+
+                }
+                // adapter 새로고침 받아오는 속도가 다르니까
+                BookmarkList.reverse()
+                keyData.reverse()
+
+                adapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // 오류가 발생했을 경우 실행되는 함수
+            }
+        }
+
+        FBdataBase.getBookMarkRef().child(FBAuth.getUid()).addValueEventListener(bookmarkListener)
+
+
+
+
+
+        Log.d("갖고 오냐고", BookmarkList.toString())
 
         for( i in keyData) {
             FBdataBase.getBoardRef().child(i).addValueEventListener(object :
@@ -69,7 +114,7 @@ class BookmarkActivity : AppCompatActivity() {
         }
 
         Log.d("갖고 오냐고", PostList.toString())
-        Log.d("갖고 오냐고", BookmarkList.toString())
+
         Log.d("갖고 오냐고", keyData.toString())
 
 
@@ -119,10 +164,15 @@ class BookmarkActivity : AppCompatActivity() {
                 BookmarkList.clear()
                 //snapshot 내부 데이터 모델 형식으로 지정정
                 for (model in snapshot.children) {
-                    val item = model.getValue(String::class.java)
+                    Log.d("북마크내부", snapshot.toString())
+                    Log.d("북마크내부", model.toString())
+                    val item = model.key
+                    Log.d("item", item.toString())
+
                     if (item != null) {
                         //게시글 목록에 item(게시글)삽입
                         BookmarkList.add(item)
+                        Log.d("in", BookmarkList.toString() )
                     }
                     //게시글 키 목록으로 String변환 넣음
                     keyData.add(model.key.toString())
@@ -130,6 +180,7 @@ class BookmarkActivity : AppCompatActivity() {
                 // adapter 새로고침 받아오는 속도가 다르니까
                 BookmarkList.reverse()
                 keyData.reverse()
+
                 adapter.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {
