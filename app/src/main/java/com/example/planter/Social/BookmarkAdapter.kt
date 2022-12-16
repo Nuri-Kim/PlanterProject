@@ -12,7 +12,8 @@ import com.example.planter.R
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class BookmarkAdapter(var context: Context, var BookmarkList: ArrayList<PostVO>)
+class BookmarkAdapter(var context: Context, var PostList:ArrayList<PostVO>
+, var BookmarkList: ArrayList<String>, var keyData:ArrayList<String>)
     : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     val database = Firebase.database
@@ -61,15 +62,15 @@ class BookmarkAdapter(var context: Context, var BookmarkList: ArrayList<PostVO>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.tvBookmarkUserNick.text = BookmarkList[position].uid
-        holder.tvBookmarkPostContent.text = BookmarkList[position].content
-        holder.tvBookmarkTitle.text = BookmarkList[position].title
-        holder.tvBookmarkUserNick.text = BookmarkList[position].nick
+        holder.tvBookmarkUserNick.text = PostList[position].uid
+        holder.tvBookmarkPostContent.text = PostList[position].content
+        holder.tvBookmarkTitle.text = PostList[position].title
+        holder.tvBookmarkUserNick.text = PostList[position].nick
 
     }
 
     override fun getItemCount(): Int {
-        return BookmarkList.size
+        return PostList.size
     }
 
 
