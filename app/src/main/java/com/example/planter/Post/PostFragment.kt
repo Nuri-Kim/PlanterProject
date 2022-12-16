@@ -47,7 +47,7 @@ class PostFragment : Fragment() {
         getPostData()
         //4. Adapter 결정
 
-        adapter = PostAdapter(requireContext(), PostList)
+        adapter = PostAdapter(requireContext(), PostList, keyData)
 
         // 각 게시글 클릭 이벤트 - 게시글 내부로 동
         adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
@@ -55,7 +55,7 @@ class PostFragment : Fragment() {
 
                 // BoardInsideActivity로 넘어가자
 
-                val intent = Intent(requireActivity(), PostDetailJsActivity::class.java)
+                val intent = Intent(requireActivity(), PostDetailActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
 
@@ -63,7 +63,9 @@ class PostFragment : Fragment() {
                 intent.putExtra("nick", PostList[position].nick)
                 intent.putExtra("time", PostList[position].time)
                 intent.putExtra("uid", PostList[position].uid)
-                
+                intent.putExtra("longitude", PostList[position].longitude)
+                intent.putExtra("latitude", PostList[position].latitude)
+
                 //PostDetail로 게시글의 키 값 전달
                 intent.putExtra("key", keyData[position])
                 

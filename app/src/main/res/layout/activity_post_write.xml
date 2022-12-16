@@ -114,4 +114,15 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         app:srcCompat="@drawable/icon_location" />
 
+    <TextView
+        android:id="@+id/tvPostWriteLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="현재 위치 추가"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostWriteLocation"
+        app:layout_constraintEnd_toStartOf="@+id/btnPostWriteSend"
+        app:layout_constraintStart_toEndOf="@+id/imgPostWriteLocation"
+        app:layout_constraintTop_toTopOf="@+id/imgPostWriteLocation" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

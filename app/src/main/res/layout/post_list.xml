@@ -70,4 +70,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostListContent" />
 
+    <ImageView
+        android:id="@+id/imgPostLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvPostLikeCount"
+        app:layout_constraintTop_toTopOf="@+id/tvPostListWriter"
+        app:srcCompat="@drawable/icon_like_color" />
+
+    <ImageView
+        android:id="@+id/imgPostCmtCount"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostLikeCount"
+        app:layout_constraintEnd_toStartOf="@+id/tvPostCmtCount"
+        app:layout_constraintTop_toTopOf="@+id/imgPostLikeCount"
+        app:srcCompat="@drawable/icon_comment" />
+
+    <TextView
+        android:id="@+id/tvPostLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostLikeCount"
+        app:layout_constraintEnd_toStartOf="@+id/imgPostCmtCount"
+        app:layout_constraintTop_toTopOf="@+id/imgPostLikeCount" />
+
+    <TextView
+        android:id="@+id/tvPostCmtCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostCmtCount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgPostCmtCount" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
