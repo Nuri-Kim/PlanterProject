@@ -3,7 +3,7 @@
     android:id="@+id/tvStateList"
     android:layout_width="match_parent"
     android:layout_height="24dp"
-    android:background="@color/white"
+    android:background="#E8E8E8"
     android:text="확인용"
     android:textColor="@color/mainColor"
     android:textSize="18sp"
