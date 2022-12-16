@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -43,18 +44,23 @@ class PostWriteActivity : AppCompatActivity() {
     lateinit var tvPostWriteUserNick: TextView
     lateinit var nick: String
     var imgUpload = false
-
+    lateinit var tvPostWriteLocation : TextView
+    var longitude = 0.0
+    var latitude = 0.0
+    var addr = "위치 정보를 불러올 수 없습니다"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_write)
         auth = Firebase.auth
+        val geocoder = Geocoder(this)
 
         //user?.email.toString()
 
         imgPostWritePicture = findViewById(R.id.imgPostWritePicture)
         etPostWriteTitle = findViewById<EditText>(R.id.etPostWriteTitle)
         etPostWriteContent = findViewById<EditText>(R.id.etPostWriteContent)
+        tvPostWriteLocation = findViewById<TextView>(R.id.tvPostWriteLocation)
 
         val imgPostWriteUserNick = findViewById<TextView>(R.id.tvPostWriteUserNick)
         val btnPostWriteSend = findViewById<Button>(R.id.btnPostWriteSend)
@@ -65,13 +71,11 @@ class PostWriteActivity : AppCompatActivity() {
         val content = intent.getStringExtra("content")
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
         val uid = FBAuth.getUid()
         val uidsended = intent.getStringExtra(uid)
-
 
         FBdataBase.getJoinRef().child(id).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -95,23 +99,7 @@ class PostWriteActivity : AppCompatActivity() {
         }
 
 
-//        if (email != null) {
-//            Log.d("나와", email)
-//        }
-
-//        Log.d("나와uidsended_WriteActivity", id)
-//        Log.d("나와uid_WriteActivity", uid)
-
-
         imgPostWriteUserNick.setText(email)
-//        imgPostWriteUserNick.text = Firebase.database.getReference(uid).toString()
-
-
-//        // 수정 버튼 클릭 시 View 값 이전 게시물에서 가져오기
-
-
-//        imgPostWriteUserNick.setText(sp.getString("loginId",""))
-
 
         fun getImageData(key: String) {
             val storageReference = Firebase.storage.reference.child("$key.png")
@@ -125,15 +113,7 @@ class PostWriteActivity : AppCompatActivity() {
 
                 }
             }
-
-
         }
-
-
-
-
-
-
 
 
         imgPostWritePicture.setOnClickListener {
@@ -161,20 +141,35 @@ class PostWriteActivity : AppCompatActivity() {
 
                 return@setOnClickListener
                 // label을 사용해 다시 setOnClickListener 돌아가 생명주기가 돌아가게끔
-            } else {
+            } else{
 
                 val manager = getSystemService(LOCATION_SERVICE) as LocationManager
                 val location: Location? = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                location?.let {
-                    val latitude = location.latitude
-                    val longitude = location.longitude
+                location?.let{
+                    latitude = location.latitude
+                    longitude = location.longitude
                     val accuracy = location.accuracy
-                    Log.d("gps 받아오기", "{$latitude}, {$longitude}")
+                    Log.d("gps 받아오기","{$latitude}, {$longitude}")
+
+                    //GRPC 오류? try catch 문으로 오류 대처
+                    try {
+                        addr = geocoder.getFromLocation(latitude, longitude, 1).first().getAddressLine(0)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    tvPostWriteLocation.text = addr
+
+//                    var citylist = geocoder.getFromLocation(latitude, longitude, 10);
+//                    var city = citylist.get(0).getAddressLine(0)
+                    Log.d("주소뭐임","$addr")
+                    Toast.makeText(this, "$addr", Toast.LENGTH_SHORT).show()
+
                 }
 
-                val locationListener: LocationListener = object : LocationListener {
+                val locationListener : LocationListener = object : LocationListener{
                     override fun onLocationChanged(location: Location) {
-                        Log.d("gps 받아오기2", "${location?.latitude},${location?.longitude}")
+                        Log.d("gps 받아오기2","${location?.latitude},${location?.longitude}")
                     }
 
                     override fun onProviderEnabled(provider: String) {
@@ -186,19 +181,18 @@ class PostWriteActivity : AppCompatActivity() {
                     }
                 }
 
-                manager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    10_000L, 10f, locationListener
-                )
+                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    10_000L,10f,locationListener)
 //                manager.removeUpdates(locationListener)
 
                 val intent = Intent(this, MapsActivity::class.java)
-                startActivity(intent)
-                finish()
+                intent.putExtra("lon", location?.longitude.toString())
+                intent.putExtra("lat", location?.latitude.toString())
+                intent.putExtra("addr",addr)
 
+                startActivity(intent)
 
             }
-
 
         }
 
@@ -231,27 +225,13 @@ class PostWriteActivity : AppCompatActivity() {
 //                    var etPost = FBdataBase.getBoardRef().child(key2)
 //                        .setValue(PostVO(title, content, "일반", uid, time))
 
-
             FBdataBase.getBoardRef().child(newKey!!)
                 .setValue(PostVO(title, content, nick, uid, time))
 //                    Log.d("etPost", etPost.toString())
 
-
             finish()
 
-
         }
-
-
-////        uid = intent.getStringExtra("uid")
-//        if(uid != null){
-//            val uid = intent.hasExtra("uid").toString()
-//            etPostWriteTitle.setText(title.toString())
-//
-//            Log.d("뭔데",uid )
-//
-//        }
-
 
     } // onCreate 밖
 

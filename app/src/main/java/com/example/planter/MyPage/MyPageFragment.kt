@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.planter.Api.HomeFragment
 import com.example.planter.MainActivity
 import com.example.planter.R
+import com.example.planter.Social.BookmarkActivity
 //import com.example.planter.Social.BookmarkActivity
 import com.example.planter.UserAuth.EditActivity
 import com.example.planter.utils.FBAuth
@@ -134,14 +135,13 @@ class MyPageFragment : Fragment() {
         btnMyBookmark.setOnClickListener {
 
 
-//            Log.d("나와 북마크용 uid", uid)
-//            val intent = Intent(requireContext(), BookmarkActivity::class.java)
-//            intent.putExtra("uid", uid.toString())
-//            startActivity(intent)
+            Log.d("나와 북마크용 uid", uid)
+            val intent = Intent(requireContext(), BookmarkActivity::class.java)
+            intent.putExtra("uid", uid.toString())
+            startActivity(intent)
 
-            //bookmark로 데이터 보내기
+//            bookmark로 데이터 보내기
 
-//            val user = FBAuth.getUid()
 //            requireActivity().supportFragmentManager.beginTransaction().replace(
 //                R.id.flMain,
 //
