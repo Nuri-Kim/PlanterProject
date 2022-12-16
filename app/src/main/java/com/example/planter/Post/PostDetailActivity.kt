@@ -157,7 +157,8 @@ class PostDetailActivity : AppCompatActivity() {
 
         val cmtData = ArrayList<CommentVO>()
         getCommentData(key)
-        adapter = CommentAdapter(this, commentList)
+//        adapter = CommentAdapter(this, commentList)
+        adapter = CommentAdapter(this, commentList,keyData,key!!)
         rvComment.adapter = adapter
         rvComment.layoutManager = LinearLayoutManager(this)
 //
