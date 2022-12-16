@@ -21,6 +21,7 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
     val channel2ID: String = "channel2ID";
     val channel2Name: String = "channel2 ";
 
+    //클릭하면 이벤트 발생
     val intent = Intent(base, MainActivity::class.java)
     val fullScreenPendingIntent = PendingIntent.getActivity(baseContext, 0,
         intent, PendingIntent.FLAG_UPDATE_CURRENT)
