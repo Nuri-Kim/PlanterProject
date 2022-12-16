@@ -25,129 +25,122 @@ import com.google.firebase.ktx.Firebase
 
 class BookmarkActivity : AppCompatActivity() {
 
+    val bookmarkRef = FBdataBase.getBookMarkRef()
+    val boardRef = FBdataBase.getBoardRef()
 
     var BookmarkList = ArrayList<String>()
     var PostList = ArrayList<PostVO>()
-    lateinit var adapter: BookmarkAdapter
     var keyData = ArrayList<String>()
-    val database = Firebase.database
-    val bookmarkRef = database.getReference("BookMarkList")
+
+    lateinit var adapter: BookmarkAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmark2)
 
-
         val rvBookmark = findViewById<RecyclerView>(R.id.rvBookmark)
         val key = intent.getStringExtra("key")
 
-        //2. template 결정 : bookmark_list
-
-        //3.Item 결정 : BookmarkVO
 
         Log.d("dd",getUid().toString())
 //        getBookmarkListData(getUid())
+//
+//        val bookmarkListener = object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                // Firebase에서 snapshot으로 데이터를 받아온 경우
+//                // 게시물의 uid
+//                //        -BoardVO
+//                //저장/삭제마다 데이터 누적으로 인한 게시글 중복 저장 방지
+//                BookmarkList.clear()
+//                //snapshot 내부 데이터 모델 형식으로 지정정
+//                for (model in snapshot.children) {
+//                    Log.d("갖고 snapshot", snapshot.toString())
+//                    Log.d("갖고 model", model.toString())
+//                    val item = model.key
+//                    Log.d("갖고 item", item.toString())
+//
+//                    if (item != null) {
+//                        //게시글 목록에 item(게시글)삽입
+//                        BookmarkList.add(item)
+//                        Log.d("갖고 in", BookmarkList.toString() )
+//                    }
+//                    //게시글 키 목록으로 String변환 넣음
+//                    keyData.add(model.key.toString())
+//
+//                }
+//                // adapter 새로고침 받아오는 속도가 다르니까
+//                BookmarkList.reverse()
+//                keyData.reverse()
+//
+//                adapter.notifyDataSetChanged()
+//            }
+//            override fun onCancelled(error: DatabaseError) {
+//                // 오류가 발생했을 경우 실행되는 함수
+//            }
+//        }
+//
+//        FBdataBase.getBookMarkRef().child(FBAuth.getUid()).addValueEventListener(bookmarkListener)
+//
+//
+//        Log.d("갖고 오냐고", BookmarkList.toString())
+//
+//        for( i in keyData) {
+//            FBdataBase.getBoardRef().child(i).addValueEventListener(object :
+//                ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    for (model in snapshot.children) {
+//                        val item = model.getValue(PostVO::class.java)
+//                        if (item != null) {
+//                            //게시글 목록에 item(게시글)삽입
+//                            PostList.add(item)
+//                        }
+//                    }
+//
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    TODO("Not yet implemented")
+//                }
+//            })
+//        }
+//
+//        Log.d("갖고 오냐고", PostList.toString())
+//
+//        Log.d("갖고 오냐고", keyData.toString())
 
-        val bookmarkListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // Firebase에서 snapshot으로 데이터를 받아온 경우
-                // 게시물의 uid
-                //        -BoardVO
-                //저장/삭제마다 데이터 누적으로 인한 게시글 중복 저장 방지
-                BookmarkList.clear()
-                //snapshot 내부 데이터 모델 형식으로 지정정
-                for (model in snapshot.children) {
-                    Log.d("갖고 snapshot", snapshot.toString())
-                    Log.d("갖고 model", model.toString())
-                    val item = model.key
-                    Log.d("갖고 item", item.toString())
-
-                    if (item != null) {
-                        //게시글 목록에 item(게시글)삽입
-                        BookmarkList.add(item)
-                        Log.d("갖고 in", BookmarkList.toString() )
-                    }
-                    //게시글 키 목록으로 String변환 넣음
-                    keyData.add(model.key.toString())
-
-
-
-
-                }
-                // adapter 새로고침 받아오는 속도가 다르니까
-                BookmarkList.reverse()
-                keyData.reverse()
-
-                adapter.notifyDataSetChanged()
-            }
-            override fun onCancelled(error: DatabaseError) {
-                // 오류가 발생했을 경우 실행되는 함수
-            }
-        }
-
-        FBdataBase.getBookMarkRef().child(FBAuth.getUid()).addValueEventListener(bookmarkListener)
-
-
-
-
-
-        Log.d("갖고 오냐고", BookmarkList.toString())
-
-        for( i in keyData) {
-            FBdataBase.getBoardRef().child(i).addValueEventListener(object :
-                ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (model in snapshot.children) {
-                        val item = model.getValue(PostVO::class.java)
-                        if (item != null) {
-                            //게시글 목록에 item(게시글)삽입
-                            PostList.add(item)
-                        }
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-            })
-        }
-
-        Log.d("갖고 오냐고", PostList.toString())
-
-        Log.d("갖고 오냐고", keyData.toString())
-
+        getBookmarkData()
 
         //4.어댑터 결정
-        adapter = BookmarkAdapter(this, PostList)
-
-        adapter.setOnItemClickListener(object : BookmarkAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-
-                var uid = FBAuth.getUid()
-
-                // BoardInsideActivity로 넘어가자
-                val intent = Intent(this@BookmarkActivity, PostDetailActivity::class.java)
-
-                intent.putExtra("uid", PostList[position].uid)
-                intent.putExtra("nick", PostList[position].nick)
-                intent.putExtra("title", PostList[position].title)
-                intent.putExtra("content",PostList[position].content)
-
-
-                //PostDetail로 게시글의 키 값 전달
-                intent.putExtra("key", keyData[position])
-
-                //PostDetail 액티비티 구동
-                startActivity(intent)
-
-            }
-        })
-
+        adapter = BookmarkAdapter(this, PostList, BookmarkList, keyData)
 
         //5.adapter부착
         rvBookmark.adapter = adapter
         rvBookmark.layoutManager = LinearLayoutManager(this)
+
+
+//        adapter.setOnItemClickListener(object : BookmarkAdapter.OnItemClickListener {
+//            override fun onItemClick(view: View, position: Int) {
+//
+//                var uid = FBAuth.getUid()
+//
+//                // BoardInsideActivity로 넘어가자
+//                val intent = Intent(this@BookmarkActivity, PostDetailActivity::class.java)
+//
+//                intent.putExtra("uid", PostList[position].uid)
+//                intent.putExtra("nick", PostList[position].nick)
+//                intent.putExtra("title", PostList[position].title)
+//                intent.putExtra("content",PostList[position].content)
+//
+//
+//                //PostDetail로 게시글의 키 값 전달
+//                intent.putExtra("key", keyData[position])
+//
+//                //PostDetail 액티비티 구동
+//                startActivity(intent)
+//
+//            }
+//        })
+
 
 
     }
@@ -231,6 +224,55 @@ class BookmarkActivity : AppCompatActivity() {
 //
 //
 //    }
+
+
+    fun getBookmarkData() {
+        // bookmarkList 경로에 있는 데이터를 다 가지고 오자
+        // 게시글의 uid값 ---> bookmarkList
+        val myBmListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                BookmarkList.clear()
+
+                for (model in snapshot.children) {
+                    BookmarkList.add(model.key.toString())
+                }
+                adapter.notifyDataSetChanged()
+                getContentData()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        bookmarkRef.child(FBAuth.getUid()).addValueEventListener(myBmListener)
+    }
+
+    fun getContentData() {
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (model in snapshot.children) {
+                    val item = model.getValue(PostVO::class.java)
+                    if (BookmarkList.contains(model.key.toString())) {
+                        if (item != null) {
+                            PostList.add(item)
+                            // data 내가 북마크 찍은 게시물만 담김
+                        }
+                    }
+                    keyData.add(model.key.toString())
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        }
+        boardRef.addValueEventListener(postListener)
+        // snapshot : content경로에 있는 데이터 전부
+    }
+
 
 
 
