@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -46,6 +47,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     var currentMillis by Delegates.notNull<Long>()
     lateinit var tvHomeSet: TextView
+    lateinit var HomeLayout: ConstraintLayout
     lateinit var requestQueue: RequestQueue
     lateinit var adapter: WeatherAdapter
     private lateinit var adapter2: ArrayAdapter<String>
@@ -74,6 +76,8 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         time = DateTimeFormatter.ofPattern("MM월 dd일 HH시 mm분").format(currentDateTime)
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        HomeLayout = view.findViewById<ConstraintLayout>(R.id.HomeLayout)
 
         tvHomeSet = view.findViewById<TextView>(R.id.tvHomeSet)
         val imgHomeReset = view.findViewById<ImageView>(R.id.imgHomeReset)
@@ -140,7 +144,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     fun openWeather() {
 
-        if (ActivityCompat.checkSelfPermission(
+        loop@if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) !=
@@ -153,6 +157,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0
             )
             // requestCode: 내가 뭘 요청한 건지 구분하기 위한 숫자
+            return
             // label을 사용해 다시 setOnClickListener 돌아가 생명주기가 돌아가게끔
         } else {
             val manager =
@@ -161,7 +166,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             location?.let {
                 latitude = location.latitude
                 longitude = location.longitude
-                Log.d("test", "{$latitude}, {$longitude}")
+                Log.d("loc", "{$latitude}, {$longitude}")
             }
         }
 
@@ -182,6 +187,13 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 var weather = weathers.get(0) as JSONObject
                 var state = weather.getString("main")
                 var stateId = weather.getString("id")
+                if(stateId.toInt() in 200..350||stateId.toInt() in 500..540||stateId.toInt()>=900){
+                    HomeLayout.setBackgroundResource(R.drawable.rain)
+                }else if(stateId.toInt() in 600..623){
+                    HomeLayout.setBackgroundResource(R.drawable.snow)
+                }else{
+                    HomeLayout.setBackgroundResource(R.drawable.sun)
+                }
 
                 var main = result.getJSONObject("main")
                 var temp = main.getString("temp")
