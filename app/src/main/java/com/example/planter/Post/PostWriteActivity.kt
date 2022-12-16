@@ -208,8 +208,10 @@ class PostWriteActivity : AppCompatActivity() {
 
 
             var newKey = FBdataBase.getBoardRef().push().key.toString()
+            val keyCheck = db.getReference("board").child(key.toString())
 
-            if (key == newKey) {
+
+            if (key!=null) {
 
                 val Content = db.getReference("board").child(key.toString())
                 Content.setValue(null)
@@ -217,6 +219,7 @@ class PostWriteActivity : AppCompatActivity() {
                 editPostData(key.toString())
 
                 if (imgUpload) imgUpload(key!!)
+
             }else{
 
                 FBdataBase.getBoardRef().child(newKey!!)
