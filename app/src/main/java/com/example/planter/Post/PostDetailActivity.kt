@@ -132,7 +132,7 @@ class PostDetailActivity : AppCompatActivity() {
             tvPostDetailDelete.visibility = View.VISIBLE
         }
 
-        if (longitude!!.length == 0 && latitude!!.length == 0) {
+        if (longitude == "0.0" && latitude == "0.0") {
             tvPostDetailLocation.visibility = View.INVISIBLE
             imgPostDetailLocation.visibility = View.INVISIBLE
         } else {
@@ -143,7 +143,7 @@ class PostDetailActivity : AppCompatActivity() {
             //GRPC 오류? try catch 문으로 오류 대처
             try {
                 addr =
-                    geocoder.getFromLocation(latitude!!.toDouble(), longitude.toDouble(), 1).first()
+                    geocoder.getFromLocation(latitude!!.toDouble(), longitude!!.toDouble(), 1).first()
                         .getAddressLine(0)
             } catch (e: Exception) {
                 e.printStackTrace()
