@@ -5,13 +5,14 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".Api.HomeFragment">
 
     <TextView
         android:id="@+id/tvHome1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:text="알람 설정"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,10 +47,13 @@
     <ListView
         android:id="@+id/lvHome"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="290dp"
+        android:background="@color/white"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvHome" />
+        app:layout_constraintTop_toBottomOf="@+id/rvHome"
+        tools:listitem="@layout/state_list" />
 
     <Switch
         android:id="@+id/swHomeAlarm1"
