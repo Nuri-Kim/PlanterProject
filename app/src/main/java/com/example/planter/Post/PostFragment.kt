@@ -47,7 +47,7 @@ class PostFragment : Fragment() {
         getPostData()
         //4. Adapter 결정
 
-        adapter = PostAdapter(requireContext(), PostList, keyData)
+        adapter = PostAdapter(requireContext(), PostList)
 
         // 각 게시글 클릭 이벤트 - 게시글 내부로 동
         adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {

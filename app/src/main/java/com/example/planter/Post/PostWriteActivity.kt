@@ -217,6 +217,12 @@ class PostWriteActivity : AppCompatActivity() {
                 editPostData(key.toString())
 
                 if (imgUpload) imgUpload(key!!)
+            }else{
+
+                FBdataBase.getBoardRef().child(newKey!!)
+                    .setValue(PostVO(title, content, nick, uid, time, longitude.toString(), latitude.toString()))
+
+                if (imgUpload) imgUpload(newKey!!)
             }
 
 
@@ -225,9 +231,8 @@ class PostWriteActivity : AppCompatActivity() {
 //                    var etPost = FBdataBase.getBoardRef().child(key2)
 //                        .setValue(PostVO(title, content, "일반", uid, time))
 
-            FBdataBase.getBoardRef().child(newKey!!)
-                .setValue(PostVO(title, content, nick, uid, time))
-//                    Log.d("etPost", etPost.toString())
+////                    Log.d("etPost", etPost.toString())
+//
 
             finish()
 
