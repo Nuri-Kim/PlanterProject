@@ -47,6 +47,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     var currentMillis by Delegates.notNull<Long>()
     lateinit var tvHomeSet: TextView
+    lateinit var rvHome: RecyclerView
     lateinit var HomeLayout: ConstraintLayout
     lateinit var requestQueue: RequestQueue
     lateinit var adapter: WeatherAdapter
@@ -77,12 +78,10 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        HomeLayout = view.findViewById<ConstraintLayout>(R.id.HomeLayout)
-
         tvHomeSet = view.findViewById<TextView>(R.id.tvHomeSet)
         val imgHomeReset = view.findViewById<ImageView>(R.id.imgHomeReset)
         val lvHome = view.findViewById<ListView>(R.id.lvHome)
-        val rvHome = view.findViewById<RecyclerView>(R.id.rvHome)
+        rvHome = view.findViewById<RecyclerView>(R.id.rvHome)
         val swHomeAlarm2 = view.findViewById<Switch>(R.id.swHomeAlarm2)
 
 
@@ -188,11 +187,11 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 var state = weather.getString("main")
                 var stateId = weather.getString("id")
                 if(stateId.toInt() in 200..350||stateId.toInt() in 500..540||stateId.toInt()>=900){
-                    HomeLayout.setBackgroundResource(R.drawable.rain)
+                    rvHome.setBackgroundResource(R.drawable.rain)
                 }else if(stateId.toInt() in 600..623){
-                    HomeLayout.setBackgroundResource(R.drawable.snow)
+                    rvHome.setBackgroundResource(R.drawable.snow)
                 }else{
-                    HomeLayout.setBackgroundResource(R.drawable.sun)
+                    rvHome.setBackgroundResource(R.drawable.sun)
                 }
 
                 var main = result.getJSONObject("main")
