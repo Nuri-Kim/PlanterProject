@@ -44,13 +44,13 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
             val tvPostListTitle : TextView
             val tvPostListContent : TextView
             val tvPostListWriter : TextView
-            val imgPostListPicture : ImageView
+            //val imgPostListPicture : ImageView
 
             init {
                 tvPostListTitle = itemView.findViewById(R.id.tvPostListTitle)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
                 tvPostListWriter = itemView.findViewById(R.id.tvPostListWriter)
-                imgPostListPicture = itemView.findViewById(R.id.imgPostListPicture)
+                //imgPostListPicture = itemView.findViewById(R.id.imgPostListPicture)
 
                 itemView.setOnClickListener {
                     val position = adapterPosition
