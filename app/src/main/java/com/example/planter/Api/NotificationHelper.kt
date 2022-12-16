@@ -4,12 +4,15 @@ import android.R
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.toColorInt
+import com.example.planter.MainActivity
 
 
 class NotificationHelper(base: Context?) : ContextWrapper(base) {
@@ -17,6 +20,10 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
     val channel1Name: String = "channel1 ";
     val channel2ID: String = "channel2ID";
     val channel2Name: String = "channel2 ";
+
+    val intent = Intent(base, MainActivity::class.java)
+    val fullScreenPendingIntent = PendingIntent.getActivity(baseContext, 0,
+        intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
  init {
      //
@@ -38,7 +45,7 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
 
         //물주기 알람채널
         val channel2 =
-            NotificationChannel(channel2ID, channel2Name, NotificationManager.IMPORTANCE_DEFAULT)
+            NotificationChannel(channel2ID, channel2Name, NotificationManager.IMPORTANCE_HIGH)
         channel2.enableLights(true)
         channel2.enableVibration(true)
         channel2.lightColor = "#0D6B3E".toColorInt()
@@ -62,6 +69,8 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
             .setContentTitle(title)
             .setContentText(message)
             .setSmallIcon(R.drawable.stat_notify_sync)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setFullScreenIntent(fullScreenPendingIntent, true)
     }
 
 }
