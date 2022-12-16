@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Social.BookmarkFragment" >
+    android:background="#E8E8E8"
+    tools:context=".Social.BookmarkFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBookmark"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".Post.PostDetailActivity">
 
 
@@ -81,6 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="글 내용"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvPostDetailDelete"
         app:layout_constraintStart_toStartOf="@+id/imgPostDetailUserPic"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailDelete" />
@@ -88,14 +91,14 @@
     <ImageView
         android:id="@+id/imgCommentPicture"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailContent"
-        app:srcCompat="@drawable/icon_home" />
+        app:srcCompat="@drawable/picture" />
 
     <TextView
         android:id="@+id/tvPostDetailCount"
@@ -178,7 +181,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_style"
-        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="댓글 등록"
         android:textColor="#FFFFFF"
         android:textStyle="bold"

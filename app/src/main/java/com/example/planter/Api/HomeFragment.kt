@@ -75,7 +75,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         val imgHomeReset = view.findViewById<ImageView>(R.id.imgHomeReset)
         val lvHome = view.findViewById<ListView>(R.id.lvHome)
         val rvHome = view.findViewById<RecyclerView>(R.id.rvHome)
-        val swHomeAlarm1 = view.findViewById<Switch>(R.id.swHomeAlarm1)
+        //val swHomeAlarm1 = view.findViewById<Switch>(R.id.swHomeAlarm1)
         val swHomeAlarm2 = view.findViewById<Switch>(R.id.swHomeAlarm2)
 
 
@@ -89,13 +89,13 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 //        }
 
         //메시지 알람
-        swHomeAlarm1.setOnCheckedChangeListener { compoundButton, ischecked ->
-            if (ischecked) {
-
-            } else {
-
-            }
-        }
+//        swHomeAlarm1.setOnCheckedChangeListener { compoundButton, ischecked ->
+//            if (ischecked) {
+//
+//            } else {
+//
+//            }
+//        }
 
         //물주기 알람
         swHomeAlarm2.setOnCheckedChangeListener { compoundButton, ischecked ->

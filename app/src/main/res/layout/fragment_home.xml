@@ -5,31 +5,38 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".Api.HomeFragment">
 
     <TextView
         android:id="@+id/tvHome1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="80dp"
-        android:text="알람 설정"
+        android:text="물주기 알람 설정"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvHome" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="0dp"
         android:layout_height="250dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCommentNick" />
 
     <ImageView
         android:id="@+id/imgHomeReset"
         android:layout_width="50dp"
         android:layout_height="29dp"
+        android:layout_marginTop="16dp"
         android:src="@android:drawable/ic_menu_rotate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,37 +53,29 @@
     <ListView
         android:id="@+id/lvHome"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="247dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/rvHome"
+        app:layout_constraintStart_toStartOf="@+id/rvHome"
         app:layout_constraintTop_toBottomOf="@+id/rvHome" />
-
-    <Switch
-        android:id="@+id/swHomeAlarm1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="40dp"
-        android:text="msg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
         android:id="@+id/swHomeAlarm2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="40dp"
         android:text="water"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvHome1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvHome1"
+        app:layout_constraintTop_toTopOf="@+id/tvHome1" />
 
     <TextView
         android:id="@+id/tvHomeSet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="TextView"
+        android:text="등록된 알람이 없습니다"
         app:layout_constraintStart_toStartOf="@+id/swHomeAlarm2"
         app:layout_constraintTop_toBottomOf="@+id/swHomeAlarm2" />
 
