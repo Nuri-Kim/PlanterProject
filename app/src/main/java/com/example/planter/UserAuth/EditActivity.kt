@@ -11,9 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.planter.R
+import com.example.planter.utils.FBAuth
+import com.example.planter.utils.FBdataBase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -23,12 +28,15 @@ class EditActivity : AppCompatActivity() {
     lateinit var storage: FirebaseStorage
     lateinit var imgEditimg: ImageView
     lateinit var imgEditBtn: ImageView
+    lateinit var getNick : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
         auth = Firebase.auth
+
+        val user = FBAuth.getUid()
 
         val tvEditEmail = findViewById<TextView>(R.id.tvEditEmail)
         val etEditPw = findViewById<EditText>(R.id.etEditPw)
@@ -43,7 +51,21 @@ class EditActivity : AppCompatActivity() {
 
         val email = tvEditEmail.text.toString()
         val pw = etEditPw.text.toString()
-        val nick = etEditNick.text.toString()
+
+
+        FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                getNick = snapshot.child("nick").value as String
+                etEditNick.setHint(getNick)
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
 
         // 회원 프로필 사진 변경 버튼
