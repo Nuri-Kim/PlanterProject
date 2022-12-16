@@ -38,7 +38,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="170dp"
-        android:src="@drawable/de_profile"
+        android:src="@drawable/main_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,22 +87,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="회원탈퇴"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/background3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnMyBookmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="북마크"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/background3" />
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_style"
+        android:text="북마크 보관함"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/btnMyPageLogOut"
+        app:layout_constraintStart_toStartOf="@+id/btnMyPageEdit"
+        app:layout_constraintTop_toBottomOf="@+id/btnMyPageLogOut" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

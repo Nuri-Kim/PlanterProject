@@ -28,14 +28,29 @@
         android:text="내용내용내용"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/tvPostListTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostListTitle" />
+        app:layout_constraintStart_toStartOf="@+id/tvPostListWriter2"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListWriter2" />
 
     <TextView
         android:id="@+id/tvPostListWriter"
         android:layout_width="wrap_content"
         android:layout_height="26dp"
-        android:layout_marginStart="24dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="2dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="2dp"
+        android:text="작성자"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPostListWriter2"
+        app:layout_constraintStart_toEndOf="@+id/tvPostListWriter2"
+        app:layout_constraintTop_toTopOf="@+id/tvPostListWriter2" />
+
+    <TextView
+        android:id="@+id/tvPostListWriter2"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
         android:background="@drawable/btn_style"
         android:paddingLeft="8dp"
         android:paddingTop="2dp"
@@ -45,9 +60,8 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPostListTitle"
-        app:layout_constraintStart_toEndOf="@+id/tvPostListTitle"
-        app:layout_constraintTop_toTopOf="@+id/tvPostListTitle" />
+        app:layout_constraintStart_toStartOf="@+id/tvPostListTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListTitle" />
 
     <TextView
         android:id="@+id/space"
@@ -63,50 +77,54 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="#bdbdbd"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostListContent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPostCmtCount" />
 
     <ImageView
         android:id="@+id/imgPostLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/tvPostLikeCount"
-        app:layout_constraintTop_toTopOf="@+id/tvPostListWriter"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPostListContent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListContent"
         app:srcCompat="@drawable/icon_like_color" />
 
     <ImageView
         android:id="@+id/imgPostCmtCount"
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/imgPostLikeCount"
-        app:layout_constraintEnd_toStartOf="@+id/tvPostCmtCount"
+        app:layout_constraintStart_toEndOf="@+id/tvPostLikeCount"
         app:layout_constraintTop_toTopOf="@+id/imgPostLikeCount"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/icon_comment" />
 
     <TextView
         android:id="@+id/tvPostLikeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/imgPostLikeCount"
-        app:layout_constraintEnd_toStartOf="@+id/imgPostCmtCount"
+        app:layout_constraintStart_toEndOf="@+id/imgPostLikeCount"
         app:layout_constraintTop_toTopOf="@+id/imgPostLikeCount" />
 
     <TextView
         android:id="@+id/tvPostCmtCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/imgPostCmtCount"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPostCmtCount"
         app:layout_constraintTop_toTopOf="@+id/imgPostCmtCount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

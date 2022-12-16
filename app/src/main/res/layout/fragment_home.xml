@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:text="물주기 알람 설정"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,18 +51,20 @@
     <ListView
         android:id="@+id/lvHome"
         android:layout_width="0dp"
-        android:layout_height="247dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvHome1"
         app:layout_constraintEnd_toEndOf="@+id/rvHome"
         app:layout_constraintStart_toStartOf="@+id/rvHome"
-        app:layout_constraintTop_toBottomOf="@+id/rvHome" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <Switch
         android:id="@+id/swHomeAlarm2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:text="water"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -75,5 +77,20 @@
         android:text="등록된 알람이 없습니다"
         app:layout_constraintStart_toStartOf="@+id/swHomeAlarm2"
         app:layout_constraintTop_toBottomOf="@+id/swHomeAlarm2" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/pointColor"
+        android:gravity="center"
+        android:text="체크리스트"
+        android:textColor="#FDFDFD"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/rvHome"
+        app:layout_constraintStart_toStartOf="@+id/rvHome"
+        app:layout_constraintTop_toBottomOf="@+id/rvHome" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

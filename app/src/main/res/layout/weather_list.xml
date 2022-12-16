@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/HomeLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#00000000">
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        android:background="#63FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView17"
@@ -13,6 +25,8 @@
         android:layout_height="wrap_content"
         android:text="현재 온도"
         android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvHomeLoc"
         app:layout_constraintTop_toBottomOf="@+id/tvHomeLoc" />
 
@@ -20,12 +34,13 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="습도"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/tvHomeTemp"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeTemp" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
 
     <TextView
         android:id="@+id/textView14"
@@ -35,6 +50,7 @@
         android:text="풍량"
         android:textColor="#000000"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toTopOf="@+id/textView13" />
 
@@ -42,11 +58,12 @@
         android:id="@+id/tvHomeTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:text="온도"
         android:textColor="#000000"
         android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/tvHomeSun"
@@ -56,6 +73,7 @@
         android:text="해돋이"
         android:textColor="#000000"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvHomeWind"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -64,10 +82,11 @@
         android:id="@+id/tvHomeHum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:text="습도"
         android:textColor="#000000"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -75,10 +94,11 @@
         android:id="@+id/tvHomeWind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:text="바람"
         android:textColor="#000000"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -87,8 +107,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="시간기준"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTemp"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTemp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvHomeLoc"
@@ -98,6 +120,8 @@
         android:layout_marginTop="24dp"
         android:text="위치"
         android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,11 +132,11 @@
         android:layout_marginStart="100dp"
         android:text="비내림"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvHomeTemp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/tvHomeTemp" />
+        app:layout_constraintTop_toTopOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView12"
@@ -132,6 +156,8 @@
         android:layout_marginBottom="8dp"
         android:text="현재날씨"
         android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvHomeState"
         app:layout_constraintStart_toStartOf="@+id/tvHomeState" />
 </androidx.constraintlayout.widget.ConstraintLayout>

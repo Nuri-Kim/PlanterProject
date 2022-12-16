@@ -13,7 +13,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="PostTitle"
-        android:textSize="14sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +26,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"
         android:text="PostContent"
-        android:textSize="12sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvBookmarkUserNick"
         app:layout_constraintTop_toBottomOf="@+id/tvBookmarkUserNick"
@@ -36,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="userNick"
-        android:textSize="10sp"
+        android:textColor="#000000"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tvBookmarkTitle"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvBookmarkTitle"
@@ -48,20 +52,33 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="PostDate"
-        android:textSize="10sp"
+        android:textColor="#000000"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/tvBookmarkUserNick"
         app:layout_constraintTop_toTopOf="@+id/tvBookmarkUserNick" />
 
     <Button
         android:id="@+id/btnBookmarkDelete"
-        android:layout_width="50sp"
-        android:layout_height="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_style"
-        android:text="삭제"
-        android:textSize="10sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="북마크 취소"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvBookmarkTitle" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="460dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

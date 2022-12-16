@@ -78,6 +78,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
+        android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="@+id/etEditPw"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
