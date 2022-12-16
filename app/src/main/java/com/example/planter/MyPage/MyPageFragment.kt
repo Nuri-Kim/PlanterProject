@@ -13,8 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
+import com.example.planter.Api.HomeFragment
 import com.example.planter.MainActivity
 import com.example.planter.R
+import com.example.planter.Social.BookmarkActivity
+//import com.example.planter.Social.BookmarkActivity
 import com.example.planter.UserAuth.EditActivity
 import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBdataBase
@@ -31,7 +34,7 @@ class MyPageFragment : Fragment() {
 
     lateinit var auth : FirebaseAuth
     lateinit var nick : String
-
+    lateinit var uid : String
     lateinit var imgMypage : ImageView
 
     override fun onCreateView(
@@ -41,6 +44,7 @@ class MyPageFragment : Fragment() {
         // Inflate the layout for this fragment
 
         auth = Firebase.auth
+        var uid = FBAuth.getUid()
 
 
         val view = inflater.inflate(R.layout.fragment_my_page, container, false)
@@ -49,10 +53,9 @@ class MyPageFragment : Fragment() {
         val btnMyPageLogOut = view.findViewById<Button>(R.id.btnMyPageLogOut)
         val tvMyPageDel = view.findViewById<TextView>(R.id.tvMyPageDel)
         val btnMyPageEdit = view.findViewById<Button>(R.id.btnMyPageEdit)
-        //val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
+        val btnMyBookmark = view.findViewById<Button>(R.id.btnMyBookmark)
 
         val user = FBAuth.getUid()
-
         // 접속한 uid 닉네임 찾아오기
         FBdataBase.getJoinRef().child(user).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -127,15 +130,25 @@ class MyPageFragment : Fragment() {
 
         }
 
-//        btnMyBookmark.setOnClickListener {
+
+
+        btnMyBookmark.setOnClickListener {
+
+
+            Log.d("나와 북마크용 uid", uid)
+            val intent = Intent(requireContext(), BookmarkActivity::class.java)
+            intent.putExtra("uid", uid.toString())
+            startActivity(intent)
+
+//            bookmark로 데이터 보내기
+
+//            requireActivity().supportFragmentManager.beginTransaction().replace(
+//                R.id.flMain,
 //
-////            var uid = FBAuth.getUid()
-////            Log.d("나와 북마크용 uid", uid)
-//            val intent = Intent(requireContext(), BookmarkFragment::class.java)
-////            intent.putExtra("uid", uid.toString())
-//            startActivity(intent)
-//
-//        }
+//                BookmarkFragment()
+//            ).commit()
+
+        }
 
 
         return view

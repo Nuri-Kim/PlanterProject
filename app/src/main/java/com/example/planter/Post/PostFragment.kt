@@ -55,7 +55,7 @@ class PostFragment : Fragment() {
 
                 // BoardInsideActivity로 넘어가자
 
-                val intent = Intent(requireActivity(), PostDetailJsActivity::class.java)
+                val intent = Intent(requireActivity(), PostDetailActivity::class.java)
 
                 intent.putExtra("title", PostList[position].title)
 
@@ -63,7 +63,9 @@ class PostFragment : Fragment() {
                 intent.putExtra("nick", PostList[position].nick)
                 intent.putExtra("time", PostList[position].time)
                 intent.putExtra("uid", PostList[position].uid)
-                
+                intent.putExtra("longitude", PostList[position].longitude)
+                intent.putExtra("latitude", PostList[position].latitude)
+
                 //PostDetail로 게시글의 키 값 전달
                 intent.putExtra("key", keyData[position])
                 
@@ -93,6 +95,7 @@ class PostFragment : Fragment() {
         return view
 
     }//onCreateView 밖
+
 
     // post에 있는 데이터 다~ 가져오는 함수
     fun getPostData() {
@@ -137,6 +140,7 @@ class PostFragment : Fragment() {
         // snapshot으로 board에 있는 모든 ~~ 데이터가 들어간다~~
         FBdataBase.getBoardRef().addValueEventListener(postListener)
     }
+
 
 
 }

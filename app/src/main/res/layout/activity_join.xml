@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".UserAuth.JoinActivity">
 
     <ImageView
@@ -54,7 +55,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="로그인 시 이용 할 이메일을 입력해주세요"
         android:inputType="textPersonName"
@@ -81,7 +82,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="비밀번호를 입력해주세요"
         android:inputType="textPassword"
@@ -108,7 +109,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="비밀번호를 다시 입력해주세요"
         android:inputType="textPassword"
@@ -135,7 +136,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="플랜터에서 사용 할 닉네임을 적어주세요"
         android:inputType="textPersonName"
@@ -158,9 +159,6 @@
         app:layout_constraintEnd_toEndOf="@+id/etJoinNick"
         app:layout_constraintStart_toStartOf="@+id/etJoinNick"
         app:layout_constraintTop_toBottomOf="@+id/etJoinNick" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

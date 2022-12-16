@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".UserAuth.LoginActivity">
 
     <EditText
@@ -13,7 +14,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="이메일을 입력해주세요"
         android:inputType="textPersonName"
@@ -30,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:background="#ECECEC"
+        android:background="#FFFFFF"
         android:ems="10"
         android:hint="비밀번호를 입력해주세요"
         android:inputType="textPassword"
@@ -82,18 +83,5 @@
         app:layout_constraintEnd_toEndOf="@+id/btnLoginLogin"
         app:layout_constraintStart_toStartOf="@+id/btnLoginLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin" />
-
-    <Button
-        android:id="@+id/googleSignInBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="540dp"
-        android:layout_marginEnd="16dp"
-        android:text="구글 로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

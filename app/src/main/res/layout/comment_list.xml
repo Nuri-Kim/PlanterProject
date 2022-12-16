@@ -22,6 +22,7 @@
         android:layout_marginStart="8dp"
         android:text="닉네임"
         android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgCommentPicture"
         app:layout_constraintTop_toTopOf="@+id/imgCommentPicture" />
@@ -33,6 +34,7 @@
         android:layout_marginTop="8dp"
         android:text="댓글 내용"
         android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/tvCommentNick"
         app:layout_constraintTop_toBottomOf="@+id/tvCommentNick" />
 
@@ -43,16 +45,18 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="댓글작성시간"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvCommentContent"
         app:layout_constraintTop_toBottomOf="@+id/tvCommentContent" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tvCommentDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="삭제"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCommentNick" />
 

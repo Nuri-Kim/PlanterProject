@@ -2,6 +2,7 @@ package com.example.planter.Post
 
 import android.content.Context
 import android.content.Intent
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -13,6 +14,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.planter.Map.MapsActivity
 import com.example.planter.utils.FBAuth
 import com.example.planter.utils.FBAuth.Companion.getUid
 import com.example.planter.utils.FBdataBase
@@ -25,6 +27,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -36,13 +39,21 @@ class PostDetailActivity : AppCompatActivity() {
     lateinit var adapter: CommentAdapter
     var commentList = ArrayList<CommentVO>()
     var keyData = ArrayList<String>()
-
+    var commentCnt: Int = 0
+    lateinit var tvPostDetailCount: TextView
+    var bookmarkCk = false
+    lateinit var imgPostDetailBookmark: ImageView
+    var likeCk = false
+    lateinit var imgPostDetailLike: ImageView
+    lateinit var tvPostDetailLike: TextView
+    lateinit var tvPostDetailLocation: TextView
+    lateinit var imgPostDetailLocation: ImageView
+    var addr = "위치 정보를 불러올 수 없습니다"
+    var currentNick = "닉네임"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_detail)
-
-
 
         auth = Firebase.auth
 
@@ -51,7 +62,7 @@ class PostDetailActivity : AppCompatActivity() {
         val commentRef = database.getReference("CommentList")
         val likeRef = database.getReference("LikeList")
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this )
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val email = sharedPreferences.getString("loginId", "")
         val id = getUid()
 
@@ -69,18 +80,19 @@ class PostDetailActivity : AppCompatActivity() {
         val tvPostDetailModify = findViewById<TextView>(R.id.tvPostDetailModify)
         val tvPostDetailDelete = findViewById<TextView>(R.id.tvPostDetailDelete)
         val tvPostDetailContent = findViewById<TextView>(R.id.tvPostDetailContent)
-        val tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
+        tvPostDetailCount = findViewById<TextView>(R.id.tvPostDetailCount)
         val tvPostDetailWrite = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
 
-        val imgPostDetailLike = findViewById<ImageView>(R.id.imgPostDetailLike)
+        imgPostDetailLike = findViewById<ImageView>(R.id.imgPostDetailLike)
+        tvPostDetailLike = findViewById<TextView>(R.id.tvPostDetailLike)
         val imgPostDetailComment = findViewById<ImageView>(R.id.imgPostDetailComment)
-        val imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
+        imgPostDetailBookmark = findViewById<ImageView>(R.id.imgPostDetailBookmark)
         val tvPostDetailCmtAdd = findViewById<TextView>(R.id.tvPostDetailCmtAdd)
         val etPostDetailComment = findViewById<EditText>(R.id.etPostDetailComment)
         val rvComment = findViewById<RecyclerView>(R.id.rvComment)
 
-
-
+        tvPostDetailLocation = findViewById<TextView>(R.id.tvPostDetailLocation)
+        imgPostDetailLocation = findViewById<ImageView>(R.id.imgPostDetailLocation)
 
 
         val title = intent.getStringExtra("title")
@@ -89,12 +101,11 @@ class PostDetailActivity : AppCompatActivity() {
         val time = intent.getStringExtra("time")
         var uid = intent.getStringExtra("uid")
 
+        var longitude = intent.getStringExtra("longitude")
+        var latitude = intent.getStringExtra("latitude")
+
         val prePost = PostVO(title!!, content!!, "일반", uid!!, time!!)
         Log.d("뭐야", prePost.toString())
-
-
-
-
 
         val key = intent.getStringExtra("key")
 
@@ -103,8 +114,6 @@ class PostDetailActivity : AppCompatActivity() {
         tvPostDetailUserNick.text = nick.toString()
         tvPostDetailTime.text = time.toString()
 
-
-
         getImageData(key.toString())
         Log.d("나와id", id)
 
@@ -112,16 +121,45 @@ class PostDetailActivity : AppCompatActivity() {
             Log.d("나와uid", uid)
         }
 
-
         val sp = getSharedPreferences("loginInfo", Context.MODE_PRIVATE)
 
-        if(uid != id) {
+        if (uid != id) {
             tvPostDetailModify.visibility = View.INVISIBLE
             tvPostDetailDelete.visibility = View.INVISIBLE
 
-        }else{
+        } else {
             tvPostDetailModify.visibility = View.VISIBLE
             tvPostDetailDelete.visibility = View.VISIBLE
+        }
+
+        if (longitude!!.length == 0 && latitude!!.length == 0) {
+            tvPostDetailLocation.visibility = View.INVISIBLE
+            imgPostDetailLocation.visibility = View.INVISIBLE
+        } else {
+            tvPostDetailLocation.visibility = View.VISIBLE
+            imgPostDetailLocation.visibility = View.VISIBLE
+
+            val geocoder = Geocoder(this)
+            //GRPC 오류? try catch 문으로 오류 대처
+            try {
+                addr =
+                    geocoder.getFromLocation(latitude!!.toDouble(), longitude.toDouble(), 1).first()
+                        .getAddressLine(0)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+            tvPostDetailLocation.text = addr
+
+        }
+
+        tvPostDetailLocation.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.putExtra("lon", longitude.toString())
+            intent.putExtra("lat", latitude.toString())
+            intent.putExtra("addr", addr)
+            startActivity(intent)
+
         }
 
 
@@ -154,51 +192,67 @@ class PostDetailActivity : AppCompatActivity() {
             finish()
         }
 
-
-        val cmtData = ArrayList<CommentVO>()
+        //댓글 정보, 리스트
         getCommentData(key)
-        adapter = CommentAdapter(this, commentList)
+        adapter = CommentAdapter(this, commentList, keyData, key!!)
         rvComment.adapter = adapter
         rvComment.layoutManager = LinearLayoutManager(this)
-//
-//            tvPostDetailDelete.setOnClickListener {
-//
-//            }
-//
-//            tvPostDetailWrite.setOnClickListener {
-//                //
-//            }
-//
-//
-//        }
 
-        imgPostDetailLike.setOnClickListener{
+        //북마크 정보
+        getBookmarkData(key)
 
-            imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+        //좋아요 정보
+        getLikeData(key)
+        getLikeCntData(key)
 
-            likeRef.child(key!!).child("count").setValue("good")
-//           likeRef.child(key!!).child("count").setValue("good")
+        FBdataBase.getJoinRef().child(auth.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    currentNick = snapshot.child("nick").value as String
+                }
 
-            likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+
+
+        // 좋아요 이벤트
+        imgPostDetailLike.setOnClickListener {
+
+            if (likeCk) {
+                imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
+                likeRef.child(key!!).child(auth.currentUser!!.uid).removeValue()
+            } else {
+                imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+                likeRef.child(key!!).child(auth.currentUser!!.uid).setValue("good")
+
+            }
 
         }
 
+        // 북마크 이벤트
         imgPostDetailBookmark.setOnClickListener {
 
-            imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
-            bookMarkRef.child(auth.currentUser!!.uid).child(key!!).setValue("bookmark")
+            if (bookmarkCk) {
+                imgPostDetailBookmark.setImageResource(R.drawable.bookmark_empty)
+
+            } else {
+                bookMarkRef.child(auth.currentUser!!.uid).child(key!!).removeValue()
+                imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
+                bookMarkRef.child(auth.currentUser!!.uid).child(key!!).setValue("bookmark")
+            }
 
         }
 
+        // 댓글 등록 이벤트
         tvPostDetailCmtAdd.setOnClickListener {
 
             val comment = etPostDetailComment.text.toString()
             val time = FBAuth.getTime()
             val comKey = FBdataBase.getCommentRef().child(key!!).push().key.toString()
             FBdataBase.getCommentRef().child(key).child(comKey)
-                .setValue(CommentVO("닉네임", id,comment,time))
-//            FBdataBase.getCommentRef().child(key)
-//                .setValue(CommentVO("닉네임", id,comment,time))
+                .setValue(CommentVO(currentNick, id, comment, time))
 
             etPostDetailComment.setText("")
 
@@ -207,17 +261,17 @@ class PostDetailActivity : AppCompatActivity() {
 
     fun getImageData(key: String) {
         val storageReference = Firebase.storage.reference.child("$key.png")
-
         storageReference.downloadUrl.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+            if (task.isSuccessful && task.result != null) {
                 //Gilde: 웹에 있는 이미지 적용하는 라이브러리
                 Glide.with(this)
                     .load(task.result)
                     .into(imgPostDetailPicture) //지역변수
 
+            } else {
+                imgPostDetailPicture.visibility = View.GONE
             }
         }
-
 
     }
 
@@ -240,9 +294,12 @@ class PostDetailActivity : AppCompatActivity() {
 
                 }
 
-                // adapter 새로고침 받아오는 속도가 다르니까
+                commentCnt = commentList.size
+                tvPostDetailCount.text = commentCnt.toString()
+
                 commentList.reverse()
                 keyData.reverse()
+                Log.d("댓글", commentCnt.toString())
                 adapter.notifyDataSetChanged()
 
             }
@@ -256,5 +313,83 @@ class PostDetailActivity : AppCompatActivity() {
         FBdataBase.getCommentRef().child(key!!).addValueEventListener(commentListener)
     }
 
+    // 좋아요 데이터 받아오기
+    fun getLikeData(key: String?) {
+        val bookmarkListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var value = snapshot.getValue<String>()
+
+                if(value == null){
+                    likeCk = false
+                    imgPostDetailLike.setImageResource(R.drawable.icon_like_white)
+                }else{
+                    likeCk = true
+                    imgPostDetailLike.setImageResource(R.drawable.icon_like_color)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        }
+
+        FBdataBase.getLikeRef().child(key!!).child(getUid()).addValueEventListener(bookmarkListener)
+
+    }
+
+    // 좋아요 개수 데이터
+    fun getLikeCntData(key: String?) {
+        val likeCntListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var likeCntList = ArrayList<String>()
+
+                for (model in snapshot.children) {
+                    val item = model.getValue<String>()
+
+                    if (item != null) {
+                        likeCntList.add(item)
+                    }
+
+                }
+
+                tvPostDetailLike.text = likeCntList.size.toString()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // 오류가 발생했을 경우 실행되는 함수
+            }
+
+        }
+
+        FBdataBase.getLikeRef().child(key!!).addValueEventListener(likeCntListener)
+    }
+
+
+    // 북마크 데이터 받아오기
+    fun getBookmarkData(key: String?) {
+        val bookmarkListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var value = snapshot.getValue<String>()
+
+                if(value == null){
+                    bookmarkCk = false
+                    imgPostDetailBookmark.setImageResource(R.drawable.bookmark_empty)
+                }else{
+                    bookmarkCk = true
+                    imgPostDetailBookmark.setImageResource(R.drawable.bookmark_green)
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        }
+
+        FBdataBase.getBookMarkRef().child(getUid()).child(key!!).addValueEventListener(bookmarkListener)
+
+    }
 
 }

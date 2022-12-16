@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                 }
+
         }
 
         tvLoginJoin.setOnClickListener{

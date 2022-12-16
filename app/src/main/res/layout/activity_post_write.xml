@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".Post.PostWriteActivity">
 
     <ImageView
@@ -22,25 +23,31 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
+        android:background="@color/white"
         android:ems="10"
         android:hint="제목을 입력해주세요"
         android:inputType="textPersonName"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCommentContent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <EditText
         android:id="@+id/etPostWriteContent"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
         android:ems="10"
+        android:gravity="top"
         android:hint="내용을 입력해주세요"
         android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgPostWritePicture"
         app:layout_constraintEnd_toEndOf="@+id/etPostWriteTitle"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etPostWriteTitle"
@@ -59,29 +66,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="작성자"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgPostWriteUserimg"
         app:layout_constraintStart_toEndOf="@+id/imgPostWriteUserimg"
         app:layout_constraintTop_toTopOf="@+id/imgPostWriteUserimg"
         app:layout_constraintVertical_bias="0.562" />
 
-    <TextView
-        android:id="@+id/tvCommentContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="이미지 추가"
-        app:layout_constraintEnd_toEndOf="@+id/imgPostWritePicture"
-        app:layout_constraintStart_toStartOf="@+id/imgPostWritePicture"
-        app:layout_constraintTop_toBottomOf="@+id/imgPostWritePicture" />
-
     <ImageView
         android:id="@+id/imgPostWritePicture"
         android:layout_width="196dp"
         android:layout_height="138dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/picture" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -94,9 +93,13 @@
     <Button
         android:id="@+id/btnPostWriteSend"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_style"
         android:text="글작성"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
@@ -110,5 +113,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         app:srcCompat="@drawable/icon_location" />
+
+    <TextView
+        android:id="@+id/tvPostWriteLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="현재 위치 추가"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostWriteLocation"
+        app:layout_constraintEnd_toStartOf="@+id/btnPostWriteSend"
+        app:layout_constraintStart_toEndOf="@+id/imgPostWriteLocation"
+        app:layout_constraintTop_toTopOf="@+id/imgPostWriteLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

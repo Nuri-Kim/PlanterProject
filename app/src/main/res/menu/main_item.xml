@@ -12,8 +12,8 @@
         android:title="게시판" />
     <item
         android:id="@+id/tab3"
-        android:icon="@drawable/icon_chat"
-        android:title="채팅" />
+        android:icon="@drawable/icon_friend"
+        android:title="친구" />
     <item
         android:id="@+id/tab4"
         android:icon="@drawable/icon_mypage"

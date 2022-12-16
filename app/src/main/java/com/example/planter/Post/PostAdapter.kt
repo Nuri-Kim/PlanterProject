@@ -4,11 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.planter.R
+import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
     :RecyclerView.Adapter<PostAdapter.ViewHolder>(){
@@ -38,11 +44,13 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
             val tvPostListTitle : TextView
             val tvPostListContent : TextView
             val tvPostListWriter : TextView
+            //val imgPostListPicture : ImageView
 
             init {
                 tvPostListTitle = itemView.findViewById(R.id.tvPostListTitle)
                 tvPostListContent = itemView.findViewById(R.id.tvPostListContent)
                 tvPostListWriter = itemView.findViewById(R.id.tvPostListWriter)
+                //imgPostListPicture = itemView.findViewById(R.id.imgPostListPicture)
 
                 itemView.setOnClickListener {
                     val position = adapterPosition
@@ -51,6 +59,8 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
                         mOnItemClickListener.onItemClick(itemView,position)
                     }
                 }
+
+
 
 
 
@@ -73,11 +83,16 @@ class PostAdapter(var context: Context, var PostList: ArrayList<PostVO>)
 
 
 
+
+
+
+
     }
 
     override fun getItemCount(): Int {
         return PostList.size //항목의 갯수
     }
+
 
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E8E8"
     tools:context=".Post.PostDetailActivity">
 
 
@@ -81,6 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="글 내용"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tvPostDetailDelete"
         app:layout_constraintStart_toStartOf="@+id/imgPostDetailUserPic"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailDelete" />
@@ -88,14 +91,14 @@
     <ImageView
         android:id="@+id/imgCommentPicture"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPostDetailContent"
-        app:srcCompat="@drawable/icon_home" />
+        app:srcCompat="@drawable/picture" />
 
     <TextView
         android:id="@+id/tvPostDetailCount"
@@ -111,9 +114,9 @@
         android:id="@+id/imgPostDetailLike"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
-        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
+        app:layout_constraintTop_toBottomOf="@+id/imgPostDetailLocation"
         app:srcCompat="@drawable/icon_like_white" />
 
     <ImageView
@@ -178,12 +181,35 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/btn_style"
-        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
         android:text="댓글 등록"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/etPostDetailComment"
         app:layout_constraintEnd_toEndOf="@+id/etPostDetailComment"
         app:layout_constraintTop_toTopOf="@+id/etPostDetailComment" />
+
+    <ImageView
+        android:id="@+id/imgPostDetailLocation"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvPostDetailContent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCommentPicture"
+        app:srcCompat="@drawable/icon_detail_location" />
+
+    <TextView
+        android:id="@+id/tvPostDetailLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="위치 정보"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPostDetailLocation"
+        app:layout_constraintEnd_toEndOf="@+id/tvPostDetailContent"
+        app:layout_constraintStart_toEndOf="@+id/imgPostDetailLocation"
+        app:layout_constraintTop_toTopOf="@+id/imgPostDetailLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
