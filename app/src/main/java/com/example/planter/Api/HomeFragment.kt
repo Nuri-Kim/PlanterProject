@@ -48,7 +48,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     lateinit var tvHomeSet: TextView
     lateinit var requestQueue: RequestQueue
     lateinit var adapter: WeatherAdapter
-//    lateinit var adapter2: ArrayAdapter<String>
+    private lateinit var adapter2: ArrayAdapter<String>
     lateinit var time: String
 
     var latitude: Double = 0.0
@@ -120,7 +120,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         //3. Request 생ㄴ성(함수안에서 작업)
         openWeather()
 
-        var adapter2 = ArrayAdapter<String>(requireActivity(), R.layout.state_list, R.id.tvStateList, stateRes)
+        adapter2 = ArrayAdapter<String>(requireActivity(), R.layout.state_list, R.id.tvStateList, stateRes)
         adapter2.notifyDataSetChanged()
 
         lvHome.adapter = adapter2
@@ -128,9 +128,11 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
         //위치정보에 따라 날씨정보 최신화.
         imgHomeReset.setOnClickListener {
+            stateRes.clear()
+
             openWeather()
             adapter.notifyDataSetChanged()
-            adapter2.notifyDataSetChanged()
+
         }
 
         return view
@@ -234,6 +236,7 @@ class HomeFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                         time
                     )
                 )
+                adapter2.notifyDataSetChanged()
                 adapter.notifyDataSetChanged()
                 Log.d("state", stateRes.toString())
             },
