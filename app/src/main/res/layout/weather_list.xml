@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/HomeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8E8E8">
+    android:background="#00000000">
 
     <TextView
         android:id="@+id/textView17"
@@ -30,7 +31,7 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:text="풍량"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -41,21 +42,21 @@
         android:id="@+id/tvHomeTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="온도"
         android:textColor="#000000"
         android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
 
     <TextView
         android:id="@+id/tvHomeSun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:text="해돋이"
         android:textColor="#000000"
         android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeWind"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
 
@@ -85,18 +86,16 @@
         android:id="@+id/tvHomeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
         android:text="시간기준"
-        app:layout_constraintBottom_toBottomOf="@+id/tvHomeLoc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvHomeLoc" />
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/tvHomeLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:text="위치"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,10 +105,14 @@
         android:id="@+id/tvHomeState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="100dp"
         android:text="비내림"
-        app:layout_constraintStart_toStartOf="@+id/tvHomeTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomeTime" />
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHomeTemp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/tvHomeTemp" />
 
     <TextView
         android:id="@+id/textView12"
@@ -121,4 +124,14 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvHomeTemp"
         app:layout_constraintStart_toEndOf="@+id/tvHomeTemp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="현재날씨"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/tvHomeState"
+        app:layout_constraintStart_toStartOf="@+id/tvHomeState" />
 </androidx.constraintlayout.widget.ConstraintLayout>
