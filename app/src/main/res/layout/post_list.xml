@@ -5,47 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgPostListPicture"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_image_24" />
-
     <TextView
         android:id="@+id/tvPostListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="타이틀타이틀"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tvPostListWriter"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostListWriter" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvPostListContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:maxLines="1"
         android:text="내용내용내용"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvPostListTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvPostListTitle" />
 
     <TextView
         android:id="@+id/tvPostListWriter"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="26dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/btn_style"
         android:paddingLeft="8dp"
@@ -56,14 +45,16 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgPostListPicture"
-        app:layout_constraintTop_toTopOf="@+id/imgPostListPicture" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvPostListTitle"
+        app:layout_constraintStart_toEndOf="@+id/tvPostListTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvPostListTitle" />
 
     <TextView
         android:id="@+id/space"
         android:layout_width="460dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,12 +63,12 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="#bdbdbd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPostListPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPostListContent" />
 
     <ImageView
         android:id="@+id/imgPostLikeCount"

@@ -35,6 +35,7 @@ class IntroActivity : AppCompatActivity() {
         btnIntroLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+
         }
 
 
@@ -42,6 +43,7 @@ class IntroActivity : AppCompatActivity() {
         btnIntroJoin.setOnClickListener {
             val intent = Intent(this, JoinActivity::class.java)
             startActivity(intent)
+
         }
 
 

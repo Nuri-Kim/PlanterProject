@@ -12,7 +12,7 @@ import com.example.planter.R
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class BookmarkAdapter(var context: Context, var BookmarkList: ArrayList<BookmarkVO>)
+class BookmarkAdapter(var context: Context, var BookmarkList: ArrayList<PostVO>)
     : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     val database = Firebase.database
@@ -62,6 +62,9 @@ class BookmarkAdapter(var context: Context, var BookmarkList: ArrayList<Bookmark
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.tvBookmarkUserNick.text = BookmarkList[position].uid
+        holder.tvBookmarkPostContent.text = BookmarkList[position].content
+        holder.tvBookmarkTitle.text = BookmarkList[position].title
+        holder.tvBookmarkUserNick.text = BookmarkList[position].nick
 
     }
 
