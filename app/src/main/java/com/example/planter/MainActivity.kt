@@ -26,6 +26,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        supportFragmentManager.beginTransaction().replace(
+            R.id.flMain,
+            HomeFragment()
+        ).commit()
+
         bnvMain.setOnItemSelectedListener{
             item ->
             when(item.itemId){
